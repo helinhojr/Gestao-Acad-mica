@@ -1,0 +1,90 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 21/mar/2019, 23:21:34
+    Author     : Helinho
+*/
+
+*{margin: 0; padding: 0; box-sizing: border-box; -webkit-box-sizing: border-box;}
+body{
+    margin:0;
+    padding: 0;
+    background: url(../img/teddy-kelley-181683-unsplash.jpg);
+    background-size: cover;
+    background-position: center;
+    font-family: sans-serif;
+}
+#caixaLogin{
+    width:320px;
+    /*height: 67vh;*/
+    background: #000;
+    color:#fff;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    padding: 8% 1.5%;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+}
+#caixaLogin h2{
+    font-size: 0.9em;
+    color:#fff;
+    background: #0ed145;
+    text-align: center;
+    float: left;
+    padding:2%;
+    margin-left: 2%;
+    border-radius: 5px;
+    border: 1px solid #CCC;
+}
+#icone{
+    width: 100px;
+    height:100px;
+    position: absolute;
+    border-radius: 50%;
+    top: -50px;
+    left:35%; 
+}
+h1{
+    margin: 0;
+    padding: 0 0 0.5%;
+    text-align: center;
+    font-size: 1.2em;
+}
+#caixaLogin p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    
+}
+#caixaLogin input{
+    width: 100%;
+    margin-bottom: 2%;
+}
+#caixaLogin input[type="submit"]{
+    border:none;
+    margin-top: 3%;
+    outline: none;
+    height: 40px;
+    background: #0ed145;
+    color:#fff;
+    font-size: 1.1em;
+    border-radius: 20px;
+}
+#caixaLogin input[type="submit"]:hover{
+    background: #f4c197;
+    color:#000;
+    pointer:cursor;
+}
+#caixaLogin input[type="text"],input[type="password"]{
+    border:none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color:#fff;
+    font-size: 1em;
+}

@@ -1,0 +1,100 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    display: grid;
+    grid-template-rows: auto 76vh;
+}
+
+
+/*Parte de cima*/
+.cima{
+    background: #1E90FF;
+    border-bottom: 3px solid white;
+    text-align: center;
+    display: inline;
+}
+.cima h2{
+    margin-top: 3%;
+    color:white;
+    float: right;
+    margin-right: 2%;
+}
+.cima h1{
+    margin-top: 3%;
+    color:white;
+    float: left;
+    margin-right: 2%;
+}
+.cima span{
+    font-size: 2em;
+    font-weight: 800;
+}
+.cima a{
+    text-decoration: none;
+}
+.cima .imagem{
+    float: left;
+    margin-left: 5%;
+}
+.cima img{
+    width: 10%;
+    margin-top: 1%;
+    border-radius: 100%;
+    float: right;
+}
+/*Parte de baixo*/
+.baixo{
+    display: grid;
+    grid-template-columns: 20% 80%; 
+}
+/*Parte direita*/
+.direita{
+    display: grid;
+    grid-template-rows: 8% 72% 20%;
+}
+.titulo{
+    background: #17a7c0;
+}
+.frame{
+    background: yellow;
+}
+.rodape{
+    background: #0ed145;
+}
+
+/*Parte Esquerda*/
+.esquerda{
+    background: #1E90FF;
+    text-align: center;
+    margin-right: 5%;
+}
+.esquerda p{
+    color: white;
+    padding: 0;
+    cursor: pointer;
+    float: right;
+    margin:0;
+    font-size: 3em;
+}
+.esquerda ul{
+    list-style: none;
+    margin-top: 12%;
+}
+.esquerda li{
+    text-transform: uppercase;
+    width: 100%;
+    cursor: pointer;
+    border-bottom: 2px solid white;
+    margin-top: 15%;
+    padding-top: 0;
+    padding-bottom: 3%;
+    font-size: 100%;
+}
+.esquerda a{
+    text-decoration: none;
+    color: white;
+    font-weight: 900;
+}
+

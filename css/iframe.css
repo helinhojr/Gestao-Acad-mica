@@ -1,0 +1,31 @@
+#frame-j{
+    width: 100%;
+    height: 100%;
+    border: none;
+    overflow: hidden;
+}
+.corpo{
+    height: 100vh;
+    display: grid;
+    grid-template-rows:15% 75% 10%;
+}
+.info{
+    border-left: 2px solid black;
+}
+.perfil{
+    display: grid;
+    grid-template-columns:75% auto;
+}
+.tit{
+    margin-top: 0;
+    background: black;
+    color:white;
+    text-align: center;
+}
+.info table{
+    font-size: 2em;
+}
+.roda{
+    background: black;
+    color:white;
+}

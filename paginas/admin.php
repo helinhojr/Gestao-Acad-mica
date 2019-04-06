@@ -33,7 +33,7 @@
                 </ul>
             </div>
             <div class="direita">
-                <iframe src="../paginas/turma.php" name="janela" id="frame-j"></iframe>
+                <iframe src="../paginas/disciplinas.php" name="janela" id="frame-j"></iframe>
             </div>
         </div>
         <script>

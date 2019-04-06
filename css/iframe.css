@@ -14,6 +14,11 @@
     display: grid;
     grid-template-rows:15% 80% 5%;
 }
+.corpo1{
+    height: 100vh;
+    display: grid;
+    grid-template-rows:90% 10%;
+}
 .info{
     border-left: 2px solid black;
 }
@@ -26,6 +31,9 @@
     background: black;
     color:white;
     text-align: center;
+}
+.tit h2{
+    margin-top: 10%;;
 }
 .info table{
     margin: .6% auto;

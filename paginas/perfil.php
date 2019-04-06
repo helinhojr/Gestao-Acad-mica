@@ -3,6 +3,7 @@
     <head>
         <title>Gestão Académica - Perfil</title>
         <link rel="stylesheet" href="../css/iframe.css">
+        <link rel="stylesheet" href="../css/fontawesome.css">
     </head>
     <body class="corpo">
         <div class="tit">
@@ -43,10 +44,15 @@
                         </tr>
                     </tbody>
                 </table>
-                <input type="button" value="Editar" name="edita" />
             </div>
             <div class="foto">
+                <div class="escopo-img">
 
+                </div>
+                <div class="escopo-bt">
+                    <button name="btEdit">Editar Perfil</button>
+                    <button>Ver Foto</button>
+                </div>
             </div>
         </div>
         <div class="roda">

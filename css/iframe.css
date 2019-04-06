@@ -4,10 +4,15 @@
     border: none;
     overflow: hidden;
 }
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
 .corpo{
     height: 100vh;
     display: grid;
-    grid-template-rows:15% 75% 10%;
+    grid-template-rows:15% 80% 5%;
 }
 .info{
     border-left: 2px solid black;
@@ -23,9 +28,30 @@
     text-align: center;
 }
 .info table{
+    margin: .6% auto;
     font-size: 2em;
 }
 .roda{
     background: black;
     color:white;
+}
+/*Lado da foto*/
+.foto{
+    height: 100%;
+}
+.escopo-img{
+    margin: 20% auto;
+    border: 2px solid black;
+    width: 100px;
+    height: 100px;
+    background: url(../img/adam-kool-11868-unsplash.jpg);   
+}
+.escopo-bt{
+    width: 100%;
+    text-align: center;
+}
+.escopo-bt button{
+    border-radius: 102px;
+    background: #1E90FF;
+    cursor: pointer;
 }

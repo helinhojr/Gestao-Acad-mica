@@ -1,0 +1,74 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+.perfil1{
+    display: grid;
+    grid-template-columns:40% auto;
+    flex-wrap: wrap;
+    background: #DBDBDB;
+    box-shadow: 0px 0px 20px rgba(0,0,0,.2);
+    overflow: hidden;
+}
+/*Tabela*/
+.tabela{
+    display: flex;
+    flex-direction: column;
+    background: white;
+    width: 100%;
+    margin-left: 15%;
+    border-radius: 10px;
+    padding: 3% 5%;
+}
+.table{
+    width: 80%;
+    color:white;
+    font-size: 1.1em;
+    font-weight: 200;
+}
+.table th{
+    background: #1E90FF;
+}
+/*Formulario*/
+.form{
+    display: flex;
+    flex-direction: column;
+    background: white;
+    width: 100%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-radius: 10px;
+    padding: 3% 5%;
+}
+.form label{
+    font-weight: 600;
+}
+:focus{
+    outline: none;
+}
+.form input, select, textarea{
+    width: 100%;
+    border: none;
+    padding: 2% 0px 1%;
+    border-bottom: 3px solid #1E90FF;
+    font-size: 1.1em;
+    font-weight: 400;
+}
+.form input[type="button"]{
+    margin-top: 4%;
+    background: #1E90FF;
+    border: none;
+    border-radius: 60px;
+    width: 20%;
+    cursor: pointer;
+    color: white;
+    padding: 2% 3%;
+    text-align: center;
+    align-self: flex-end;
+    font-size: 1.2em;
+    font-weight: 400; 
+}
+.form input[type="button"]:hover{
+    background: #337186;
+}

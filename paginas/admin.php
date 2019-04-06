@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1">
         <title>Gestao Académica - Admin</title>
         <link rel="icon" href="../icones/school.png" >
-        <link type="text/css" rel="stylesheet" href="../css/estilopag.css">
+        <link type="text/css" rel="stylesheet" href="../css/estilo.css">
         <link type="text/css" rel="stylesheet" href="../css/iframe.css">
         <link type="text/css" rel="stylesheet" href="../css/all.css">
     </head>

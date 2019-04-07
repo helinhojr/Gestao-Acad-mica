@@ -47,7 +47,7 @@
             </div>
             <div class="foto">
                 <div class="escopo-img">
-
+                    <img class="fotodeperfil" src="">
                 </div>
                 <div class="escopo-bt">
                     <button name="btEdit">Editar Perfil</button>
@@ -58,5 +58,6 @@
         <div class="roda">
 
         </div>
+        <script src="../js/jss.js"></script>
     </body>
 </html>

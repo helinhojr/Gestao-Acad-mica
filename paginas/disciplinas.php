@@ -14,14 +14,14 @@
                         <legend>Cadastro de Disciplinas</legend>
                         <label for="nomes">Nome</label>
                         <input type="text" name="nome" id="nomes">
-                        <input type="button" name="enviar" value="Enviar">
+                        <input type="button" id="btDisc" name="enviar" value="Enviar">
                     </fieldset>
                 </form>
                 <form  name="níveis" action="../conexao/config.php" method="POST" enctype="multipart/form-data">
                     <fieldset>
                         <legend>Cadastro de Níveis</legend>
                         <label for="nomes">Nome</label>
-                        <input type="text" name="nome" id="nomes">
+                        <input type="text" name="nome" id="nome">
                         <label for="disciplinas">Disciplinas</label>
                         <select id="disciplinas">
                             
@@ -70,5 +70,6 @@
         <div class="roda">
 
         </div>
+        <script src="../js/jss.js"></script>
     </body>
 </html>

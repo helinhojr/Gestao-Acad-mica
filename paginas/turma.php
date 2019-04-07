@@ -13,7 +13,7 @@
         <div class="perfil1">
             <form class="form" name="turma" action="../conexao/config.php" method="POST" enctype="multipart/form-data">
                 <label for="nomes">Nome</label>
-                <input type="text" name="nome" id="nomes">
+                <input type="text" name="nome" id="name">
                 <label for="classe">Nível</label>
                 <select id="classe">
                     
@@ -57,5 +57,6 @@
         <div class="roda">
 
         </div>
+        <script src="../js/jss.js"></script>
     </body>
 </html>

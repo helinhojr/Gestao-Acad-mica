@@ -4,6 +4,7 @@
         <title>Gestão Académica - Perfil</title>
         <link rel="stylesheet" href="../css/iframe.css">
         <link rel="stylesheet" href="../css/fontawesome.css">
+        <link rel="stylesheet" href="../css/bootstrap.css">
     </head>
     <body class="corpo">
         <div class="tit">

@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1">
-        <title>Gestao Académica - Admin</title>
+        <title>Gestao Académica - Estudante</title>
         <link rel="icon" href="../icones/school.png" >
         <link type="text/css" rel="stylesheet" href="../css/estilo.css">
         <link type="text/css" rel="stylesheet" href="../css/iframe.css">
@@ -26,11 +26,9 @@
             <div class="esquerda1">
                 <ul>
                     <li><i class="fas fa-user"></i><a href="#">Início</a></li>
-                    <li><i class="fas fa-user"></i><a href="#">Professores</a></li>
-                    <li><i class="fas fa-user"></i><a href="#">Secretários</a></li>
-                    <li><i class="fas fa-user"></i><a href="#">Turmas</a></li>
-                    <li><i class="fas fa-user"></i><a href="#">Disciplinas</a></li>
-                    <li><i class="fas fa-user"></i><a href="#">Níveis</a></li>
+                    <li><i class="fas fa-user"></i><a href="#">Aproveitamento</a></li>
+                    <li><i class="fas fa-user"></i><a href="#">Disciplinas em Curso</a></li>
+                    <li><i class="fas fa-user"></i><a href="#">Professores Atuais</a></li>
                 </ul>
             </div>
             <div class="direita">
@@ -62,24 +60,6 @@
             });
             lga[0].addEventListener("click", function () {
                 frame.src = "perfil.php";
-            });
-            icones[4].addEventListener("click", function () {
-                frame.src = "disciplinas.php";
-            });
-            lga[4].addEventListener("click", function () {
-                frame.src = "disciplinas.php";
-            });
-            icones[3].addEventListener("click", function () {
-                frame.src = "turma.php";
-            });
-            lga[3].addEventListener("click", function () {
-                frame.src = "turma.php";
-            });
-            icones[5].addEventListener("click", function () {
-                frame.src = "disciplinas.php";
-            });
-            lga[5].addEventListener("click", function () {
-                frame.src = "disciplinas.php";
             });
         </script>
     </body>

@@ -12,7 +12,7 @@
     </head>
     <body>
         <div class="cima">
-            <img class="imagem" src="../icones/334.jpg">
+            <img class="imagem" src="../img/notebook.png">
             <h1><span>S</span>istema de <span>G</span>estão <span>A</span>cadémica</h1>
             <a href="#"><img src="../img/adam-kool-11868-unsplash.jpg"></a>
             <h2>Hélio José Zandamela</h2>
@@ -25,9 +25,9 @@
         <div class="baixo1">
             <div class="esquerda1">
                 <ul>
-                    <li><i class="fas fa-user"></i><a href="#">Início</a></li>
-                    <li><i class="fas fa-user"></i><a href="#">Matrículas</a></li>
-                    <li><i class="fas fa-user"></i><a href="#">Renovação</a></li>
+                    <li><i class="fas fa-home"></i><a href="#">Início</a></li>
+                    <li><i class="fas fa-user-edit"></i><a href="#">Matrículas</a></li>
+                    <li><i class="far fa-calendar-check"></i><a href="#">Renovação</a></li>
                 </ul>
             </div>
             <div class="direita">

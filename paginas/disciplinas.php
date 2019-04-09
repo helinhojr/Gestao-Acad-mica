@@ -4,6 +4,7 @@
         <title>Gestão Académica - Disciplinas</title>
         <link rel="stylesheet" href="../css/forms.css">
         <link rel="stylesheet" href="../css/all.css">
+        <link rel="icon" href="../img/notebook.png" >
         <link rel="stylesheet" href="../css/iframe.css">
         <link rel="stylesheet" href="../css/bootstrap.css">
     </head>
@@ -47,7 +48,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td><button type="button" class="btn btn-default">Alterar</button><button type="button" class="btn btn-default">Alterar</button></td>
+                            <td><button type="button" class="btn btn-default"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-default"><i class="fas fa-trash"></i></button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -57,6 +58,7 @@
                             <th>Código</th>
                             <th>Nível</th>
                             <th>Data de Cadastro</th>
+                            <th>Disciplinas</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -65,7 +67,8 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td><button type="button" class="btn btn-default">Alterar</button><button type="button" class="btn btn-default">Alterar</button></td>
+                            <td></td>
+                            <td><button type="button" class="btn btn-default"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-default"><i class="fas fa-trash"></i></button></td>
                         </tr>
                     </tbody>
                 </table>

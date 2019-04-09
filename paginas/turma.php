@@ -3,6 +3,7 @@
     <head>
         <title>Gestão Académica - Turmas</title>
         <link rel="stylesheet" href="../css/forms.css">
+        <link rel="icon" href="../img/notebook.png" >
         <link rel="stylesheet" href="../css/all.css">
         <link rel="stylesheet" href="../css/iframe.css">
         <link rel="stylesheet" href="../css/bootstrap.css">
@@ -53,7 +54,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td><button type="button" class="btn btn-default">A</button><button type="button" class="btn btn-default">A</button></td>
+                            <td><button type="button" class="btn btn-default"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-default"><i class="fas fa-trash"></i></button></td>
                         </tr>
                     </tbody>
                 </table>

@@ -23,11 +23,13 @@ body{
     margin-right: 2%;
 }
 .cima h1{
-    margin-top: 3%;
+    margin-top: 1%;
+    margin-bottom: 3%;
     color:white;
     float: left;
     margin-right: 2%;
 }
+
 .cima span{
     font-size: 2em;
     font-weight: 800;
@@ -37,6 +39,7 @@ body{
 }
 .cima .imagem{
     float: left;
+    width: 5%;
     margin-left: 5%;
 }
 .cima img{
@@ -86,7 +89,7 @@ body{
     width: 14%;
     height: 12%;
     left: 0;
-    top:76%;
+    top:72%;
     cursor: pointer;
 }
 .btbotao span{
@@ -135,4 +138,7 @@ body{
 }
 .esquerda1 a{
     display: none;
+}
+.tamanho li{
+    font-size: 2em;
 }

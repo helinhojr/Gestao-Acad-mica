@@ -4,15 +4,15 @@
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1">
         <title>Gestao Académica - Estudante</title>
-        <link rel="icon" href="../icones/school.png" >
         <link type="text/css" rel="stylesheet" href="../css/estilo.css">
         <link type="text/css" rel="stylesheet" href="../css/iframe.css">
         <link rel="stylesheet" href="../css/bootstrap.css">
+        <link rel="icon" href="../img/notebook.png" >
         <link type="text/css" rel="stylesheet" href="../css/all.css">
     </head>
     <body>
         <div class="cima">
-            <img class="imagem" src="../icones/334.jpg">
+            <img class="imagem" src="../img/notebook.png">
             <h1><span>S</span>istema de <span>G</span>estão <span>A</span>cadémica</h1>
             <a href="#"><img src="../img/adam-kool-11868-unsplash.jpg"></a>
             <h2>Hélio José Zandamela</h2>
@@ -25,10 +25,10 @@
         <div class="baixo1">
             <div class="esquerda1">
                 <ul>
-                    <li><i class="fas fa-user"></i><a href="#">Início</a></li>
-                    <li><i class="fas fa-user"></i><a href="#">Aproveitamento</a></li>
-                    <li><i class="fas fa-user"></i><a href="#">Disciplinas em Curso</a></li>
-                    <li><i class="fas fa-user"></i><a href="#">Professores Atuais</a></li>
+                    <li><i class="fas fa-home"></i><a href="#">Início</a></li>
+                    <li><i class="fas fa-handshake"></i><a href="#">Aproveitamento</a></li>
+                    <li><i class="fas fa-running"></i><a href="#">Disciplinas em Curso</a></li>
+                    <li><i class="fas fa-list-alt"></i><a href="#">Professores Atuais</a></li>
                 </ul>
             </div>
             <div class="direita">

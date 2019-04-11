@@ -6,7 +6,6 @@
         <link rel="stylesheet" href="../css/all.css">
         <link rel="icon" href="../img/notebook.png" >
         <link rel="stylesheet" href="../css/iframe.css">
-        <link rel="stylesheet" href="../css/bootstrap.css">
     </head>
     <body class="corpo1">
         <div class="perfil1">

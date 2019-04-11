@@ -7,7 +7,6 @@
         <link rel="icon" href="../img/notebook.png" >
         <link type="text/css" rel="stylesheet" href="../css/estilo.css">
         <link type="text/css" rel="stylesheet" href="../css/iframe.css">
-        <link rel="stylesheet" href="../css/bootstrap.css">
         <link type="text/css" rel="stylesheet" href="../css/all.css">
     </head>
     <body>
@@ -31,6 +30,7 @@
                     <li><i class="fas fa-archway"></i><a href="#">Turmas</a></li>
                     <li><i class="fas fa-book-open"></i><a href="#">Disciplinas</a></li>
                     <li><i class="fas fa-arrows-alt-v"></i><a href="#">Níveis</a></li>
+                    <li><i class="fas fa-arrows-alt-v"></i><a href="#">Definições</a></li>
                 </ul>
             </div>
             <div class="direita">
@@ -65,6 +65,12 @@
             lga[0].addEventListener("click", function () {
                 frame.src = "perfil.php";
             });
+            icones[1].addEventListener("click", function () {
+                frame.src = "professores.php";
+            });
+            lga[1].addEventListener("click", function () {
+                frame.src = "professores.php";
+            });
             icones[4].addEventListener("click", function () {
                 frame.src = "disciplinas.php";
             });
@@ -82,6 +88,12 @@
             });
             lga[5].addEventListener("click", function () {
                 frame.src = "disciplinas.php";
+            });
+            icones[6].addEventListener("click", function () {
+                frame.src = "definicoes.php";
+            });
+            lga[6].addEventListener("click", function () {
+                frame.src = "definicoes.php";
             });
         </script>
     </body>

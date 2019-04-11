@@ -56,7 +56,6 @@
             .form-area p{
                 text-align: left;
                 color:#fff;
-                text-transform: uppercase;
                 font-weight: bold;
             }
             .btn{
@@ -107,11 +106,11 @@
             <div class="image-area">
                 <img src="ct2.png" >
             </div>
-            <h2>LOGIN</h2>
-            <p>SEU NOME:</p>
+            <h2>Entrar</h2>
+            <p>Usuário</p>
             <input type="text">
-            <p>SEU EMAIL:</p>
-            <input type="email">
+            <p>Senha</p>
+            <input type="password">
             <a href="#" class="btn">
                 <span class="btn-text"> Sign in</span>
                 <span class="btn-text"> Log in</span>

@@ -31,7 +31,7 @@
     grid-template-rows: auto auto;
 }
 .table{
-    width: 80%;
+    width: 100%;
     color:white;
     font-size: 1.1em;
     font-weight: 200;
@@ -80,7 +80,7 @@ fieldset input[type="button"]{
 :focus{
     outline: none;
 }
-.form input, select, textarea{
+input, select, textarea{
     width: 100%;
     border: none;
     padding: 2% 0px 1%;
@@ -90,10 +90,9 @@ fieldset input[type="button"]{
 }
 button{
     margin-top: 4%;
-    background: #1E90FF;
+    background: orange;
     border: none;
-    border-radius: 60px;
-    width: 20%;
+    border-radius: 12px;
     cursor: pointer;
     color: white;
     padding: 2% 3%;
@@ -102,7 +101,7 @@ button{
     font-size: 1.2em;
     font-weight: 400; 
 }
-.form input[type="button"]{
+input[type="button"]{
     margin-top: 4%;
     background: #1E90FF;
     border: none;
@@ -116,6 +115,14 @@ button{
     font-size: 1.2em;
     font-weight: 400; 
 }
-.form input[type="button"]:hover{
+input[type="button"]:hover{
     background: #337186;
+}
+label{
+    margin-top: 1%;
+    font-weight: 600
+}
+h3{
+    color:#1E90FF;
+    margin: 2% auto;
 }

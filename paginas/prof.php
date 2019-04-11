@@ -7,7 +7,6 @@
         <link rel="icon" href="../img/notebook.png" >
         <link type="text/css" rel="stylesheet" href="../css/estilo.css">
         <link type="text/css" rel="stylesheet" href="../css/iframe.css">
-        <link rel="stylesheet" href="../css/bootstrap.css">
         <link type="text/css" rel="stylesheet" href="../css/all.css">
     </head>
     <body>

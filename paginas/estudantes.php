@@ -2,19 +2,19 @@
 <html lang="pt">
     <head>
         <meta charset="UTF-8">
-        <title>Gestão Académica - Estudantes</title>
-        <link rel="stylesheet" href="../css/forms.css">
+        <title>Gestão Académica - Matrículas</title>
         <link rel="stylesheet" href="../css/all.css">
         <link rel="icon" href="../img/notebook.png" >
         <link rel="stylesheet" href="../css/iframe.css">
-        <link rel="stylesheet" href="../css/bootstrap.css">
+        <link rel="stylesheet" href="../css/forms.css">
     </head>
     <body>
         <div class="tit">
-            <h2>Estudantes</h2>
+            <h2>Matrículas dos estudantes</h2>
         </div>
         <div class="perfil1">
             <form class="form" name="professores" action="" method="POST" enctype="multipart/form-data">
+                <h3>Passo 1</h3>
                 <label class="lbl">Nome Completo</label>
                 <input type="text" name="nomecompleto" id="nomecompleto">
                 <label class="lbl">Nome do Pai</label>
@@ -25,10 +25,6 @@
                 <input type="date" name="datanascimento" id="datanascimento" placeholder="--/--/----">
                 <label class="lbl">Endereço</label>
                 <input type="text" name="morada" id="morada">
-                <label class="lbl">Nível</label>
-                <select>
-                    <option></option>
-                </select>
                 <label class="lbl">Género</label>
                 <select>
                     <option>Masculino</option>
@@ -44,39 +40,27 @@
                 <input type="button" value="enviar" id="enviar">
             </form>
             <div class="tabela">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Código</th>
-                            <th>Nome</th>
-                            <th>Nível</th>
-                            <th>Pai</th>
-                            <th>Mãe</th>
-                            <th>Género</th>
-                            <th>Regime</th>
-                            <th>Foto</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><button type="button" class="btn btn-default"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-default"><i class="fas fa-trash"></i></button></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h3>Passo 2</h3>
+                <label>Estudante</label>
+                <select disabled>
+                    <option></option>
+                </select>
+                <label>Turma</label>
+                <select >
+                    <option></option>
+                </select>
+                <input type="button" value="enviar" id="enviar1">
+                <h3>Passo 3</h3>
+                <label>Nível</label>
+                <select >
+                    <option></option>
+                </select>
+                <label>Semestre</label>
+                <select disabled>
+                    <option></option>
+                </select>
+                <input type="button" value="finalizar" id="enviar2">
+
             </div>
         </div>
         <div class="roda">

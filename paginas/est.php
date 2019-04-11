@@ -6,7 +6,6 @@
         <title>Gestao Académica - Estudante</title>
         <link type="text/css" rel="stylesheet" href="../css/estilo.css">
         <link type="text/css" rel="stylesheet" href="../css/iframe.css">
-        <link rel="stylesheet" href="../css/bootstrap.css">
         <link rel="icon" href="../img/notebook.png" >
         <link type="text/css" rel="stylesheet" href="../css/all.css">
     </head>
@@ -39,6 +38,7 @@
             //Funcao do Menu
             var baixo = document.querySelector(".baixo1");
             var esquerda = document.querySelector(".esquerda1");
+            esquerda.className+=" tamanho";
             var btn = document.querySelector(".btbotao");
             var i = 0;
             btn.addEventListener("click", function () {
@@ -49,6 +49,7 @@
                 } else {
                     baixo.className = "baixo1";
                     esquerda.className = "esquerda1";
+                    esquerda.className+=" tamanho";
                     i = 0;
                 }
             });

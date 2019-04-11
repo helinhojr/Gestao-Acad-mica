@@ -7,9 +7,9 @@
         <link rel="stylesheet" href="../css/all.css">
         <link rel="icon" href="../img/notebook.png" >
         <link rel="stylesheet" href="../css/iframe.css">
-        <link rel="stylesheet" href="../css/bootstrap.css">
+        <!--<link rel="stylesheet" href="../css/bootstrap.css">-->
     </head>
-    <body class="corpo">
+    <body>
         <div class="tit">
             <h2>Professores</h2>
         </div>
@@ -28,8 +28,8 @@
                 <label>Disciplinas</label>
                 <select id = "nivel">
                 </select>
-                <input type="button" value="adicionar">
-                <input type="button" value="gravar">
+                <button>adicionar</button>
+                <button>gravar</button>
             </form>     
             <div class="tabela">
                 <table class="table" >
@@ -44,7 +44,6 @@
                             <th></th>
                             <th></th>
                             <th></th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,14 +54,12 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td><button type="button" class="btn btn-default"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-default"><i class="fas fa-trash"></i></button></td>
+                            <td><button><i class="fas fa-edit"></i></button></td>
+                            <td><button><i class="fas fa-trash"></i></button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-        </div>
-        <div class="roda">
-
         </div>
 
     </body>

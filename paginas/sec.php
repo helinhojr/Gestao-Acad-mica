@@ -60,6 +60,12 @@
             lga[0].addEventListener("click", function () {
                 frame.src = "perfil.php";
             });
+            icones[1].addEventListener("click", function () {
+                frame.src = "estudantes.php";
+            });
+            lga[1].addEventListener("click", function () {
+                frame.src = "estudantes.php";
+            });
         </script>
     </body>
 </html>

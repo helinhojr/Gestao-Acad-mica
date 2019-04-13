@@ -2,16 +2,16 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Gestão Académica - Professores</title>
-        <meta charset="UTF-8">
+        <title>Gestão Académica - Secretário</title>
         <link rel="stylesheet" href="../css/forms.css">
         <link rel="stylesheet" href="../css/all.css">
         <link rel="icon" href="../img/notebook.png" >
         <link rel="stylesheet" href="../css/iframe.css">
+        <!--<link rel="stylesheet" href="../css/bootstrap.css">-->
     </head> 
-   <body>
+    <body>
         <div class="tit">
-            <h2>Professores</h2>
+            <h2>Secretários</h2>
         </div>
         <div class="perfil1">
             <form class="form" name="professores" action="" method="POST" enctype="multipart/form-data">
@@ -30,10 +30,7 @@
                 <input type="text" name="turma" id="turma" placeholder="turma">
                 <label class="lbl">Endereço</label>
                 <input type="text" name="morada" id="morada">
-                <label>Disciplinas</label>
-                <select id = "nivel">
-                </select>
-                <button type="button">adicionar</button>
+                <h3>Dados Para Acesso</h3>
                 <label class="lbl">Nome Usuário</label>
                 <input type="text" name="user" id="user">
                 <label class="lbl">Senha</label>
@@ -72,4 +69,4 @@
         </div>
 
     </body>
-</html>
+</html>s

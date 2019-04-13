@@ -19,9 +19,6 @@
     display: grid;
     grid-template-rows:90% 10%;
 }
-.info{
-    border-left: 2px solid black;
-}
 .perfil{
     display: grid;
     grid-template-columns:75% auto;
@@ -53,11 +50,4 @@
 .escopo-bt{
     width: 100%;
     text-align: center;
-}
-.escopo-bt button{
-    border-radius: 102px;
-    background: #1E90FF;
-    color: white;
-    padding: 2% 3%;
-    cursor: pointer;
 }

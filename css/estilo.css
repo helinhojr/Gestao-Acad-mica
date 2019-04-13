@@ -136,9 +136,12 @@ body{
     font-weight: 900;
     margin-left: 3%;
 }
+.esquerda a:hover{
+    color:orange;
+}
 .esquerda1 a{
     display: none;
 }
 .tamanho li{
-    font-size: 3em;
+    font-size: 2em;
 }

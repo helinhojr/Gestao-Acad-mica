@@ -83,6 +83,12 @@
             lga[3].addEventListener("click", function () {
                 frame.src = "turma.php";
             });
+            icones[2].addEventListener("click", function () {
+                frame.src = "secretarios.php";
+            });
+            lga[2].addEventListener("click", function () {
+                frame.src = "secretarios.php";
+            });
             icones[5].addEventListener("click", function () {
                 frame.src = "disciplinas.php";
             });

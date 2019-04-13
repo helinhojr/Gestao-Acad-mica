@@ -26,7 +26,6 @@
                 <ul>
                     <li><i class="fas fa-home"></i><a href="#">Início</a></li>
                     <li><i class="fas fa-handshake"></i><a href="#">Aproveitamento</a></li>
-                    <li><i class="fas fa-running"></i><a href="#">Disciplinas em Curso</a></li>
                     <li><i class="fas fa-list-alt"></i><a href="#">Professores Atuais</a></li>
                 </ul>
             </div>
@@ -61,6 +60,18 @@
             });
             lga[0].addEventListener("click", function () {
                 frame.src = "perfil.php";
+            });
+            icones[2].addEventListener("click", function () {
+                frame.src = "estudantes_professores.php";
+            });
+            lga[2].addEventListener("click", function () {
+                frame.src = "estudantes_professores.php";
+            });
+            icones[1].addEventListener("click", function () {
+                frame.src = "estudantes_aproveitamento.php";
+            });
+            lga[1].addEventListener("click", function () {
+                frame.src = "estudantes_aproveitamento.php";
             });
         </script>
     </body>

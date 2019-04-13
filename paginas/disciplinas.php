@@ -2,37 +2,34 @@
 <html>
     <head>
         <title>Gestão Académica - Disciplinas</title>
-        <link rel="stylesheet" href="../css/forms.css">
+        <meta charset="UTF-8">
         <link rel="stylesheet" href="../css/all.css">
         <link rel="icon" href="../img/notebook.png" >
         <link rel="stylesheet" href="../css/iframe.css">
+        <link rel="stylesheet" href="../css/forms.css">
     </head>
-    <body class="corpo1">
+    <body>
         <div class="perfil1">
             <div class="form">
                 <form  name="disciplinas" action="../controller/config.php" method="POST" enctype="multipart/form-data">
-                    <fieldset>
-                        <legend>Cadastro de Disciplinas</legend>
+                        <h3>Cadastro de Disciplinas</h3>
                         <label for="nomes">Nome</label>
                         <input type="text" name="nome" id="nomes">
-                        <input type="button" id="btDisc" name="enviar" value="Enviar">
-                    </fieldset>
+                        <button type="button">enviar</button>
                 </form>
                 <form  name="níveis" action="../controller/config.php" method="POST" enctype="multipart/form-data">
-                    <fieldset>
-                        <legend>Cadastro de Níveis</legend>
+                        <h3>Cadastro de Níveis</h3>
                         <label for="nomes">Nome</label>
                         <input type="text" name="nome" id="nome">
                         <label for="disciplinas">Disciplinas</label>
                         <select id="disciplinas">
 
                         </select>
-                        <input type="button" name="add" value="adicionar">
-                        <input type="button" name="enviar" value="enviar">
-                    </fieldset>
+                        <button type="button">adicionar</button>
+                        <button type="button">enviar</button>
                 </form>
             </div>
-            <div class="tabela2">
+            <div class="tabela">
                 <table class="table">
                     <thead>
                         <tr>
@@ -51,7 +48,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <table class="table">
+                <table class="tabela2">
                     <thead>
                         <tr>
                             <th>Código</th>
@@ -74,9 +71,6 @@
 
             </div>
         </div>    
-        <div class="roda">
-
-        </div>
         <script src="../js/jss.js"></script>
     </body>
 </html>

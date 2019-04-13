@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Gestão Académica - Definições</title>
+        <meta charset="UTF-8">
         <link rel="stylesheet" href="../css/all.css">
         <link rel="icon" href="../img/notebook.png" >
         <link rel="stylesheet" href="../css/iframe.css">
@@ -19,7 +20,7 @@
                 <input type="date" name="datain" id="datain">
                 <label class="lbl">Data de término</label>
                 <input type="date" name="datafin" id="datafin">
-                <input type="button" value="enviar" id="enviar">
+                <button type="button">enviar</button>
                 <h3>Semestre</h3>
                 <label class="lbl">Período Lectivo</label>
                 <select disabled>
@@ -35,7 +36,7 @@
                 <input type="date" name="datains" id="datains">
                 <label class="lbl">Data de término</label>
                 <input type="date" name="datafins" id="datafins">
-                <input type="button" value="enviar" id="enviar1">
+                <button type="button">enviar</button>
             </form>
             <div class="tabela">
                 <h3>Dados do Administrador</h3>
@@ -43,22 +44,13 @@
                 <input type="text" name="nomeus" placeholder="Username" id="usname">
                 <label>Senha do Usuário</label>
                 <input type="password" name="pass" placeholder="Password" id="usname">
-                <input type="button" value="enviar" id="enviar2">
-                <h3>Passo 3</h3>
-                <label>Nível</label>
-                <select >
-                    <option></option>
-                </select>
-                <label>Semestre</label>
-                <select disabled>
-                    <option></option>
-                </select>
-                <input type="button" value="enviar" id="enviar2">
-
+                <button type="button">enviar</button>
+                
+                <h3>Salas</h3>
+                <label>Número</label>
+                <input name="sala" type="number" id="sala">
+                <button type="button">enviar</button>
             </div>
-        </div>
-        <div class="roda">
-
         </div>
     </body>
 </html>

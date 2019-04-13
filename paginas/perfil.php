@@ -2,11 +2,11 @@
 <html>
     <head>
         <title>Gestão Académica - Perfil</title>
+        <link rel="stylesheet" href="../css/all.css">
         <link rel="stylesheet" href="../css/iframe.css">
-        <link rel="stylesheet" href="../css/fontawesome.css">
-        <link rel="stylesheet" href="../css/bootstrap.css">
+        <link rel="stylesheet" href="../css/forms.css">
     </head>
-    <body class="corpo">
+    <body>
         <div class="tit">
             <h2>O Meu Perfil</h2>
         </div>
@@ -24,7 +24,7 @@
                             <td>0065656</td>
                         </tr>
                         <tr>
-                            <td>Nome: </td>
+                            <td>Nome Completo: </td>
                             <td>Helio</td>
                         </tr>
                         <tr>
@@ -32,16 +32,16 @@
                             <td>05/07/1999</td>
                         </tr>
                         <tr>
-                            <td>Nome do Pai:</td>
-                            <td>Jose Ofice</td>
+                            <td>Usuário</td>
+                            <td>Jose</td>
+                        </tr>
+                        <tr>
+                            <td>Senha</td>
+                            <td>Jose</td>
                         </tr>
                         <tr>
                             <td>Género:</td>
                             <td>Masculino</td>
-                        </tr>
-                        <tr>
-                            <td>Nivel:</td>
-                            <td>12 Classe</td>
                         </tr>
                     </tbody>
                 </table>
@@ -51,13 +51,9 @@
                     <img class="fotodeperfil" src="">
                 </div>
                 <div class="escopo-bt">
-                    <button name="btEdit">Editar Perfil</button>
-                    <button>Ver Foto</button>
+                    <button type="button">Editar Perfil</button>
                 </div>
             </div>
-        </div>
-        <div class="roda">
-
         </div>
         <script src="../js/jss.js"></script>
     </body>

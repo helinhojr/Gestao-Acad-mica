@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Gestão Académica - Matrículas</title>
+        <meta charset="UTF-8">
         <link rel="stylesheet" href="../css/all.css">
         <link rel="icon" href="../img/notebook.png" >
         <link rel="stylesheet" href="../css/iframe.css">
@@ -37,7 +38,7 @@
                 </select>
                 <label>Foto</label>
                 <input type="file" name="foto" id="foto">
-                <input type="button" value="enviar" id="enviar">
+                <button type="button">enviar</button>
             </form>
             <div class="tabela">
                 <h3>Passo 2</h3>
@@ -49,7 +50,7 @@
                 <select >
                     <option></option>
                 </select>
-                <input type="button" value="enviar" id="enviar1">
+                <button type="button">enviar</button>
                 <h3>Passo 3</h3>
                 <label>Nível</label>
                 <select >
@@ -59,7 +60,7 @@
                 <select disabled>
                     <option></option>
                 </select>
-                <input type="button" value="finalizar" id="enviar2">
+                <button type="button">Finalizar</button>
 
             </div>
         </div>

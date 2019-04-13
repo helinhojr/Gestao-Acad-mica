@@ -61,6 +61,18 @@
             lga[0].addEventListener("click", function () {
                 frame.src = "perfil.php";
             });
+            icones[1].addEventListener("click", function () {
+                frame.src = "prof_disc.php";
+            });
+            lga[1].addEventListener("click", function () {
+                frame.src = "prof_disc.php";
+            });
+            icones[2].addEventListener("click", function () {
+                frame.src = "prof_al.php";
+            });
+            lga[2].addEventListener("click", function () {
+                frame.src = "prof_al.php";
+            });
         </script>
     </body>
 </html>

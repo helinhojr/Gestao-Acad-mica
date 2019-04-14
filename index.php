@@ -34,7 +34,7 @@
                 width: 50px;
                 height: 50px;
                 border-radius: 50%;
-                background: tomato;
+                background: #1E90FF;
                 position: absolute;
                 top:-5%;
                 left: 45%;
@@ -106,13 +106,13 @@
             <div class="image-area">
                 <img src="ct2.png" >
             </div>
-            <h2>Entrar</h2>
+            <h2>Início de Sessão</h2>
             <p>Usuário</p>
             <input type="text">
             <p>Senha</p>
             <input type="password">
             <a href="#" class="btn">
-                <span class="btn-text"> Sign in</span>
+                <span class="btn-text"> Entrar</span>
                 <span class="btn-text"> Log in</span>
             </a>
             <a href="#" class="for-pass"> Esqueceu password?</a>

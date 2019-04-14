@@ -13,7 +13,6 @@
 }
 /*Tabela*/
 .tabela{
-    display: flex;
     flex-direction: column;
     background: white;
     width: 80%;
@@ -96,7 +95,7 @@ button{
     padding: 2% 3%;
     text-align: center;
     align-self: flex-end;
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: 400; 
 }
 input[type="button"]{

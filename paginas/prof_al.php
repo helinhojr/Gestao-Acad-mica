@@ -11,7 +11,7 @@
     </head>
     <body>
         <div class="tit">
-            <h2>Disciplinas leccionadas</h2>
+            <h2>Dísponibilizando as notas</h2>
         </div>
         <div class="tab">
             <table class="table" border="0" width="6" cellpadding="4">
@@ -45,7 +45,7 @@
                 </select>
                 <label>Valor</label>
                 <input class="pesq" type="number" max="2" name="nome" id="nome">
-                <button type="button">Atualizar</button>
+                <button type="button"><i class="fas fa-sync-alt"></i></button>
             </form>
         </div>
     </body>

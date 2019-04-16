@@ -15,7 +15,7 @@
                         <h3>Cadastro de Disciplinas</h3>
                         <label for="nomes">Nome</label>
                         <input type="text" name="nome" id="nomes">
-                        <button type="button">enviar</button>
+                        <button type="button"><i class="far fa-save"></i></button>
                 </form>
                 <form  name="níveis" action="../controller/config.php" method="POST" enctype="multipart/form-data">
                         <h3>Cadastro de Níveis</h3>
@@ -25,8 +25,8 @@
                         <select id="disciplinas">
 
                         </select>
-                        <button type="button">adicionar</button>
-                        <button type="button">enviar</button>
+                        <button type="button"><i class="fas fa-plus"></i></button>
+                        <button type="button"><i class="far fa-save"></i></button>
                 </form>
             </div>
             <div class="tabela">

@@ -39,7 +39,7 @@
                 <label>Disciplina</label>
                 <select>
                 </select>
-                <button>adicionar</button>
+                <button><i class="fas fa-plus"></i></button>
             </form>
             <div class="tabela">
                 <table class="table" >

@@ -2,14 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/PW/modelo/Semestre.php</file>
-            <file>file:/C:/xampp/htdocs/PW/modelo/PeriodoLectivo.php</file>
-            <file>file:/C:/xampp/htdocs/PW/modelo/Disciplina.php</file>
-            <file>file:/C:/xampp/htdocs/PW/modelo/Turma.php</file>
-            <file>file:/C:/xampp/htdocs/PW/modelo/Nivel.php</file>
-            <file>file:/C:/xampp/htdocs/PW/modelo/Usuario.php</file>
-            <file>file:/C:/xampp/htdocs/PW/modelo/Nota.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

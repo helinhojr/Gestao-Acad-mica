@@ -38,7 +38,7 @@
                 </select>
                 <label>Foto</label>
                 <input type="file" name="foto" id="foto">
-                <button type="button">enviar</button>
+                <button type="button"><i class="far fa-save"></i></button>
             </form>
             <div class="tabela">
                 <h3>Passo 2</h3>
@@ -50,17 +50,13 @@
                 <select >
                     <option></option>
                 </select>
-                <button type="button">enviar</button>
+                <button type="button"><i class="far fa-save"></i></button>
                 <h3>Passo 3</h3>
-                <label>Nível</label>
-                <select >
-                    <option></option>
-                </select>
                 <label>Semestre</label>
                 <select disabled>
                     <option></option>
                 </select>
-                <button type="button">Finalizar</button>
+                <button type="button"><i class="fas fa-chevron-right"></i></button>
 
             </div>
         </div>

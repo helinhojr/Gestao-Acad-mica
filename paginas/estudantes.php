@@ -19,9 +19,15 @@
                 <label class="lbl">Nome Completo</label>
                 <input type="text" name="nomecompleto" id="nomecompleto">
                 <label class="lbl">Nome do Pai</label>
-                <input type="text" name="nomepai" id="nomepai">
+                <input required type="text" name="nomepai" id="nomepai">
                 <label class="lbl">Nome da mãe</label>
                 <input type="text" name="nomepai" id="nomepai">
+                <label class="lbl">Contacto do Aluno</label>
+                <input required type="tel" name="contactoAl" id="contAl">
+                <label required class="lbl">Email</label>
+                <input type="email" name="email" id="email">
+                <label class="lbl">Contacto do Encarregado</label>
+                <input type="tel" name="contactoEn" id="contEn">
                 <label class="lbl">Data de Nascimento</label>
                 <input type="date" name="datanascimento" id="datanascimento" placeholder="--/--/----">
                 <label class="lbl">Endereço</label>
@@ -38,7 +44,7 @@
                 </select>
                 <label>Foto</label>
                 <input type="file" name="foto" id="foto">
-                <button type="button"><i class="far fa-save"></i></button>
+                <button type="submit"><i class="far fa-save"></i></button>
             </form>
             <div class="tabela">
                 <h3>Passo 2</h3>

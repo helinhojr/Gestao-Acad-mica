@@ -6,13 +6,29 @@
  * @author Helinho
  */
 class Usuario {
-
     private $codigo;
     private $usuario;
     private $senha;
     private $painel;
+    private $email;
+    private $status;
+    function getEmail() {
+        return $this->email;
+    }
 
-    function getCodigo() {
+    function getStatus() {
+        return $this->status;
+    }
+
+    function setEmail($email) {
+        $this->email = $email;
+    }
+
+    function setStatus($status) {
+        $this->status = $status;
+    }
+
+        function getCodigo() {
         return $this->codigo;
     }
 
@@ -43,5 +59,5 @@ class Usuario {
     function setPainel($painel) {
         $this->painel = $painel;
     }
-
+    
 }

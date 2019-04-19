@@ -17,15 +17,15 @@
                 <label for="nomes">Nome</label>
                 <input type="text" name="nome" id="name">
                 <label for="classe">Nível</label>
-                <select id="classe">
+                <select name="nivel">
                     
                 </select>    
                 <label for="sala">Sala</label>
-                <select id="sala">
+                <select name="sala">
                     
                 </select>    
                 <label for="diretor">Director de Turma</label>
-                <select id="diretor">
+                <select name="diretor">
                     
                 </select>    
                 <button>enviar</button>

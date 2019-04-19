@@ -26,7 +26,6 @@
                 <ul>
                     <li><i class="fas fa-home"></i><a href="#">Início</a></li>
                     <li><i class="fas fa-user-edit"></i><a href="#">Matrículas</a></li>
-                    <li><i class="far fa-calendar-check"></i><a href="#">Renovação</a></li>
                 </ul>
             </div>
             <div class="direita">

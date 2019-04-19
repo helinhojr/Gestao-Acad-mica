@@ -9,12 +9,15 @@
         <link rel="stylesheet" href="../css/iframe.css">
         <link rel="stylesheet" href="../css/forms.css">
     </head>
+    <?php
+        require_once './mycontrolle.php';
+    ?>
     <body>
         <div class="tit">
             <h2>Definições do Administrador</h2>
         </div>
-        <div class="perfil1">
-            <form class="form" name="def" action="" method="POST" enctype="multipart/form-data">
+        <form class="perfil1"name="def" action="" method="POST" enctype="multipart/form-data">
+            <div class="form" >
                 <h3>Período Lectivo</h3>
                 <label class="lbl">Data de Início</label>
                 <input type="date" name="datain" id="datain">
@@ -37,20 +40,21 @@
                 <label class="lbl">Data de término</label>
                 <input type="date" name="datafins" id="datafins">
                 <button type="button">enviar</button>
-            </form>
+            </div>
             <div class="tabela">
+                
                 <h3>Dados do Administrador</h3>
                 <label>Nome do Usuário</label>
                 <input type="text" name="nomeus" placeholder="Username" id="usname">
                 <label>Senha do Usuário</label>
                 <input type="password" name="pass" placeholder="Password" id="usname">
-                <button type="button">enviar</button>
+                <button type="submit">enviar</button>
                 
                 <h3>Salas</h3>
-                <label>Número</label>
-                <input name="sala" type="number" id="sala">
-                <button type="button">enviar</button>
-            </div>
-        </div>
+                <label>Nome da Sala</label>
+                <input name="nrsala" type="text" id="sala">
+                <button type="submit" class="btSala">enviar</button>
+            </div >
+        </form>
     </body>
 </html>

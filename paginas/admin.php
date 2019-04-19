@@ -34,7 +34,7 @@
                 </ul>
             </div>
             <div class="direita">
-                <iframe src="disciplinas.php" name="janela" id="frame-j"></iframe>
+                <iframe src="perfil.php" name="janela" id="frame-j"></iframe>
             </div>
         </div>
         <script>
@@ -90,10 +90,10 @@
                 frame.src = "secretarios.php";
             });
             icones[5].addEventListener("click", function () {
-                frame.src = "disciplinas.php";
+                frame.src = "niveis.php";
             });
             lga[5].addEventListener("click", function () {
-                frame.src = "disciplinas.php";
+                frame.src = "niveis.php";
             });
             icones[6].addEventListener("click", function () {
                 frame.src = "definicoes.php";

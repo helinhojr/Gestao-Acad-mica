@@ -14,8 +14,25 @@
 class Nivel {
     private $nome;
     private $codigo;
-    
-    function getNome() {
+    private $status;
+    private $data;
+    function getStatus() {
+        return $this->status;
+    }
+
+    function getData() {
+        return $this->data;
+    }
+
+    function setStatus($status) {
+        $this->status = $status;
+    }
+
+    function setData($data) {
+        $this->data = $data;
+    }
+
+        function getNome() {
         return $this->nome;
     }
 

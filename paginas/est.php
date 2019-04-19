@@ -30,7 +30,7 @@
                 </ul>
             </div>
             <div class="direita">
-                <iframe src="disciplinas.php" name="janela" id="frame-j"></iframe>
+                <iframe src="perfil.php" name="janela" id="frame-j"></iframe>
             </div>
         </div>
         <script>

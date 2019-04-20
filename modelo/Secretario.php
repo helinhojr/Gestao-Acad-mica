@@ -22,8 +22,16 @@ class Secretario {
     private $genero;
     private $numeroBI;
     private $endereco;
-    
-    function getEstado() {
+    private $foto;
+    function getFoto() {
+        return $this->foto;
+    }
+
+    function setFoto($foto) {
+        $this->foto = $foto;
+    }
+
+        function getEstado() {
         return $this->estado;
     }
 
@@ -106,16 +114,18 @@ class Secretario {
     public static function gravar(Secretario $sec) {
             require_once '../controller/conexao.php';
             $conexao = conectar();
-            $gravar = $conexao->prepare("INSERT INTO secretario(nome,estado,nascimento,user,bi,endereco,senha,genero,email) VALUES(:nome,:estado,:data,:user,:bi,:endereco,:senha,:genero,:email)");
+            $senha=strtoupper(substr((md5(date("YmdHis"))),1,7));
+            $gravar = $conexao->prepare("INSERT INTO secretario(nome,estado,nascimento,user,bi,endereco,senha,genero,email,foto) VALUES(:nome,:estado,:data,:user,:bi,:endereco,:senha,:genero,:email,:foto)");
             $gravar->bindValue(":nome", $sec->getNome());
             $gravar->bindValue(":estado",$sec->getEstado());
             $gravar->bindValue(":data",$sec->getDataDeNasc());
             $gravar->bindValue(":endereco",$sec->getEndereco());
             $gravar->bindValue(":email",$sec->getEmail());
-            $gravar->bindValue(":user",$sec->getUser());
-            $gravar->bindValue(":senha",$sec->getSenha());
+            $gravar->bindValue(":user",$sec->getEmail());
+            $gravar->bindValue(":senha",$senha);
             $gravar->bindValue(":bi",$sec->getNumeroBI());
             $gravar->bindValue(":genero",$sec->getGenero());
+            $gravar->bindValue(":foto",$sec->getFoto());
             if ($gravar->execute()) {
                 $us=$sec->getUser();
                 $resultado=$conexao->prepare("SELECT codigo FROM professor WHERE user=$us");

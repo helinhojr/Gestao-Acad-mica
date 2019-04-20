@@ -53,7 +53,7 @@
                 <h3>Salas</h3>
                 <label>Nome da Sala</label>
                 <input name="nrsala" type="text" id="sala">
-                <button type="submit" class="btSala">enviar</button>
+                <button type="submit" name="btSala">enviar</button>
             </div >
         </form>
     </body>

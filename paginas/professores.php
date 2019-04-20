@@ -33,23 +33,23 @@
                 <input type="text" name="biProf" id="turma" placeholder="Número do BI">
                 <label class="lbl">Endereço</label>
                 <input type="text" name="moradaProf" id="morada">
-                <label class="lbl">Nome Usuário</label>
-                <input type="text" name="userProf" id="user">
-                <label class="lbl">Senha</label>
-                <input type="password" name="passProf" id="pass">
+                <label>Foto</label>
+                <input type="file" name="fotoProf" id="foto">
                 <button type="submit" name="btProf"><i class="far fa-save"></i></button>
 
                 <label>Professor</label>
                 <select name = "professor" disabled="">
                     <option><?php
+                            include_once '../modelo/Professor.php';
                         $professores = $conexao->prepare("SELECT * FROM professor");
                         $professores->execute();
                         $profs = $professores->fetchAll(PDO::FETCH_ASSOC);
+                        Professor::$profes=$profs[count($profs) - 1]['codigo'];
                         echo $profs[count($profs) - 1]['nome'] . "  " . $profs[count($profs) - 1]['bi'];
                         ?></option>
                 </select>
                 <label>Disciplinas</label>
-                <select name = "disciplina">
+                <select name = "disciplinaS">
                     <?php
                     $disciplinas = $conexao->prepare("SELECT * FROM disciplina");
                     $disciplinas->execute();
@@ -58,7 +58,7 @@
                         <option><?php echo $row['nome']; ?></option>
                     <?php endwhile; ?>
                 </select>
-                <button type="submit">adicionar</button>
+                <button type="submit" name="addDisc"><i class="fas fa-plus"></i></button>
             </form>     
             <div class="tabela">
                 <table class="table" >
@@ -72,22 +72,23 @@
                             <th>User</th>
                             <th>Senha</th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $professores = $conexao->prepare("SELECT * FROM professor");
-                        $professores->execute();
-                        while ($linha = $professores->fetch(PDO::FETCH_ASSOC)):
+                        $profers = $conexao->prepare("SELECT * FROM professor");
+                        $profers->execute();
+                        while ($linha = $profers->fetch(PDO::FETCH_ASSOC)):
                             ?>
                             <tr>
-                                <td><?php echo $linha['codigo'] ?></td>
-                                <td><?php echo $linha['nome'] ?></td>
-                                <td><?php echo $linha['email'] ?></td>
-                                <td><?php echo $linha['nascimento'] ?></td>
-                                <td><?php echo $linha['bi'] ?></td>
-                                <td><?php echo $linha['user'] ?></td>
-                                <td><?php echo $linha['senha'] ?></td>
+                                <td><?php echo $linha['codigo']; ?></td>
+                                <td><?php echo $linha['nome']; ?></td>
+                                <td><?php echo $linha['email']; ?></td>
+                                <td><?php echo $linha['nascimento']; ?></td>
+                                <td><?php echo $linha['bi']; ?></td>
+                                <td><?php echo $linha['user']; ?></td>
+                                <td><?php echo $linha['senha']; ?></td>
                                 <td></td>
                                 <td><button><i class="fas fa-edit"></i></button></td>
                                 <td><button><i class="fas fa-trash"></i></button></td>

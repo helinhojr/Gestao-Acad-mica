@@ -9,6 +9,9 @@
         <link rel="stylesheet" href="../css/iframe.css">
         <link rel="stylesheet" href="../css/forms.css">
     </head>
+    <?php
+        require_once './mycontrolle.php';
+    ?>
     <body>
         <div class="tit">
             <h2>Matrículas dos estudantes</h2>
@@ -21,7 +24,7 @@
                 <label class="lbl">Nome do Pai</label>
                 <input required type="text" name="nomepai" id="nomepai">
                 <label class="lbl">Nome da mãe</label>
-                <input type="text" name="nomepai" id="nomepai">
+                <input type="text" name="nomemae" id="nomepai">
                 <label class="lbl">Contacto do Aluno</label>
                 <input required type="tel" name="contactoAl" id="contAl">
                 <label required class="lbl">Email</label>
@@ -33,18 +36,18 @@
                 <label class="lbl">Endereço</label>
                 <input type="text" name="morada" id="morada">
                 <label class="lbl">Género</label>
-                <select>
+                <select name="generoEs">
                     <option>Masculino</option>
                     <option>Feminino</option>
                 </select>
                 <label class="lbl">Regime</label>
-                <select>
+                <select name="regime">
                     <option>Laboral</option>
                     <option>Pós - Laboral</option>
                 </select>
                 <label>Foto</label>
-                <input type="file" name="foto" id="foto">
-                <button type="submit"><i class="far fa-save"></i></button>
+                <input type="file" name="fotoEstu" id="foto">
+                <button type="submit" name="saveEst"><i class="far fa-save"></i></button>
             </form>
             <div class="tabela">
                 <h3>Passo 2</h3>
@@ -53,13 +56,13 @@
                     <option></option>
                 </select>
                 <label>Turma</label>
-                <select >
+                <select name="turmaEs">
                     <option></option>
                 </select>
                 <button type="button"><i class="far fa-save"></i></button>
                 <h3>Passo 3</h3>
                 <label>Semestre</label>
-                <select disabled>
+                <select name="sesmestre" disabled>
                     <option></option>
                 </select>
                 <button type="button"><i class="fas fa-chevron-right"></i></button>

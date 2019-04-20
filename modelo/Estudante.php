@@ -17,10 +17,28 @@ class Estudante {
     private $genero;
     private $regime;
     private $foto;
+    private $turma=1;
     private $senha;
-    private $estado;
+    private $user;
+    private $bi;
+    private $estado="activo";
+    function getUser() {
+        return $this->user;
+    }
     
-    function getEstado() {
+    function setUser($user) {
+        $this->user = $user;
+    }
+
+        function getBi() {
+        return $this->bi;
+    }
+
+    function setBi($bi) {
+        $this->bi = $bi;
+    }
+
+        function getEstado() {
         return $this->estado;
     }
 
@@ -131,6 +149,42 @@ class Estudante {
     function setSenha($senha) {
         $this->senha = $senha;
     }
+    
+    function getTurma() {
+        return $this->turma;
+    }
 
+    function setTurma($turma) {
+        $this->turma = $turma;
+    }
 
+        public static function gravar(Estudante $est) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $codigo=strtoupper(substr((md5(date("YmdHis"))),1,7));
+        $gravar = $conexao->prepare("INSERT INTO estudante(codigo,nome,estado,nascimento,user,bi,endereco,senha,genero,email,pai,mae,contacto,contenc,regime,foto) VALUES(:codigo,:nome,:estado,:data,:user,:bi,:endereco,:senha,:genero,:email,:np,:nm,:cont,:contEn,:regime,:foto)");
+        $gravar->bindValue(":codigo", $codigo);
+        $gravar->bindValue(":nome", $est->getNome());
+        $gravar->bindValue(":estado", $est->getEstado());
+        $gravar->bindValue(":data", $est->getDataDeNascimento());
+        $gravar->bindValue(":endereco", $est->getEndereco());
+        $gravar->bindValue(":email", $est->getEmail());
+        $gravar->bindValue(":user", $est->getEmail());
+        $gravar->bindValue(":senha",$codigo);
+        $gravar->bindValue(":bi", $est->getBi());
+        $gravar->bindValue(":genero", $est->getGenero());
+        $gravar->bindValue(":foto", $est->getFoto());
+        $gravar->bindValue(":regime", $est->getRegime());
+        $gravar->bindValue(":np", $est->getNomePai());
+        $gravar->bindValue(":nm", $est->getNomeMae());
+        $gravar->bindValue(":contEn", $est->getContactoEnc());
+        $gravar->bindValue(":cont", $est->getContacto());
+        if ($gravar->execute()) {
+            echo "<script>alert('Salvo com Sucesso!')</script>";
+            header("../paginas/estudantes.php");
+        } else {
+            echo "<script>alert('Não foi possível efectuar a gravação!')</script>";
+            header("../paginas/estudantes.php");
+        }
+    }
 }

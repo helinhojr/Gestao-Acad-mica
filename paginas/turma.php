@@ -8,6 +8,9 @@
         <link rel="stylesheet" href="../css/all.css">
         <link rel="stylesheet" href="../css/iframe.css">
     </head>
+    <?php 
+        require_once './mycontrolle.php';
+    ?>
     <body>
         <div class="tit">
             <h2>Turmas</h2>
@@ -22,7 +25,13 @@
                 </select>    
                 <label for="sala">Sala</label>
                 <select name="sala">
-                    
+                    <?php 
+                        $salas = $conexao->prepare("Select * from sala");
+                        $salas->execute();
+                        while ($linha = $salas->fetch(PDO::FETCH_ASSOC)):
+                    ?>
+                    <option><?php echo $linha['nome']; ?></option>
+                    <?php endwhile; ?>
                 </select>    
                 <label for="diretor">Director de Turma</label>
                 <select name="diretor">

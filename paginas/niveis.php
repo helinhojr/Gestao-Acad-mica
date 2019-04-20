@@ -22,39 +22,51 @@
             <form class="form" name="níveis" method="POST" enctype="multipart/form-data">
                 <h3>Cadastro de Níveis</h3>
                 <label for="nomes">Nome</label>
-                <input type="text" name="nome" id="nome">
-                <label for="disciplinas">Disciplinas</label>
-                    <select id="disciplinas">
-                        <?php
-                        while ($linha = $resultado->fetch(PDO::FETCH_ASSOC)):
-                            ?>
-                        <option><?php echo $linha['nome']; ?></option>
-                            <?php
-                        endwhile;
-                        ?>
-                    </select>
-                <button type="submit" name="btadicionarN"><i class="fas fa-plus"></i></button>
+                <input type="text" name="nomeN" id="nome">
                 <button type="submit" name="btNivel"><i class="far fa-save"></i></button>
+                <label>Nível</label>
+                <select name="nivv" disabled="">
+                    <?php
+                    $niveis = $conexao->prepare("select * from nivel");
+                    $niveis->execute();
+                    $sps=$niveis->fetchAll(PDO::FETCH_ASSOC);
+                    ?>
+                    <option><?php echo $sps[count($sps)-1]['nome']; ?></option>
+                </select>
+                <label for="disciplinas">Disciplinas</label>
+                <select name="discNiv" id="disciplinas">
+                    <?php
+                    while ($linha = $resultado->fetch(PDO::FETCH_ASSOC)):
+                        ?>
+                        <option><?php echo $linha['nome']; ?></option>
+                        <?php
+                    endwhile;
+                    ?>
+                </select>
+                <button type="submit" name="btaddn"><i class="fas fa-plus"></i></button>
             </form>
             <div class="tabela">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Código</th>
                             <th>Nível</th>
                             <th>Data de Cadastro</th>
-                            <th>Disciplinas</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><button type="button" class="btn btn-default"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-default"><i class="fas fa-trash"></i></button></td>
-                        </tr>
+                        <?php
+                        $niveis = $conexao->prepare("select * from nivel");
+                        $niveis->execute();
+                        while ($linha = $niveis->fetch(PDO::FETCH_ASSOC)):
+                            ?>
+                            <tr>
+                                <td><?php echo $linha['nome'] ?></td>
+                                <td><?php echo $linha['data'] ?></td>
+                                <td></td>
+                                <td><button type="button" class="btn btn-default"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-default"><i class="fas fa-trash"></i></button></td>
+                            </tr>
+                        <?php endwhile; ?>
                     </tbody>
                 </table>
             </div>

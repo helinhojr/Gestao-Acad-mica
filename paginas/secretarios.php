@@ -38,6 +38,8 @@
                 <input type="text" name="userSec" id="user">
                 <label class="lbl">Senha</label>
                 <input type="password" name="passSec" id="pass">
+                <label>Foto</label>
+                <input type="file" name="fotoSec" id="foto">
                 <button type="submit" name="btSec">gravar</button>
             </form>     
             <div class="tabela">

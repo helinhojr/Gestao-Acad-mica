@@ -50,14 +50,14 @@ class Disciplina {
         $this->codigo = $codigo;
     }
 
-    public function verificar($nome) {
+    public static function verificar($nome) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
         $niveis = $conexao->prepare("select nome from disciplina");
         $niveis->execute();
         $resultado = 0;
         while ($nomes = $niveis->fetch(PDO::FETCH_ASSOC)) {
-            if (strcmp($nome, $nomes['nome']))
+            if (strcmp($nome, $nomes['nome'])==0)
                 $resultado++;
         }
         if ($resultado == 0) {
@@ -75,9 +75,9 @@ class Disciplina {
         $gravar->bindValue(":nome", $disciplina->getNome());
         $gravar->bindValue(":estado", $disciplina->getStatus());
         $gravar->bindValue(":data", $data);
-        $valor = verificar($disciplina->getNome());
+        $valor = Disciplina::verificar($disciplina->getNome());
         if ($valor == 0) {
-            echo "<script>alert('Impossível fazer a gravação, nível já cadastrado!')</script>";
+            echo "<script>alert('Impossível fazer a gravação, disciplina já cadastrada!')</script>";
         } else {
             if ($gravar->execute()) {
                 echo "<script>alert('Salvo com Sucesso!')</script>";

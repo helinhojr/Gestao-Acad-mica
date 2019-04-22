@@ -39,8 +39,6 @@ if (isset($_POST['btProf'])) {
             $professor->setGenero($gen);
             $professor->setNumeroBI($bi);
             $professor->setNome($nome);
-            $professor->setSenha($pass);
-            $professor->setUser($us);
             $professor->setFoto($arquivo);
             $professor = Professor::gravar($professor);
         } else {
@@ -73,9 +71,7 @@ if (isset($_POST['btSec'])) {
             $secretario->setGenero($gen);
             $secretario->setNumeroBI($bi);
             $secretario->setNome($nome);
-            $secretario->setSenha($pass);
             $secretario->setFoto($arquivo);
-            $secretario->setUser($us);
             $secretario = Secretario::gravar($secretario);
         } else {
             echo "<script>alert('Não foi possível efectuar a gravação da imagem!')</script>";

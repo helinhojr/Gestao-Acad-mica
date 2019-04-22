@@ -41,14 +41,14 @@ class Nivel {
         $this->nome = $nome;
     }
 
-    public function verificar($nome) {
+    public static function verificar($nome) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
         $niveis = $conexao->prepare("select nome from nivel");
         $niveis->execute();
         $resultado = 0;
         while ($nomes = $niveis->fetch(PDO::FETCH_ASSOC)) {
-            if (strcmp($nome, $nomes['nome']))
+            if (strcmp($nome, $nomes['nome'])==0)
                 $resultado++;
         }
         if ($resultado == 0) {
@@ -66,7 +66,7 @@ class Nivel {
         $gravar->bindValue(":nome", $nivel->getNome());
         $gravar->bindValue(":estado", $nivel->getStatus());
         $gravar->bindValue(":data", $data);
-        $valor =verificar($nivel->getNome());
+        $valor = Nivel::verificar($nivel->getNome());
         if ($valor == 0) {
             echo "<script>alert('Impossível fazer a gravação, nível já cadastrado!')</script>";
         } else {

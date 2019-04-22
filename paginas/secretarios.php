@@ -33,11 +33,6 @@
                 <input type="text" name="biSec" id="turma" placeholder="Número do BI">
                 <label class="lbl">Endereço</label>
                 <input type="text" name="moradaSec" id="morada">
-                <h3>Dados Para Acesso</h3>
-                <label class="lbl">Nome Usuário</label>
-                <input type="text" name="userSec" id="user">
-                <label class="lbl">Senha</label>
-                <input type="password" name="passSec" id="pass">
                 <label>Foto</label>
                 <input type="file" name="fotoSec" id="foto">
                 <button type="submit" name="btSec">gravar</button>

@@ -40,7 +40,7 @@
                 <label>Professor</label>
                 <select name = "professor" disabled="">
                     <option><?php
-                            include_once '../modelo/Professor.php';
+                        include_once '../modelo/Professor.php';
                         $professores = $conexao->prepare("SELECT * FROM professor");
                         $professores->execute();
                         $profs = $professores->fetchAll(PDO::FETCH_ASSOC);
@@ -71,8 +71,6 @@
                             <th>Número do BI</th>
                             <th>User</th>
                             <th>Senha</th>
-                            <th></th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -89,9 +87,8 @@
                                 <td><?php echo $linha['bi']; ?></td>
                                 <td><?php echo $linha['user']; ?></td>
                                 <td><?php echo $linha['senha']; ?></td>
-                                <td></td>
-                                <td><button><i class="fas fa-edit"></i></button></td>
-                                <td><button><i class="fas fa-trash"></i></button></td>
+                                <td><button class="verde"><i class="fas fa-edit"></i></button></td>
+                                <td><button class="vermelho"><i class="fas fa-trash"></i></button></td>
                             </tr>
                             <?php
                         endwhile;

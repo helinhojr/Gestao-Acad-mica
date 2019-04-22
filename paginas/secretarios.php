@@ -35,7 +35,7 @@
                 <input type="text" name="moradaSec" id="morada">
                 <label>Foto</label>
                 <input type="file" name="fotoSec" id="foto">
-                <button type="submit" name="btSec">gravar</button>
+                <button type="submit" name="btSec"><i class="far fa-save"></i></button>
             </form>     
             <div class="tabela">
                 <table class="table" >
@@ -48,7 +48,6 @@
                             <th>Número do BI</th>
                             <th>User</th>
                             <th>Senha</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,9 +64,8 @@
                                 <td><?php echo $linha['bi'] ?></td>
                                 <td><?php echo $linha['user'] ?></td>
                                 <td><?php echo $linha['senha'] ?></td>
-                                <td></td>
-                                <td><button><i class="fas fa-edit"></i></button></td>
-                                <td><button><i class="fas fa-trash"></i></button></td>
+                                <td><button class="verde"><i class="fas fa-edit"></i></button></td>
+                                <td><button class="vermelho"><i class="fas fa-trash"></i></button></td>
                             </tr>
                             <?php
                         endwhile;

@@ -10,18 +10,10 @@ class Usuario {
     private $usuario;
     private $senha;
     private $painel;
-    private $email;
     private $status;
-    function getEmail() {
-        return $this->email;
-    }
-
+    private $codUs;
     function getStatus() {
         return $this->status;
-    }
-
-    function setEmail($email) {
-        $this->email = $email;
     }
 
     function setStatus($status) {
@@ -59,5 +51,50 @@ class Usuario {
     function setPainel($painel) {
         $this->painel = $painel;
     }
-    
+    function getCodUs() {
+        return $this->codUs;
+    }
+
+    function setCodUs($codUs) {
+        $this->codUs = $codUs;
+    }
+
+        public static function verificar($nome) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $niveis = $conexao->prepare("select user from usuario");
+        $niveis->execute();
+        $resultado = 0;
+        while ($nomes = $niveis->fetch(PDO::FETCH_ASSOC)) {
+            if (strcmp($nome, $nomes['user'])==0)
+                $resultado++;
+        }
+        if ($resultado == 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public static function gravar(Usuario $usuario) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $gravar = $conexao->prepare("INSERT INTO usuario(user,senha,painel,status,codigoUs) VALUES(:user,:senha,:painel,:estado,:us)");
+        $gravar->bindValue(":user", $usuario->getUsuario());
+        $gravar->bindValue(":senha", $usuario->getSenha());
+        $gravar->bindValue(":painel", $usuario->getPainel());
+        $gravar->bindValue(":estado", $usuario->getStatus());
+        $gravar->bindValue(":us", $usuario->getCodUs());
+        $valor = Usuario::verificar($usuario->getUsuario());
+        $valor = Usuario::verificar($usuario->getUsuario());
+        if ($valor == 0) {
+            return false;
+        } else {
+            if ($gravar->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 }

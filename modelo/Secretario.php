@@ -12,17 +12,19 @@
  * @author Helinho
  */
 class Secretario {
+
     private $codigo;
     private $nome;
     private $dataDeNasc;
     private $email;
     private $user;
     private $senha;
-    private $estado="activo";
+    private $estado = "activo";
     private $genero;
     private $numeroBI;
     private $endereco;
     private $foto;
+
     function getFoto() {
         return $this->foto;
     }
@@ -31,7 +33,7 @@ class Secretario {
         $this->foto = $foto;
     }
 
-        function getEstado() {
+    function getEstado() {
         return $this->estado;
     }
 
@@ -39,7 +41,6 @@ class Secretario {
         $this->estado = $estado;
     }
 
-        
     function getCodigo() {
         return $this->codigo;
     }
@@ -111,34 +112,47 @@ class Secretario {
     function setEndereco($endereco) {
         $this->endereco = $endereco;
     }
+
     public static function gravar(Secretario $sec) {
-            require_once '../controller/conexao.php';
-            $conexao = conectar();
-            $senha=strtoupper(substr((md5(date("YmdHis"))),1,7));
-            $gravar = $conexao->prepare("INSERT INTO secretario(nome,estado,nascimento,user,bi,endereco,senha,genero,email,foto) VALUES(:nome,:estado,:data,:user,:bi,:endereco,:senha,:genero,:email,:foto)");
-            $gravar->bindValue(":nome", $sec->getNome());
-            $gravar->bindValue(":estado",$sec->getEstado());
-            $gravar->bindValue(":data",$sec->getDataDeNasc());
-            $gravar->bindValue(":endereco",$sec->getEndereco());
-            $gravar->bindValue(":email",$sec->getEmail());
-            $gravar->bindValue(":user",$sec->getEmail());
-            $gravar->bindValue(":senha",$senha);
-            $gravar->bindValue(":bi",$sec->getNumeroBI());
-            $gravar->bindValue(":genero",$sec->getGenero());
-            $gravar->bindValue(":foto",$sec->getFoto());
+        require_once '../controller/conexao.php';
+        require_once '../modelo/Usuario.php';
+        $conexao = conectar();
+        $senha = strtoupper(substr((md5(date("YmdHis"))), 1, 7));
+        $gravar = $conexao->prepare("INSERT INTO secretario(codigo,nome,estado,nascimento,user,bi,endereco,senha,genero,email,foto) VALUES(:codigo,:nome,:estado,:data,:user,:bi,:endereco,:senha,:genero,:email,:foto)");
+        $gravar->bindValue(":codigo", $senha);
+        $gravar->bindValue(":nome", $sec->getNome());
+        $gravar->bindValue(":estado", $sec->getEstado());
+        $gravar->bindValue(":data", $sec->getDataDeNasc());
+        $gravar->bindValue(":endereco", $sec->getEndereco());
+        $gravar->bindValue(":email", $sec->getEmail());
+        $gravar->bindValue(":user", $sec->getEmail());
+        $gravar->bindValue(":senha", $senha);
+        $gravar->bindValue(":bi", $sec->getNumeroBI());
+        $gravar->bindValue(":genero", $sec->getGenero());
+        $gravar->bindValue(":foto", $sec->getFoto());
+        $usuario = new Usuario();
+        $usuario->setPainel("sec");
+        $usuario->setUsuario($sec->getEmail());
+        $usuario->setSenha($senha);
+        $usuario->setStatus($sec->getEstado());
+        $usuario->setCodUs($sec->senha);
+        if (Usuario::gravar($usuario) == true) {
             if ($gravar->execute()) {
-                $us=$sec->getUser();
-                $resultado=$conexao->prepare("SELECT codigo FROM professor WHERE user=$us");
-                while ($lin=$resultado->fetch(PDO::FETCH_ASSOC)){
-                   $sec->setCodigo($lin['codigo']); 
+                $us = $sec->getUser();
+                $resultado = $conexao->prepare("SELECT codigo FROM secretario WHERE user=$us");
+                while ($lin = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                    $sec->setCodigo($lin['codigo']);
                 }
                 echo "<script>alert('Salvo com Sucesso!')</script>";
                 header("../paginas/secretarios.php");
                 return $sec;
-            }else{
+            } else {
                 echo "<script>alert('Não foi possível efectuar a gravação!')</script>";
                 header("../paginas/secretarios.php");
             }
+        }else{
+            echo "<script>alert('Não foi possível efectuar a gravação, Usuário já existente!')</script>"; 
+        }   
         }
-
-}
+    }
+    

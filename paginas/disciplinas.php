@@ -32,7 +32,6 @@
                             <th>Código</th>
                             <th>Disciplina</th>
                             <th>Data de Cadastro</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,7 +42,7 @@
                                 <td><?php echo $linha['codigo']?></td>
                                 <td><?php echo $linha['nome']?></td>
                                 <td><?php echo $linha['data']?></td>
-                                <td><button type="button" class="btn btn-default"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-default"><i class="fas fa-trash"></i></button></td>
+                                <td><button type="button" class="verde"><i class="fas fa-edit"></i></button><button type="button" class="vermelho"><i class="fas fa-trash"></i></button></td>
                             </tr>
                         <?php
                             endwhile;

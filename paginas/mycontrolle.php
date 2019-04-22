@@ -121,6 +121,7 @@ if (isset($_POST['saveEst'])) {
             $morada = $_POST['morada'];
             $gen = $_POST['generoEs'];
             $regi = $_POST['regime'];
+            $bi = $_POST['nrBI'];
             $estudante = new Estudante();
             $estudante->setNome($nomeEs);
             $estudante->setContacto($cont);
@@ -132,6 +133,7 @@ if (isset($_POST['saveEst'])) {
             $estudante->setGenero($gen);
             $estudante->setNomeMae($mae);
             $estudante->setNomePai($pai);
+            $estudante->setBi($bi);
             $estudante->setRegime($regi);
             Estudante::gravar($estudante);
         } catch (Exception $ex) {
@@ -147,4 +149,22 @@ if(isset($_POST['btNivel'])){
     $nivels=$_POST['nomeN'];
     $nivel->setNome($nivels);
     Nivel::gravar($nivel);
+}
+if(isset($_POST['btTurma'])){
+    require_once '../modelo/Turma.php';
+    $nome=$_POST['nomeTurma'];
+    $sala=$_POST['sala'];
+    $nivel=$_POST['nivel'];
+    $director=$_POST['diretor'];
+    
+    $turma = new Turma();
+    $turma->setNome($nome);
+    $turma->setNivel($nivel);
+    $turma->setSala($sala);
+    Turma::gravar($turma);
+}
+if(isset($_POST['enturm'])){
+    require_once '../modelo/Estudante.php';
+    $turma=$_POST['turmaEs'];
+    Estudante::enturmar($turma);
 }

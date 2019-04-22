@@ -3,8 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/PW/paginas/secretarios.php</file>
-            <file>file:/C:/xampp/htdocs/PW/paginas/definicoes.php</file>
+            <file>file:/C:/xampp/htdocs/PW/paginas/estudantes.php</file>
+            <file>file:/C:/xampp/htdocs/PW/modelo/Disciplina.php</file>
+            <file>file:/C:/xampp/htdocs/PW/paginas/professores.php</file>
+            <file>file:/C:/xampp/htdocs/PW/paginas/mycontrolle.php</file>
+            <file>file:/C:/xampp/htdocs/PW/modelo/Usuario.php</file>
+            <file>file:/C:/xampp/htdocs/PW/modelo/Professor.php</file>
+            <file>file:/C:/xampp/htdocs/PW/modelo/Secretario.php</file>
+            <file>file:/C:/xampp/htdocs/PW/modelo/Estudante.php</file>
         </group>
     </open-files>
 </project-private>

@@ -30,8 +30,8 @@
 .table{
     width: 100%;
     color:black;
-    font-size: 1.1em;
-    font-weight: 200;
+    font-size: 1em;
+    font-weight: 300;
 }
 .table th,.tabela2 th{
     background: #1E90FF;
@@ -85,18 +85,45 @@ input, select, textarea{
     font-size: 1.1em;
     font-weight: 400;
 }
-button{
+button[type="submit"]{
     margin-top: 4%;
     background: orange;
     border: none;
     border-radius: 60px;
     cursor: pointer;
     color: white;
+    margin-right: 1%;
     padding: 2% 3%;
     text-align: center;
     align-self: flex-end;
     font-size: 1em;
     font-weight: 400; 
+}
+.verde{
+    margin-top: 4%;
+    background: #0ed145;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    color: black;
+    padding: 2% 3%;
+    text-align: center;
+    align-self: flex-end;
+    font-size: 1em;
+    font-weight: 400;
+}
+.vermelho{
+    margin-top: 4%;
+    background: red;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    color: black;
+    padding: 2% 3%;
+    text-align: center;
+    align-self: flex-end;
+    font-size: 1em;
+    font-weight: 400;
 }
 input[type="button"]{
     margin-top: 4%;

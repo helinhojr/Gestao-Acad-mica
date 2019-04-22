@@ -1,10 +1,12 @@
 <?php
+
 /**
  * Description of Estudante
  *
  * @author Helinho
  */
 class Estudante {
+
     private $codigo;
     private $nome;
     private $nomePai;
@@ -17,20 +19,21 @@ class Estudante {
     private $genero;
     private $regime;
     private $foto;
-    private $turma=1;
+    private $turma = 1;
     private $senha;
     private $user;
     private $bi;
-    private $estado="activo";
+    private $estado = "activo";
+
     function getUser() {
         return $this->user;
     }
-    
+
     function setUser($user) {
         $this->user = $user;
     }
 
-        function getBi() {
+    function getBi() {
         return $this->bi;
     }
 
@@ -38,7 +41,7 @@ class Estudante {
         $this->bi = $bi;
     }
 
-        function getEstado() {
+    function getEstado() {
         return $this->estado;
     }
 
@@ -46,7 +49,7 @@ class Estudante {
         $this->estado = $estado;
     }
 
-        function getCodigo() {
+    function getCodigo() {
         return $this->codigo;
     }
 
@@ -149,7 +152,7 @@ class Estudante {
     function setSenha($senha) {
         $this->senha = $senha;
     }
-    
+
     function getTurma() {
         return $this->turma;
     }
@@ -158,10 +161,11 @@ class Estudante {
         $this->turma = $turma;
     }
 
-        public static function gravar(Estudante $est) {
+    public static function gravar(Estudante $est) {
         require_once '../controller/conexao.php';
+        require_once '../modelo/Usuario.php';
         $conexao = conectar();
-        $codigo=strtoupper(substr((md5(date("YmdHis"))),1,7));
+        $codigo = strtoupper(substr((md5(date("YmdHis"))), 1, 7));
         $gravar = $conexao->prepare("INSERT INTO estudante(codigo,nome,estado,nascimento,user,bi,endereco,senha,genero,email,pai,mae,contacto,contenc,regime,foto) VALUES(:codigo,:nome,:estado,:data,:user,:bi,:endereco,:senha,:genero,:email,:np,:nm,:cont,:contEn,:regime,:foto)");
         $gravar->bindValue(":codigo", $codigo);
         $gravar->bindValue(":nome", $est->getNome());
@@ -170,7 +174,7 @@ class Estudante {
         $gravar->bindValue(":endereco", $est->getEndereco());
         $gravar->bindValue(":email", $est->getEmail());
         $gravar->bindValue(":user", $est->getEmail());
-        $gravar->bindValue(":senha",$codigo);
+        $gravar->bindValue(":senha", $codigo);
         $gravar->bindValue(":bi", $est->getBi());
         $gravar->bindValue(":genero", $est->getGenero());
         $gravar->bindValue(":foto", $est->getFoto());
@@ -179,12 +183,39 @@ class Estudante {
         $gravar->bindValue(":nm", $est->getNomeMae());
         $gravar->bindValue(":contEn", $est->getContactoEnc());
         $gravar->bindValue(":cont", $est->getContacto());
-        if ($gravar->execute()) {
-            echo "<script>alert('Salvo com Sucesso!')</script>";
-            header("../paginas/estudantes.php");
+        $usuario = new Usuario();
+        $usuario->setPainel("est");
+        $usuario->setUsuario($est->getEmail());
+        $usuario->setSenha($codigo);
+        $usuario->setStatus($est->getEstado());
+        $usuario->setCodUs($codigo);
+        if (Usuario::gravar($usuario) == true) {
+            if ($gravar->execute()) {
+                echo "<script>alert('Salvo com Sucesso!')</script>";
+                header("../paginas/estudantes.php");
+            } else {
+                echo "<script>alert('Não foi possível efectuar a gravação!')</script>";
+                header("../paginas/estudantes.php");
+            }
         } else {
-            echo "<script>alert('Não foi possível efectuar a gravação!')</script>";
-            header("../paginas/estudantes.php");
+            echo "<script>alert('Não foi possível efectuar a gravação, Usuário já existente!')</script>";
         }
     }
+
+    public static $ests = "ss";
+
+    public static function enturmar($turma) {
+        require_once '../controller/conexao.php';
+        $estudantes = $conexao->prepare("SELECT * FROM estudante");
+        $estudantes->execute();
+        $ests = $estudantes->fetchAll(PDO::FETCH_ASSOC);
+        $conexao = conectar();
+        $est = $conexao->prepare("update estudante set turma=:turma where codigo=:cond");
+        $est->bindValue(":turma", $turma);
+        $est->bindValue(":cond", $ests[count($ests) - 1]['codigo']);
+        if($est->execute()){
+            echo "AWESOME";
+        }
+    }
+
 }

@@ -104,9 +104,11 @@ class Professor {
 
     public static function gravar(Professor $prof) {
         require_once '../controller/conexao.php';
+        require_once '../modelo/Usuario.php';
         $conexao = conectar();
         $senha = strtoupper(substr((md5(date("YmdHis"))), 1, 7));
-        $gravar = $conexao->prepare("INSERT INTO professor(nome,estado,nascimento,user,bi,endereco,senha,genero,email,foto) VALUES(:nome,:estado,:data,:user,:bi,:endereco,:senha,:genero,:email,:foto)");
+        $gravar = $conexao->prepare("INSERT INTO professor(codigo,nome,estado,nascimento,user,bi,endereco,senha,genero,email,foto) VALUES(:codigo,:nome,:estado,:data,:user,:bi,:endereco,:senha,:genero,:email,:foto)");
+        $gravar->bindValue(":codigo", $senha);
         $gravar->bindValue(":nome", $prof->getNome());
         $gravar->bindValue(":estado", $prof->getEstado());
         $gravar->bindValue(":data", $prof->getDataDeNasc());
@@ -117,18 +119,28 @@ class Professor {
         $gravar->bindValue(":bi", $prof->getNumeroBI());
         $gravar->bindValue(":genero", $prof->getGenero());
         $gravar->bindValue(":foto", $prof->getFoto());
-        if ($gravar->execute()) {
-            $us = $prof->getUser();
-            $resultado = $conexao->prepare("SELECT codigo FROM professor WHERE user=$us");
-            while ($lin = $resultado->fetch(PDO::FETCH_ASSOC)) {
-                $prof->setCodigo($lin['codigo']);
+        $usuario = new Usuario();
+        $usuario->setPainel("prof");
+        $usuario->setUsuario($prof->getEmail());
+        $usuario->setSenha($senha);
+        $usuario->setStatus($prof->getEstado());
+        $usuario->setCodUs($senha);
+        if (Usuario::gravar($usuario)==true){
+            if ($gravar->execute()) {
+                $us = $prof->getUser();
+                $resultado = $conexao->prepare("SELECT codigo FROM professor WHERE user=$us");
+                while ($lin = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                    $prof->setCodigo($lin['codigo']);
+                }
+                echo "<script>alert('Salvo com Sucesso!')</script>";
+                header("../paginas/professores.php");
+                return $prof;
+            } else {
+                echo "<script>alert('Não foi possível efectuar a gravação!')</script>";
+                header("../paginas/professores.php");
             }
-            echo "<script>alert('Salvo com Sucesso!')</script>";
-            header("../paginas/professores.php");
-            return $prof;
         } else {
-            echo "<script>alert('Não foi possível efectuar a gravação!')</script>";
-            header("../paginas/professores.php");
+            echo "<script>alert('Não foi possível efectuar a gravação, Usuário já existente!')</script>"; 
         }
     }
 
@@ -142,7 +154,7 @@ class Professor {
         $professores->execute();
         $profs = $professores->fetchAll(PDO::FETCH_ASSOC);
         $gravar = $conexao->prepare("INSERT INTO professor_disciplina(cod_prof,cod_disc,ano) VALUES(:prof,:disc,:ano)");
-        $gravar->bindValue(":prof",$profs[count($profs) - 1]['codigo']);
+        $gravar->bindValue(":prof", $profs[count($profs) - 1]['codigo']);
         $gravar->bindValue(":disc", $disc);
         $gravar->bindValue(":ano", $ano);
         if ($gravar->execute()) {

@@ -23,10 +23,10 @@
                 <input type="text" name="nomecompleto" id="nomecompleto">
                 <label class="lbl">Nome do Pai</label>
                 <input required type="text" name="nomepai" id="nomepai">
+                <label class="lbl">Número do BI</label>
+                <input required type="text" name="nrBI" id="bi">
                 <label class="lbl">Nome da mãe</label>
                 <input type="text" name="nomemae" id="nomepai">
-                <label class="lbl">Contacto do Aluno</label>
-                <input required type="tel" name="contactoAl" id="contAl">
                 <label required class="lbl">Email</label>
                 <input type="email" name="email" id="email">
                 <label class="lbl">Contacto do Encarregado</label>
@@ -53,19 +53,31 @@
                 <h3>Passo 2</h3>
                 <label>Estudante</label>
                 <select disabled>
-                    <option></option>
+                    <option><?php
+                        include_once '../modelo/Estudante.php';
+                        $professores = $conexao->prepare("SELECT * FROM estudante");
+                        $professores->execute();
+                        $profs = $professores->fetchAll(PDO::FETCH_ASSOC);
+                        echo $profs[count($profs) - 1]['nome'] . "  " . $profs[count($profs) - 1]['bi'];
+                        ?></option>
                 </select>
                 <label>Turma</label>
                 <select name="turmaEs">
-                    <option></option>
+                     <?php
+                    $turmas = $conexao->prepare("SELECT * FROM turma");
+                    $turmas->execute();
+                    while ($row = $turmas->fetch(PDO::FETCH_ASSOC)):
+                        ?>
+                        <option><?php echo $row['nome']; ?></option>
+                    <?php endwhile; ?>
                 </select>
-                <button type="button"><i class="far fa-save"></i></button>
+                <button type="submit" name="enturm"><i class="far fa-save"></i></button>
                 <h3>Passo 3</h3>
                 <label>Semestre</label>
                 <select name="sesmestre" disabled>
                     <option></option>
                 </select>
-                <button type="button"><i class="fas fa-chevron-right"></i></button>
+                <button type="submit"><i class="fas fa-chevron-right"></i></button>
 
             </div>
         </div>

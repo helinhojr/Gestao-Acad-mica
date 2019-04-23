@@ -61,7 +61,7 @@ class Nivel {
     public static function gravar(Nivel $nivel) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $data = date("d/m/y");
+        $data = date("d/m/Y");
         $gravar = $conexao->prepare("INSERT INTO nivel(nome,estado,data) VALUES(:nome,:estado,:data)");
         $gravar->bindValue(":nome", $nivel->getNome());
         $gravar->bindValue(":estado", $nivel->getStatus());

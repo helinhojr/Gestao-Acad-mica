@@ -168,3 +168,25 @@ if(isset($_POST['enturm'])){
     $turma=$_POST['turmaEs'];
     Estudante::enturmar($turma);
 }
+if(isset($_POST['btPer'])){
+    require_once '../modelo/PeriodoLectivo.php';
+    $datF=$_POST['datafin'];
+    $datI=$_POST['datain'];
+    $periodo=new PeriodoLectivo();
+    $periodo->setDatafinal($datF);
+    $periodo->setDatainicio($datI);
+    PeriodoLectivo::gravar($periodo);
+}
+if(isset($_POST['bts'])){
+    require_once '../modelo/Semestre.php';
+    $datF=$_POST['datafins'];
+    $datI=$_POST['datains'];
+    $num=$_POST['num'];
+    $pl=$_POST['pel'];
+    $semestre = new Semestre();
+    $semestre->setDataInicio($datI);
+    $semestre->setDatafim($datF);
+    $semestre->setNumero($num);
+    $semestre->setPeriodo($pl);
+    Semestre::gravar($semestre);
+}

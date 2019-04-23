@@ -91,7 +91,7 @@ class Turma {
     public static function gravar(Turma $turma) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $data = date("d/m/y");
+        $data = date("d/m/Y");
         $gravar = $conexao->prepare("INSERT INTO turma(nome,ano,vagas,director,nivel,sala) VALUES(:nome,:ano,:vagas,:director,:nivel,:sala)");
         $gravar->bindValue(":nome", $turma->getNome());
         $gravar->bindValue(":ano", $data);

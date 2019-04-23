@@ -12,20 +12,31 @@
  * @author Helinho
  */
 class PeriodoLectivo {
-    private $codigo;
+    private $ano;
     private $datainicio;
     private $datafinal;
+    private $estado="activo";
     
-    function __construct() {
+    function getEstado() {
+        return $this->estado;
+    }
+
+    function setEstado($estado) {
+        $this->estado = $estado;
+    }
+
+        function __construct() {
         
     }
-
-    
-    function getCodigo() {
-        return $this->codigo;
+    function getAno() {
+        return $this->ano;
     }
 
-    function getDatainicio() {
+    function setAno($ano) {
+        $this->ano = $ano;
+    }
+
+        function getDatainicio() {
         return $this->datainicio;
     }
 
@@ -33,9 +44,6 @@ class PeriodoLectivo {
         return $this->datafinal;
     }
 
-    function setCodigo($codigo) {
-        $this->codigo = $codigo;
-    }
 
     function setDatainicio($datainicio) {
         $this->datainicio = $datainicio;
@@ -45,5 +53,43 @@ class PeriodoLectivo {
         $this->datafinal = $datafinal;
     }
 
+    public static function verificar($nome) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $niveis = $conexao->prepare("select ano from Periodo");
+        $niveis->execute();
+        $resultado = 0;
+        while ($nomes = $niveis->fetch(PDO::FETCH_ASSOC)) {
+            if (strcmp($nome, $nomes['ano'])==0)
+                $resultado++;
+        }
+        if ($resultado == 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 
+    public static function gravar(PeriodoLectivo $pl) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $data = date("Y");
+        $gravar = $conexao->prepare("INSERT INTO periodo(ano,dataInicio,dataFim,estado) VALUES(:ano,:final,:inicio,:estado)");
+        $gravar->bindValue(":ano", $data);
+        $gravar->bindValue(":final", $pl->getDatafinal());
+        $gravar->bindValue(":inicio", $pl->getDatainicio());
+        $gravar->bindValue(":estado", $pl->getEstado());
+        $valor = PeriodoLectivo::verificar($data);
+        if ($valor == 0) {
+            echo "<script>alert('Impossível fazer a gravação, período lectivo já cadastrado!')</script>";
+        } else {
+            if ($gravar->execute()) {
+                echo "<script>alert('Salvo com Sucesso!')</script>";
+                header("../paginas/disciplinas.php");
+            } else {
+                echo "<script>alert('Não foi possível efectuar a gravação!')</script>";
+                header("../paginas/disciplinas.php");
+            }
+        }
+    }
 }

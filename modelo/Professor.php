@@ -149,7 +149,7 @@ class Professor {
     public static function profDisc($disc) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $ano = date("y");
+        $ano = date("Y");
         $professores = $conexao->prepare("SELECT * FROM professor");
         $professores->execute();
         $profs = $professores->fetchAll(PDO::FETCH_ASSOC);

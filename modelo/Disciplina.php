@@ -70,7 +70,7 @@ class Disciplina {
     public static function gravar(Disciplina $disciplina) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $data = date("d/m/y");
+        $data = date("d/m/Y");
         $gravar = $conexao->prepare("INSERT INTO disciplina(nome,estado,data) VALUES(:nome,:estado,:data)");
         $gravar->bindValue(":nome", $disciplina->getNome());
         $gravar->bindValue(":estado", $disciplina->getStatus());

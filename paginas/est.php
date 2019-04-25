@@ -14,7 +14,7 @@
             <img class="imagem" src="../img/notebook.png">
             <h1><span>S</span>istema de <span>G</span>estão <span>A</span>cadémica</h1>
             <a href="#"><img src="../img/adam-kool-11868-unsplash.jpg"></a>
-            <h2>Hélio José Zandamela</h2>
+                <h2></h2>
             <div class="btbotao">
                 <span></span>
                 <span></span>
@@ -37,7 +37,7 @@
             //Funcao do Menu
             var baixo = document.querySelector(".baixo1");
             var esquerda = document.querySelector(".esquerda1");
-            esquerda.className+=" tamanho";
+            esquerda.className += " tamanho";
             var btn = document.querySelector(".btbotao");
             var i = 0;
             btn.addEventListener("click", function () {
@@ -48,7 +48,7 @@
                 } else {
                     baixo.className = "baixo1";
                     esquerda.className = "esquerda1";
-                    esquerda.className+=" tamanho";
+                    esquerda.className += " tamanho";
                     i = 0;
                 }
             });

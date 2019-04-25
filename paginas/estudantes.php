@@ -29,6 +29,8 @@
                 <input type="text" name="nomemae" id="nomepai">
                 <label required class="lbl">Email</label>
                 <input type="email" name="email" id="email">
+                <label class="lbl">Contacto do Aluno</label>
+                <input type="tel" name="contactoAl" id="cont">
                 <label class="lbl">Contacto do Encarregado</label>
                 <input type="tel" name="contactoEn" id="contEn">
                 <label class="lbl">Data de Nascimento</label>

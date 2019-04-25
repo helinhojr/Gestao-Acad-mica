@@ -39,12 +39,15 @@
 
                 <label>Professor</label>
                 <select name = "professor" disabled="">
-                    <option><?php
-                        include_once '../modelo/Professor.php';
-                        $professores = $conexao->prepare("SELECT * FROM professor");
-                        $professores->execute();
-                        $profs = $professores->fetchAll(PDO::FETCH_ASSOC);
-                        Professor::$profes=$profs[count($profs) - 1]['codigo'];
+                    <?php
+                    include_once '../modelo/Professor.php';
+                    $professores = $conexao->prepare("SELECT * FROM professor");
+                    $professores->execute();
+                    $profs = $professores->fetchAll(PDO::FETCH_ASSOC);
+                    ?>
+
+                    <option id="<?php echo $profs[count($profs) - 1]['codigo']; ?>">
+                        <?php
                         echo $profs[count($profs) - 1]['nome'] . "  " . $profs[count($profs) - 1]['bi'];
                         ?></option>
                 </select>

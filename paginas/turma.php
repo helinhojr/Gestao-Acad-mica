@@ -68,7 +68,17 @@
                     $profs->execute();
                     while ($linha = $profs->fetch(PDO::FETCH_ASSOC)):
                     ?>
-                    <option><?php echo $linha['nome']; ?></option>
+                    <option id="<?php echo $linha['codigo']; ?>"><?php echo $linha['nome']; ?></option>
+                    <?php endwhile; ?>
+                </select>
+                <label>Disciplina</label>
+                <select name="discProf">
+                    <?php
+                    $profs = $conexao->prepare("Select nome,cod_disc from professor_disciplina join disciplina on cod_disc=codigo where cod_prof='AF56616'");
+                    $profs->execute();
+                    while ($linha = $profs->fetch(PDO::FETCH_ASSOC)):
+                    ?>
+                    <option id="<?php echo $linha['cod_disc']; ?>"><?php echo $linha['nome']; ?></option>
                     <?php endwhile; ?>
                 </select>
                 <button type="submit"><i class="fas fa-plus"></i></button>
@@ -77,6 +87,7 @@
                 <table class="table" >
                     <thead>
                         <tr>
+                            <th>Código</th>
                             <th>Nome</th>
                             <th>Sala</th>
                             <th>Director da Turma</th>
@@ -92,6 +103,7 @@
                         while ($lee = $turm1->fetch(PDO::FETCH_ASSOC)):
                         ?>
                         <tr>
+                            <td><?php echo $lee['codigo']; ?></td>
                             <td><?php echo $lee['nome']; ?></td>
                             <td><?php echo $lee['sala']; ?></td>
                             <td><?php echo $lee['director']; ?></td>

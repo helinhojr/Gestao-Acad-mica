@@ -92,13 +92,15 @@ class Turma {
         require_once '../controller/conexao.php';
         $conexao = conectar();
         $data = date("d/m/Y");
-        $gravar = $conexao->prepare("INSERT INTO turma(nome,ano,vagas,director,nivel,sala) VALUES(:nome,:ano,:vagas,:director,:nivel,:sala)");
+        $codigo = strtoupper(substr((md5(date("YmdHis"))), 1, 7));
+        $gravar = $conexao->prepare("INSERT INTO turma(codigo,nome,ano,vagas,director,nivel,sala) VALUES(:codigo,:nome,:ano,:vagas,:director,:nivel,:sala)");
         $gravar->bindValue(":nome", $turma->getNome());
         $gravar->bindValue(":ano", $data);
         $gravar->bindValue(":vagas", $turma->getVagas());
         $gravar->bindValue(":director", $turma->getDirector());
         $gravar->bindValue(":nivel", $turma->getNivel());
         $gravar->bindValue(":sala", $turma->getSala());
+        $gravar->bindValue(":codigo", $codigo);
         $valor = Turma::verificar($turma->getNome(),$data);
         if ($valor == 0) {
             echo "<script>alert('Impossível fazer a gravação, turma já cadastrada!')</script>";

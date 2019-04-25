@@ -101,23 +101,54 @@
             }
         </style>
     </head>
+    <?php
+    define('ROOT_PATH', dirname(__FILE__));
+    require_once './controller/conexao.php';
+    $conexao = conectar();
+    if (isset($_POST['entrar'])) {
+        $user = $_POST['user'];
+        $pas = $_POST['pass'];
+        $usuarios = $conexao->prepare("select * from usuario where user='$user' and senha='$pas'");
+        $usuarios->execute();
+        $us = $usuarios->fetchAll();
+        foreach ($us as $user) {
+            echo $user['painel'];
+            $cod = $user['codigoUs'];
+            if (strcmp($user['painel'], "prof") == 0) {
+                echo "<script>window.location='paginas/prof.php'</script>";
+            } else if (strcmp($user['painel'], "est") == 0) {
+                require_once './paginas/est.php';
+                $estudante = $conexao->prepare("select * from estudante where codigo='$cod'");
+                $estudante->execute();
+                while ($lnha = $estudante->fetch(PDO::FETCH_ASSOC)):
+                    echo $lnha['nome'];
+                endwhile;
+//                echo "<script>window.location='paginas/est.php'</script>";
+            }else if (strcmp($user['painel'], "admin") == 0) {
+                echo "<script>window.location='paginas/admin.php'</script>";
+            } else {
+                echo "<script>window.location='paginas/sec.php'</script>";
+            }
+        }
+    }
+    ?>
     <body>
-        <div class="form-area">
+        <form method="post" class="form-area">
             <div class="image-area">
                 <img src="ct2.png" >
             </div>
             <h2>Início de Sessão</h2>
             <p>Usuário</p>
-            <input type="text">
+            <input type="text" name="user">
             <p>Senha</p>
-            <input type="password">
-            <a href="#" class="btn">
+            <input type="password" name="pass">
+            <button name="entrar" class="btn">
                 <span class="btn-text"> Entrar</span>
                 <span class="btn-text"> Log in</span>
-            </a>
+            </button>
             <a href="#" class="for-pass"> Esqueceu password?</a>
 
-        </div>
+        </form>
 
     </body>
 </html>

@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1">
-        <title>Gestao Académica - Professor</title>
-        <link rel="icon" href="../img/notebook.png" >
-        <link type="text/css" rel="stylesheet" href="../css/estilo.css">
-        <link type="text/css" rel="stylesheet" href="../css/iframe.css">
-        <link type="text/css" rel="stylesheet" href="../css/all.css">
-    </head>
-    <body>
-        <div class="cima">
-            <img class="imagem" src="../img/notebook.png">
-            <h1><span>S</span>istema de <span>G</span>estão <span>A</span>cadémica</h1>
-            <a href="#"><img src="../img/adam-kool-11868-unsplash.jpg"></a>
-            <h2>Hélio José Zandamela</h2>
-            <div class="btbotao">
-                <span></span>
-                <span></span>
-                <span></span>
+    <?php
+    require_once '../modelo/Professor.php';
+    session_start();
+    $estuda = $_SESSION['idPr'];
+    foreach (Professor::buscarEst($estuda) as $est):
+        ?>
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1">
+            <title>Gestao Académica - Professor</title>
+            <link rel="icon" href="../img/notebook.png" >
+            <link type="text/css" rel="stylesheet" href="../css/estilo.css">
+            <link type="text/css" rel="stylesheet" href="../css/iframe.css">
+            <link type="text/css" rel="stylesheet" href="../css/all.css">
+        </head>
+        <body>
+            <div class="cima">
+                <img class="imagem" src="../img/notebook.png">
+                <h1><span>S</span>istema de <span>G</span>estão <span>A</span>cadémica</h1>
+                <a href="#"><img src="<?php echo $est['foto']; ?>"></a>
+                <h2><?php echo $est['nome']; ?></h2>
+                <div class="btbotao">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
-        </div>
+        <?php endforeach; ?> 
         <div class="baixo1">
             <div class="esquerda1">
                 <ul>
@@ -37,7 +44,7 @@
             //Funcao do Menu
             var baixo = document.querySelector(".baixo1");
             var esquerda = document.querySelector(".esquerda1");
-            esquerda.className+=" tamanho";
+            esquerda.className += " tamanho";
             var btn = document.querySelector(".btbotao");
             var i = 0;
             btn.addEventListener("click", function () {
@@ -48,7 +55,7 @@
                 } else {
                     baixo.className = "baixo1";
                     esquerda.className = "esquerda1";
-                    esquerda.className+=" tamanho";
+                    esquerda.className += " tamanho";
                     i = 0;
                 }
             });

@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html>
+    <?php
+    session_start();
+    require_once '../modelo/Turma.php';
+    $turmas = Turma::buscarPrT($_SESSION['idPr']);
+    ?>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1">
@@ -37,7 +42,12 @@
             <form class="formulario" method="post">
                 <label>Turma</label>
                 <select class="pesq">
+                    <?php foreach ($turmas as $turma): ?>
+                        <option value="<?php echo $turma['turma'] ?>"><?php echo $turma['a'] ?></option>
+                    <?php endforeach; ?>
                 </select>
+                <button type="submit" ><i class="fas fa-sync-alt"></i></button>
+
                 <label>Nome do Estudante</label>
                 <input class="pesq" type="text" name="nome" id="nome">
                 <label>Nota</label>
@@ -45,7 +55,7 @@
                 </select>
                 <label>Valor</label>
                 <input class="pesq" type="number" max="2" name="nome" id="nome">
-                <button type="button"><i class="fas fa-sync-alt"></i></button>
+                <button type="submit" ><i class="fas fa-sync-alt"></i></button>
             </form>
         </div>
     </body>

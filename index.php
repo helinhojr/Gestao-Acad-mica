@@ -1,5 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt">
+    <?php
+    $dbname = "escola";
+    $host = "localhost";
+    $user = "root";
+    $pass = "";
+    try {
+        $conexao = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+    } catch (Exception $ex) {
+        echo $ex->getMessage();
+    }
+    ?>
     <head>
         <meta charset="UTF-8">
         <title>Gestão Académica - Login</title>
@@ -94,61 +105,80 @@
             .for-pass{
                 text-decoration: none;
                 display: block;
-                margin-top: 30px;
+                margin-top: 3px;
                 font-weight: bold;
                 font-size: 20px;
                 color: #fff;
             }
+            .h2{
+                background: #1E90FF;
+                color: red;
+                width: 80%;
+                font-size: 1em;
+            }
         </style>
     </head>
-    <?php
-    define('ROOT_PATH', dirname(__FILE__));
-    require_once './controller/conexao.php';
-    $conexao = conectar();
-    if (isset($_POST['entrar'])) {
-        $user = $_POST['user'];
-        $pas = $_POST['pass'];
-        $usuarios = $conexao->prepare("select * from usuario where user='$user' and senha='$pas'");
-        $usuarios->execute();
-        $us = $usuarios->fetchAll();
-        foreach ($us as $user) {
-            echo $user['painel'];
-            $cod = $user['codigoUs'];
-            if (strcmp($user['painel'], "prof") == 0) {
-                echo "<script>window.location='paginas/prof.php'</script>";
-            } else if (strcmp($user['painel'], "est") == 0) {
-                require_once './paginas/est.php';
-                $estudante = $conexao->prepare("select * from estudante where codigo='$cod'");
-                $estudante->execute();
-                while ($lnha = $estudante->fetch(PDO::FETCH_ASSOC)):
-                    echo $lnha['nome'];
-                endwhile;
-//                echo "<script>window.location='paginas/est.php'</script>";
-            }else if (strcmp($user['painel'], "admin") == 0) {
-                echo "<script>window.location='paginas/admin.php'</script>";
-            } else {
-                echo "<script>window.location='paginas/sec.php'</script>";
-            }
-        }
-    }
-    ?>
+
     <body>
-        <form method="post" class="form-area">
+        <form method="POST" class="form-area">
             <div class="image-area">
                 <img src="ct2.png" >
+
             </div>
             <h2>Início de Sessão</h2>
+
             <p>Usuário</p>
             <input type="text" name="user">
             <p>Senha</p>
             <input type="password" name="pass">
-            <button name="entrar" class="btn">
+            <button name="entraLogin" type="submit" class="btn">
                 <span class="btn-text"> Entrar</span>
                 <span class="btn-text"> Log in</span>
             </button>
+            <?php
+            session_start();
+            if (isset($_POST['entraLogin'])) {
+                $user = $_POST['user'];
+                $pass = $_POST['pass'];
+                if (empty($user) || empty($pass)) {
+                    echo "<h2 class='h2'>Campos da senha ou Usuario não preenchidos!!!</h2>";
+                } else {
+                    $usuario = $conexao->prepare("select * from usuario where user=:user and senha=:pass");
+                    $usuario->bindValue(":user", $user);
+                    $usuario->bindValue(":pass", $pass);
+                    $usuario->execute();
+                    $users = $usuario->fetchAll(PDO::FETCH_ASSOC);
+                    if (empty($users)) {
+                        echo "<h2 class='h2'>Dados incorrectos, tente novamente!!!</h2>";
+                    } else {
+                        foreach ($users as $us) {
+                            if ($us['status'] == "inactivo") {
+                                echo "<h2 class='h2'>Usuário Inactivo, contacte os responsáveis!!!</h2>";
+                            }else{
+                                switch ($us['painel']){
+                                    case "est": $_SESSION['logado']=true;
+                                        $_SESSION['idUsuario']=$us['codigoUs'];
+                                        echo "<script>window.location='paginas/est.php'</script>";
+                                        break;
+                                    case "prof":$_SESSION['logado']=true;
+                                        $_SESSION['idPr']=$us['codigoUs'];
+                                        echo "<script>window.location='paginas/prof.php'</script>";
+                                        break;
+                                    case "prof":$_SESSION['logado']=true;
+                                        $_SESSION['idSc']=$us['codigoUs'];
+                                        echo "<script>window.location='paginas/sec.php'</script>";
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            ?>
             <a href="#" class="for-pass"> Esqueceu password?</a>
 
         </form>
 
     </body>
+
 </html>

@@ -12,12 +12,12 @@
  * @author Helinho
  */
 class Turma {
+
     private $nome;
     private $sala;
     private $director;
     private $ano;
     private $nivel;
-    private $vagas;
 
     function getNome() {
         return $this->nome;
@@ -37,10 +37,6 @@ class Turma {
 
     function getNivel() {
         return $this->nivel;
-    }
-
-    function getVagas() {
-        return $this->vagas;
     }
 
     function setNome($nome) {
@@ -63,48 +59,60 @@ class Turma {
         $this->nivel = $nivel;
     }
 
-    function setVagas($vagas) {
-        $this->vagas = $vagas;
-    }
-
     public function __toString() {
         return $this->$nome;
     }
-    
-    public static function verificar($nome,$ano) {
+
+    public static function verificar($nome, $ano, $dir) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $niveis = $conexao->prepare("select nome,ano from turma");
-        $niveis->execute();
-        $resultado = 0;
-        while ($nomes = $niveis->fetch(PDO::FETCH_ASSOC)) {
-            if (strcmp($nome, $nomes['nome'])==0 && strcmp($ano, $nomes['ano'])==0)
-                $resultado++;
-        }
-        if ($resultado == 0) {
-            return 1;
-        } else {
+        $niveis = $conexao->prepare("select nome,ano from turma where nome=:nome and ano=:ano");
+        $niveis->bindValue(":nome", $nome);
+        $niveis->bindValue(":ano", $ano);
+        $dirs = $conexao->prepare("select director from turma where director=:dir");
+        $dirs->bindValue(":dir", $dir);
+        $dirs->execute();
+        if ($niveis->rowCount() > 0) {
             return 0;
+        } else if ($dirs->rowCount() < 0) {
+            return 1;
+        } else{
+            return 2;
         }
+    }
+
+    public static function buscar() {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca = $conexao->prepare("select * from turma");
+        $busca->execute();
+        return $busca->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function buscarPrT($prof) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca = $conexao->prepare("select turma.nome as a,disciplina.nome as c,turma,disc from discturmpro join disciplina on disc=disciplina.codigo join turma on turma=turma.codigo where professor=:pro");
+        $busca->bindValue(":pro", $prof);
+        $busca->execute();
+        return $busca->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function gravar(Turma $turma) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $data = date("d/m/Y");
+        $data = date("Y");
         $codigo = strtoupper(substr((md5(date("YmdHis"))), 1, 7));
-        $gravar = $conexao->prepare("INSERT INTO turma(codigo,nome,ano,vagas,director,nivel,sala) VALUES(:codigo,:nome,:ano,:vagas,:director,:nivel,:sala)");
+        $gravar = $conexao->prepare("INSERT INTO turma(codigo,nome,ano,director,nivel,sala) VALUES(:codigo,:nome,:ano,:director,:nivel,:sala)");
         $gravar->bindValue(":nome", $turma->getNome());
         $gravar->bindValue(":ano", $data);
-        $gravar->bindValue(":vagas", $turma->getVagas());
         $gravar->bindValue(":director", $turma->getDirector());
         $gravar->bindValue(":nivel", $turma->getNivel());
         $gravar->bindValue(":sala", $turma->getSala());
         $gravar->bindValue(":codigo", $codigo);
-        $valor = Turma::verificar($turma->getNome(),$data);
+        $valor = Turma::verificar($turma->getNome(), $data, $turma->getDirector());
         if ($valor == 0) {
             echo "<script>alert('Impossível fazer a gravação, turma já cadastrada!')</script>";
-        } else {
+        } else if ($valor == 2) {
             if ($gravar->execute()) {
                 echo "<script>alert('Salvo com Sucesso!')</script>";
                 header("../paginas/turma.php");
@@ -112,6 +120,9 @@ class Turma {
                 echo "<script>alert('Não foi possível efectuar a gravação!')</script>";
                 header("../paginas/turma.php");
             }
+        } else {
+            echo "<script>alert('Impossível fazer a gravação, Este professor já é director de uma turma!')</script>";
         }
     }
+
 }

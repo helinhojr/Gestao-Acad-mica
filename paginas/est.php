@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1">
-        <title>Gestao Académica - Estudante</title>
-        <link type="text/css" rel="stylesheet" href="../css/estilo.css">
-        <link type="text/css" rel="stylesheet" href="../css/iframe.css">
-        <link rel="icon" href="../img/notebook.png" >
-        <link type="text/css" rel="stylesheet" href="../css/all.css">
-    </head>
-    <body>
-        <div class="cima">
-            <img class="imagem" src="../img/notebook.png">
-            <h1><span>S</span>istema de <span>G</span>estão <span>A</span>cadémica</h1>
-            <a href="#"><img src="../img/adam-kool-11868-unsplash.jpg"></a>
-                <h2></h2>
-            <div class="btbotao">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+    <?php
+    require_once '../modelo/Estudante.php';
+    session_start();
+    $estuda = $_SESSION['idUsuario'];
+    foreach (Estudante::buscarEst($estuda) as $est):
+        ?>
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1">
+            <title>Gestao Académica - Estudante</title>
+            <link type="text/css" rel="stylesheet" href="../css/estilo.css">
+            <link type="text/css" rel="stylesheet" href="../css/iframe.css">
+            <link rel="icon" href="../img/notebook.png" >
+            <link type="text/css" rel="stylesheet" href="../css/all.css">
+        </head>
+        <body>
+            <div class="cima">
+                <img class="imagem" src="../img/notebook.png">
+                <h1><span>S</span>istema de <span>G</span>estão <span>A</span>cadémica</h1>
+                <a href="#"><img src="<?php echo $est['foto']; ?>"></a>
+                <h2><?php echo $est['nome']; ?></h2>
+                <div class="btbotao">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            <?php endforeach; ?>    
         </div>
         <div class="baixo1">
             <div class="esquerda1">

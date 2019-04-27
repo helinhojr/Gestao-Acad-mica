@@ -59,6 +59,8 @@
                 <h3>Salas</h3>
                 <label>Nome da Sala</label>
                 <input name="nrsala" type="text" id="sala">
+                <label>Vagas</label>
+                <input name="vagas" type="number">
                 <button type="submit" name="btSala">enviar</button>
             </div >
         </form>

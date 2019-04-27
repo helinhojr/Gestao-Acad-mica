@@ -48,7 +48,14 @@ class Secretario {
     function getNome() {
         return $this->nome;
     }
-
+    public static function buscarEst($cod){
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca=$conexao->prepare("select * from secretario where codigo=:cod");
+        $busca->bindValue(":cod", $cod);
+        $busca->execute();
+        return $busca->fetchAll(PDO::FETCH_ASSOC);
+    }
     function getDataDeNasc() {
         return $this->dataDeNasc;
     }
@@ -112,7 +119,13 @@ class Secretario {
     function setEndereco($endereco) {
         $this->endereco = $endereco;
     }
-
+    public static function buscar(){
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca=$conexao->prepare("select * from secretario");
+        $busca->execute();
+        return $busca->fetchAll(PDO::FETCH_ASSOC);
+    }
     public static function gravar(Secretario $sec) {
         require_once '../controller/conexao.php';
         require_once '../modelo/Usuario.php';

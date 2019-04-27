@@ -14,6 +14,24 @@ class Professor {
     private $foto;
     private $estado = "activo";
 
+    public static function buscarEst($cod) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca = $conexao->prepare("select * from professor where codigo=:cod");
+        $busca->bindValue(":cod", $cod);
+        $busca->execute();
+        return $busca->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function buscarDisc($cod) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca = $conexao->prepare("select * from professor_disciplina where codigo=:cod");
+        $busca->bindValue(":cod", $cod);
+        $busca->execute();
+        return $busca->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     function getFoto() {
         return $this->foto;
     }
@@ -102,6 +120,14 @@ class Professor {
         $this->estado = $estado;
     }
 
+    public static function buscar() {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca = $conexao->prepare("select * from professor");
+        $busca->execute();
+        return $busca->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function gravar(Professor $prof) {
         require_once '../controller/conexao.php';
         require_once '../modelo/Usuario.php';
@@ -125,7 +151,7 @@ class Professor {
         $usuario->setSenha($senha);
         $usuario->setStatus($prof->getEstado());
         $usuario->setCodUs($senha);
-        if (Usuario::gravar($usuario)==true){
+        if (Usuario::gravar($usuario) == true) {
             if ($gravar->execute()) {
                 $us = $prof->getUser();
                 $resultado = $conexao->prepare("SELECT codigo FROM professor WHERE user=$us");
@@ -140,34 +166,95 @@ class Professor {
                 header("../paginas/professores.php");
             }
         } else {
-            echo "<script>alert('Não foi possível efectuar a gravação, Usuário já existente!')</script>"; 
+            echo "<script>alert('Não foi possível efectuar a gravação, Usuário já existente!')</script>";
         }
     }
 
-    public static $profes = 0;
+    public static function verificar($cod_disc, $cod_prof) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca = $conexao->prepare("select * from professor_disciplina where cod_prof=:pr and cod_disc=:dis");
+        $busca->bindValue(":pr", $cod_prof);
+        $busca->bindValue(":dis", $cod_disc);
+        $busca->execute();
+        if ($busca->rowCount() > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
-    public static function profDisc($disc) {
+    public static function profDisc($disc, $prof) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
         $ano = date("Y");
-        $professores = $conexao->prepare("SELECT * FROM professor");
-        $professores->execute();
-        $profs = $professores->fetchAll(PDO::FETCH_ASSOC);
         $gravar = $conexao->prepare("INSERT INTO professor_disciplina(cod_prof,cod_disc,ano) VALUES(:prof,:disc,:ano)");
-        $gravar->bindValue(":prof", $profs[count($profs) - 1]['codigo']);
+        $gravar->bindValue(":prof", $prof);
         $gravar->bindValue(":disc", $disc);
         $gravar->bindValue(":ano", $ano);
-        if ($gravar->execute()) {
-            echo "<script>alert('Salvo com Sucesso!')</script>";
-            header("../paginas/professores.php");
+        if (Professor::verificar($disc, $prof)) {
+            if ($gravar->execute()) {
+                echo "<script>alert('Salvo com Sucesso!')</script>";
+                header("../paginas/professores.php");
+            } else {
+                echo "<script>alert('Não foi possível efectuar a gravação!')</script>";
+                header("../paginas/professores.php");
+            }
         } else {
-            echo "<script>alert('Não foi possível efectuar a gravação!')</script>";
+            echo "<script>alert('Não foi possível efectuar a gravação, o professor já dá a mesma disciplina!')</script>";
             header("../paginas/professores.php");
         }
     }
 
     public function __toString() {
         return $this->nome . " " . $this->numeroBI;
+    }
+
+    public static function verEnturm($disc, $prof, $turma) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $discs = $conexao->prepare("select * from discturmpro where disc=:ds and professor=:pro");
+        $discs->bindValue(":pro", $prof);
+        $discs->bindValue(":ds", $disc);
+        $discs->execute();
+        $turm = $conexao->prepare("select * from discturmpro where turma=:tr and professor=:pro and ano=:ano");
+        $turm->bindValue(":pro", $prof);
+        $turm->bindValue(":tr", $turma);
+        $turm->bindValue(":ano", date("Y"));
+        $turm->execute();
+        if ($discs->rowCount() > 0) {
+            return 0;
+        } else if ($turm->rowCount() == 2) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
+    public static function enturmar($disc, $prof, $turma) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $turm = $conexao->prepare("insert into discturmpro values(:pro,:tr,:ds,:ano)");
+        $turm->bindValue(":pro", $prof);
+        $turm->bindValue(":tr", $turma);
+        $turm->bindValue(":ds", $disc);
+        $turm->bindValue(":ano", date("Y"));
+        $valor = Professor::verEnturm($disc, $prof, $turma);
+        if ($valor == 0) {
+            echo "<script>alert('Não foi possível efectuar a gravação, o professor já dá a mesma disciplina nesta turma!')</script>";
+            header("../paginas/turma.php");
+        } else if ($valor == 1) {
+            echo "<script>alert('Não foi possível efectuar a gravação, o professor não pode dar mais de duas disciplinas na mesma turma!')</script>";
+            header("../paginas/turma.php");
+        } else {
+            if ($turm->execute()) {
+                echo "<script>alert('Salvo com Sucesso!')</script>";
+                header("../paginas/turma.php");
+            }else{
+                echo "<script>alert('Não foi possível efectuar a gravação!')</script>";
+                header("../paginas/turma.php");
+            }
+        }
     }
 
 }

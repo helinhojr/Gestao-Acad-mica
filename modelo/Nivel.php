@@ -48,7 +48,7 @@ class Nivel {
         $niveis->execute();
         $resultado = 0;
         while ($nomes = $niveis->fetch(PDO::FETCH_ASSOC)) {
-            if (strcmp($nome, $nomes['nome'])==0)
+            if (strcmp($nome, $nomes['nome']) == 0)
                 $resultado++;
         }
         if ($resultado == 0) {
@@ -56,6 +56,14 @@ class Nivel {
         } else {
             return 0;
         }
+    }
+
+    public static function buscar() {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca = $conexao->prepare("select * from nivel");
+        $busca->execute();
+        return $busca->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function gravar(Nivel $nivel) {
@@ -80,21 +88,36 @@ class Nivel {
         }
     }
 
-    public static function nivDisc($disc) {
+    public static function veriND($disc, $nivel) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $professores = $conexao->prepare("SELECT * FROM professor");
-        $professores->execute();
-        $profs = $professores->fetchAll(PDO::FETCH_ASSOC);
-        $gravar = $conexao->prepare("INSERT INTO nivel_disciplina(cod_niv,cod_disc) VALUES(:prof,:disc)");
-        $gravar->bindValue(":prof", $profs[count($profs) - 1]['codigo']);
+        $gravar=$conexao->prepare("select * from nivel_disciplina where disc=:disc and nivel=:niv");
         $gravar->bindValue(":disc", $disc);
-        if ($gravar->execute()) {
-            echo "<script>alert('Salvo com Sucesso!')</script>";
-            header("../paginas/professores.php");
+        $gravar->bindValue(":niv", $nivel);
+        if($gravar->rowCount()>0){
+            return 0;
+        }else{
+            return 1;
+        }
+    }
+
+    public static function nivDisc($disc, $nivel) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $valor= Nivel::veriND($disc, $nivel);
+        if ($valor == 0) {
+            echo "<script>alert('Impossível adicionar, essa disciplina já foi associada ao nível')</script>";
         } else {
-            echo "<script>alert('Não foi possível efectuar a gravação!')</script>";
-            header("../paginas/professores.php");
+            $gravar = $conexao->prepare("INSERT INTO nivel_disciplina VALUES(:disc,:niv)");
+            $gravar->bindValue(":disc", $disc);
+            $gravar->bindValue(":niv", $nivel);
+            if ($gravar->execute()) {
+                echo "<script>alert('Salvo com Sucesso!')</script>";
+                header("../paginas/professores.php");
+            } else {
+                echo "<script>alert('Não foi possível efectuar a gravação!')</script>";
+                header("../paginas/professores.php");
+            }
         }
     }
 

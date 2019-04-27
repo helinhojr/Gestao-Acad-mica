@@ -2,6 +2,31 @@
 
 include '../controller/conexao.php';
 $conexao = conectar();
+if (isset($_POST['entraLogin'])) {
+    $user = $_POST['user'];
+    $pas = $_POST['pass'];
+    $usuarios = $conexao->prepare("select * from usuario where user='$user' and senha='$pas'");
+    $usuarios->execute();
+    $us = $usuarios->fetchAll();
+    foreach ($us as $user) {
+        $cod = $user['codigoUs'];
+        if (strcmp($user['painel'], "prof") == 0) {
+            echo "<script>window.location='prof.php'</script>";
+        } else if (strcmp($user['painel'], "est") == 0) {
+            require_once 'est.php';
+            $estudante = $conexao->prepare("select * from estudante where codigo='$cod'");
+            $estudante->execute();
+            while ($lnha = $estudante->fetch(PDO::FETCH_ASSOC)):
+                $novocodigo=$lnha['codigo'];
+            endwhile;
+            echo "<script>window.location='est.php'</script>";
+        }else if (strcmp($user['painel'], "admin") == 0) {
+            echo "<script>window.location='paginas/admin.php'</script>";
+        } else {
+            echo "<script>window.location='paginas/sec.php'</script>";
+        }
+    }
+}
 if (isset($_POST['btDisc'])) {
     require_once '../modelo/Disciplina.php';
     $disciplina = new Disciplina();
@@ -13,8 +38,11 @@ if (isset($_POST['btDisc'])) {
 if (isset($_POST['btadicionarN'])) {
     
 }
-if (isset($_POST['btNivel'])) {
-    
+if (isset($_POST['btaddn'])) {
+    require_once '../modelo/Nivel.php';
+    $disc=$_POST['discNiv'];
+    $nivel=$_POST['nivel'];
+    Nivel::nivDisc($disc, $nivel);
 }
 if (isset($_POST['btProf'])) {
     require_once '../modelo/Professor.php';
@@ -82,8 +110,10 @@ if (isset($_POST['btSec'])) {
 }
 if (isset($_POST['btSala'])) {
     $nomeSala = $_POST['nrsala'];
-    $gravar = $conexao->prepare("INSERT INTO sala(nome) VALUES(:nome)");
+    $vagas = $_POST['vagas'];
+    $gravar = $conexao->prepare("INSERT INTO sala(nome,vagas) VALUES(:nome,:vaga)");
     $gravar->bindValue(":nome", $nomeSala);
+    $gravar->bindValue(":vaga", $vagas);
     if ($gravar->execute()) {
         echo "<script>alert('Salvo com Sucesso!')</script>";
         header("definicoes.php");
@@ -95,10 +125,8 @@ if (isset($_POST['btSala'])) {
 if (isset($_POST['addDisc'])) {
     require_once '../modelo/Professor.php';
     $disc = $_POST['disciplinaS'];
-    $buscarDisciplina = $conexao->prepare("SELECT codigo FROM disciplina WHERE nome='$disc' limit 1");
-    $buscarDisciplina->execute();
-    $dado = $buscarDisciplina->fetchAll(PDO::FETCH_ASSOC);
-    Professor::profDisc($dado[count($dado) - 1]['codigo']);
+    $profex=$_POST['rep'];
+    Professor::profDisc($disc,$profex);
 }
 if (isset($_POST['saveEst'])) {
     require_once '../modelo/Estudante.php';
@@ -142,51 +170,59 @@ if (isset($_POST['saveEst'])) {
     } else {
         echo "<script>alert('Extensão do arquivo não permitido!')</script>";
     }
-}      
-if(isset($_POST['btNivel'])){
+}
+if (isset($_POST['btNivel'])) {
     require_once '../modelo/Nivel.php';
     $nivel = new Nivel();
-    $nivels=$_POST['nomeN'];
+    $nivels = $_POST['nomeN'];
     $nivel->setNome($nivels);
     Nivel::gravar($nivel);
 }
-if(isset($_POST['btTurma'])){
+if (isset($_POST['btTurma'])) {
     require_once '../modelo/Turma.php';
-    $nome=$_POST['nomeTurma'];
-    $sala=$_POST['sala'];
-    $nivel=$_POST['nivel'];
-    $director=$_POST['diretor'];
-    
+    $nome = $_POST['nomeTurma'];
+    $sala = $_POST['sala'];
+    $nivel = $_POST['nivel'];
+    $director = $_POST['diretor'];
     $turma = new Turma();
     $turma->setNome($nome);
+    $turma->setDirector($director);
     $turma->setNivel($nivel);
     $turma->setSala($sala);
     Turma::gravar($turma);
 }
-if(isset($_POST['enturm'])){
+if (isset($_POST['btTurmas'])) {
     require_once '../modelo/Estudante.php';
-    $turma=$_POST['turmaEs'];
-    Estudante::enturmar($turma);
+    $turma = $_POST['turmaEs'];
+    $ests = $_POST['ests'];
+    Estudante::enturmar($turma,$ests);
 }
-if(isset($_POST['btPer'])){
+if (isset($_POST['btPer'])) {
     require_once '../modelo/PeriodoLectivo.php';
-    $datF=$_POST['datafin'];
-    $datI=$_POST['datain'];
-    $periodo=new PeriodoLectivo();
+    $datF = $_POST['datafin'];
+    $datI = $_POST['datain'];
+    $periodo = new PeriodoLectivo();
     $periodo->setDatafinal($datF);
     $periodo->setDatainicio($datI);
     PeriodoLectivo::gravar($periodo);
 }
-if(isset($_POST['bts'])){
+if (isset($_POST['bts'])) {
     require_once '../modelo/Semestre.php';
-    $datF=$_POST['datafins'];
-    $datI=$_POST['datains'];
-    $num=$_POST['num'];
-    $pl=$_POST['pel'];
+    $datF = $_POST['datafins'];
+    $datI = $_POST['datains'];
+    $num = $_POST['num'];
+    $pl = $_POST['pel'];
     $semestre = new Semestre();
     $semestre->setDataInicio($datI);
     $semestre->setDatafim($datF);
     $semestre->setNumero($num);
     $semestre->setPeriodo($pl);
     Semestre::gravar($semestre);
+}
+if(isset($_POST['btTDP'])){
+    require_once '../modelo/Professor.php';
+    $turma=$_POST['ttu'];
+    $disc=$_POST['discProf'];
+    $prof=$_POST['dirPr'];
+    Professor::enturmar($disc, $prof, $turma);
 }

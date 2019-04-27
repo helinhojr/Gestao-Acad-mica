@@ -160,7 +160,21 @@ class Estudante {
     function setTurma($turma) {
         $this->turma = $turma;
     }
-
+    public static function buscar(){
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca=$conexao->prepare("select * from estudante");
+        $busca->execute();
+        return $busca->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function buscarEst($cod){
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca=$conexao->prepare("select * from estudante where codigo=:cod");
+        $busca->bindValue(":cod", $cod);
+        $busca->execute();
+        return $busca->fetchAll(PDO::FETCH_ASSOC);
+    }
     public static function gravar(Estudante $est) {
         require_once '../controller/conexao.php';
         require_once '../modelo/Usuario.php';
@@ -204,7 +218,7 @@ class Estudante {
 
     public static $ests = "ss";
 
-    public static function enturmar($turma) {
+    public static function enturmar($turma,$ests) {
         require_once '../controller/conexao.php';
         $estudantes = $conexao->prepare("SELECT * FROM estudante");
         $estudantes->execute();
@@ -212,9 +226,9 @@ class Estudante {
         $conexao = conectar();
         $est = $conexao->prepare("update estudante set turma=:turma where codigo=:cond");
         $est->bindValue(":turma", $turma);
-        $est->bindValue(":cond", $ests[count($ests) - 1]['codigo']);
+        $est->bindValue(":cond", $ests);
         if($est->execute()){
-            echo "AWESOME";
+            echo "<script>alert('Salvo com Sucesso!!!')</script>";
         }
     }
 

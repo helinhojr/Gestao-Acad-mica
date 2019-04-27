@@ -6,12 +6,14 @@
  * @author Helinho
  */
 class Usuario {
+
     private $codigo;
     private $usuario;
     private $senha;
     private $painel;
     private $status;
     private $codUs;
+
     function getStatus() {
         return $this->status;
     }
@@ -20,7 +22,7 @@ class Usuario {
         $this->status = $status;
     }
 
-        function getCodigo() {
+    function getCodigo() {
         return $this->codigo;
     }
 
@@ -51,6 +53,7 @@ class Usuario {
     function setPainel($painel) {
         $this->painel = $painel;
     }
+
     function getCodUs() {
         return $this->codUs;
     }
@@ -59,14 +62,14 @@ class Usuario {
         $this->codUs = $codUs;
     }
 
-        public static function verificar($nome) {
+    public static function verificar($nome) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
         $niveis = $conexao->prepare("select user from usuario");
         $niveis->execute();
         $resultado = 0;
         while ($nomes = $niveis->fetch(PDO::FETCH_ASSOC)) {
-            if (strcmp($nome, $nomes['user'])==0)
+            if (strcmp($nome, $nomes['user']) == 0)
                 $resultado++;
         }
         if ($resultado == 0) {
@@ -74,6 +77,16 @@ class Usuario {
         } else {
             return 0;
         }
+    }
+    public static function validar($user,$senha) {
+        define("FICHEIRO", __FILE__);
+        require_once FICHEIRO.'../controller/conexao.php';
+        $conexao = conectar();
+        $niveis = $conexao->prepare("select * from usuario where user=:user and senha=:pass");
+        $niveis->bindValue(":user", $user);
+        $niveis->bindValue(":pass", $senha);
+        $niveis->execute();
+        return $niveis->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function gravar(Usuario $usuario) {
@@ -97,4 +110,13 @@ class Usuario {
             }
         }
     }
+
+    public static function buscar() {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca = $conexao->prepare("select * from usuario");
+        $busca->execute();
+        return $busca->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

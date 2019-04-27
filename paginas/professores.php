@@ -36,20 +36,20 @@
                 <label>Foto</label>
                 <input type="file" name="fotoProf" id="foto">
                 <button type="submit" name="btProf"><i class="far fa-save"></i></button>
-
                 <label>Professor</label>
-                <select name = "professor" disabled="">
+                <select name = "rep">
                     <?php
                     include_once '../modelo/Professor.php';
                     $professores = $conexao->prepare("SELECT * FROM professor");
                     $professores->execute();
-                    $profs = $professores->fetchAll(PDO::FETCH_ASSOC);
+                    while($linha=$professores->fetch(PDO::FETCH_ASSOC)):
                     ?>
 
-                    <option id="<?php echo $profs[count($profs) - 1]['codigo']; ?>">
+                    <option value="<?php echo $linha['codigo']; ?>">
                         <?php
-                        echo $profs[count($profs) - 1]['nome'] . "  " . $profs[count($profs) - 1]['bi'];
+                        echo $linha['nome'] ;
                         ?></option>
+                    <?php endwhile; ?>
                 </select>
                 <label>Disciplinas</label>
                 <select name = "disciplinaS">
@@ -58,7 +58,7 @@
                     $disciplinas->execute();
                     while ($row = $disciplinas->fetch(PDO::FETCH_ASSOC)):
                         ?>
-                        <option><?php echo $row['nome']; ?></option>
+                    <option value="<?php echo $row['codigo']; ?>"><?php echo $row['nome']; ?></option>
                     <?php endwhile; ?>
                 </select>
                 <button type="submit" name="addDisc"><i class="fas fa-plus"></i></button>

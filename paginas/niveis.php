@@ -8,11 +8,8 @@
         <link rel="stylesheet" href="../css/all.css">
         <link rel="stylesheet" href="../css/iframe.css">
     </head>
-    <?php
+    <?php 
     require_once './mycontrolle.php';
-    $busca = "select * from disciplina";
-    $resultado = $conexao->prepare($busca);
-    $resultado->execute();
     ?>
     <body>
         <div class="tit">
@@ -25,22 +22,23 @@
                 <input type="text" name="nomeN" id="nome">
                 <button type="submit" name="btNivel"><i class="far fa-save"></i></button>
                 <label>Nível</label>
-                <select name="nivv" disabled="">
+                <select name="nivel">
                     <?php
-                    $niveis = $conexao->prepare("select * from nivel");
-                    $niveis->execute();
-                    $sps=$niveis->fetchAll(PDO::FETCH_ASSOC);
+                    require_once '../modelo/Nivel.php';
+                    foreach (Nivel::buscar() as $linha):
                     ?>
-                    <option><?php echo $sps[count($sps)-1]['nome']; ?></option>
+                    <option><?php echo $linha['nome']; ?></option>
+                    <?php endforeach;?>
                 </select>
                 <label for="disciplinas">Disciplinas</label>
                 <select name="discNiv" id="disciplinas">
                     <?php
-                    while ($linha = $resultado->fetch(PDO::FETCH_ASSOC)):
+                    require_once '../modelo/Disciplina.php';
+                    foreach (Disciplina::buscar() as $linha):
                         ?>
-                        <option><?php echo $linha['nome']; ?></option>
+                        <option value="<?php echo $linha['codigo']; ?>"><?php echo $linha['nome']; ?></option>
                         <?php
-                    endwhile;
+                    endforeach;
                     ?>
                 </select>
                 <button type="submit" name="btaddn"><i class="fas fa-plus"></i></button>
@@ -55,9 +53,7 @@
                     </thead>
                     <tbody>
                         <?php
-                        $niveis = $conexao->prepare("select * from nivel");
-                        $niveis->execute();
-                        while ($linha = $niveis->fetch(PDO::FETCH_ASSOC)):
+                        foreach (Nivel::buscar() as $linha):
                             ?>
                             <tr>
                                 <td><?php echo $linha['nome'] ?></td>
@@ -65,7 +61,7 @@
                                 <td></td>
                                 <td><button type="button" class="verde"><i class="fas fa-edit"></i></button><button type="button" class="vermelho"><i class="fas fa-trash"></i></button></td>
                             </tr>
-                        <?php endwhile; ?>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

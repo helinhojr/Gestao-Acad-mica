@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html>
+    <?php
+    session_start();
+    require_once '../modelo/Turma.php';
+    $turmas= Turma::buscarPrT($_SESSION['idPr']);
+    ?>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1">
@@ -22,10 +27,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach ($turmas as $turma): ?>
                     <tr>
-                        <td></td>
-                        <td></td>
+                        <td><?php echo $turma['c'] ?></td>
+                        <td><?php echo $turma['a'] ?></td>
                     </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
 

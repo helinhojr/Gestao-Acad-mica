@@ -52,9 +52,8 @@
                     </thead>
                     <tbody>
                        <?php
-                        $secs = $conexao->prepare("SELECT * FROM secretario");
-                        $secs->execute();
-                        while ($linha = $secs->fetch(PDO::FETCH_ASSOC)):
+                           require_once '../modelo/Secretario.php';
+                           foreach(Secretario::buscar() as $linha):
                             ?>
                             <tr>
                                 <td><?php echo $linha['codigo'] ?></td>
@@ -68,7 +67,7 @@
                                 <td><button class="vermelho"><i class="fas fa-trash"></i></button></td>
                             </tr>
                             <?php
-                        endwhile;
+                            endforeach;
                         ?>
                     </tbody>
                 </table>
@@ -76,4 +75,4 @@
         </div>
 
     </body>
-</html>s
+</html>

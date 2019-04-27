@@ -68,21 +68,26 @@ class Semestre {
         $this->datafim = $datafim;
     }
 
-    public static function verificar($nome,$ano) {
+    public static function verificar($nome,$ano,$df) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $niveis = $conexao->prepare("select nome,periodo from semestre");
+        $niveis = $conexao->prepare("select nome,periodo from semestre where nome=:nom and periodo=:per and dataFinal<:df");
+        $niveis->bindValue(":nom", $nome);
+        $niveis->bindValue(":per", $ano);
+        $niveis->bindValue(":df", $df);
         $niveis->execute();
-        $resultado = 0;
-        while ($nomes = $niveis->fetch(PDO::FETCH_ASSOC)) {
-            if (strcmp($nome, $nomes['nome']) == 0 && strcmp($ano, $nomes['periodo']) == 0)
-                $resultado++;
-        }
-        if ($resultado == 0) {
-            return 1;
-        } else {
+        if ($niveis->rowCount()>0) {
             return 0;
+        } else {
+            return 1;
         }
+    }
+    public static function buscar(){
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca=$conexao->prepare("select * from semestre");
+        $busca->execute();
+        return $busca->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function gravar(Semestre $sm) {
@@ -94,7 +99,7 @@ class Semestre {
         $gravar->bindValue(":inicio", $sm->getDatainicio());
         $gravar->bindValue(":estado", $sm->getEstado());
         $gravar->bindValue(":per", $sm->getPeriodo());
-        $valor = Semestre::verificar($sm->getNumero(),$sm->getPeriodo());
+        $valor = Semestre::verificar($sm->getNumero(),$sm->getPeriodo(),$sm->getDataInicio());
         if ($valor == 0) {
             echo "<script>alert('Impossível fazer a gravação, semestre já cadastrado!')</script>";
         } else {

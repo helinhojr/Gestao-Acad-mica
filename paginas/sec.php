@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html>
+    <?php
+    require_once '../modelo/Secretario.php';
+    session_start();
+    $estuda = $_SESSION['idSc'];
+    foreach (Secretario::buscarEst($estuda) as $est):
+        ?>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1">
@@ -13,14 +19,15 @@
         <div class="cima">
             <img class="imagem" src="../img/notebook.png">
             <h1><span>S</span>istema de <span>G</span>estão <span>A</span>cadémica</h1>
-            <a href="#"><img src="../img/adam-kool-11868-unsplash.jpg"></a>
-            <h2>Hélio José Zandamela</h2>
+            <a href="#"><img src="<?php echo $est['foto']; ?>"></a>
+                <h2><?php echo $est['nome']; ?></h2>
             <div class="btbotao">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
         </div>
+        <?php endforeach; ?> 
         <div class="baixo1">
             <div class="esquerda1">
                 <ul>

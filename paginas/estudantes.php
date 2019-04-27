@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="../css/forms.css">
     </head>
     <?php
-        require_once './mycontrolle.php';
+    require_once './mycontrolle.php';
     ?>
     <body>
         <div class="tit">
@@ -54,26 +54,28 @@
             <div class="tabela">
                 <h3>Passo 2</h3>
                 <label>Estudante</label>
-                <select disabled>
-                    <option><?php
-                        include_once '../modelo/Estudante.php';
-                        $professores = $conexao->prepare("SELECT * FROM estudante");
-                        $professores->execute();
-                        $profs = $professores->fetchAll(PDO::FETCH_ASSOC);
-                        echo $profs[count($profs) - 1]['nome'] . "  " . $profs[count($profs) - 1]['bi'];
-                        ?></option>
+                <select name="ests" disabled>
+                    <?php
+                    include_once '../modelo/Estudante.php';
+                    $professores = $conexao->prepare("SELECT * FROM estudante");
+                    $professores->execute();
+                    $profs = $professores->fetchAll(PDO::FETCH_ASSOC);
+                    ?>
+                    <option value="<?php $profs[count($profs) - 1]['codigo'] ?>"><?php
+                    echo $profs[count($profs) - 1]['nome'];
+                    ?></option>
                 </select>
                 <label>Turma</label>
                 <select name="turmaEs">
-                     <?php
+                    <?php
                     $turmas = $conexao->prepare("SELECT * FROM turma");
                     $turmas->execute();
                     while ($row = $turmas->fetch(PDO::FETCH_ASSOC)):
                         ?>
-                        <option><?php echo $row['nome']; ?></option>
+                    <option value="<?php echo $row['codigo']; ?>"><?php echo $row['nome']; ?></option>
                     <?php endwhile; ?>
                 </select>
-                <button type="submit" name="enturm"><i class="far fa-save"></i></button>
+                <button name="btTurmas" type="submit"><i class="far fa-save"></i></button>
                 <h3>Passo 3</h3>
                 <label>Semestre</label>
                 <select name="sesmestre" disabled>

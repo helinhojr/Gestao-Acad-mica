@@ -66,7 +66,13 @@ class Disciplina {
             return 0;
         }
     }
-
+    public static function buscar(){
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca=$conexao->prepare("select * from disciplina");
+        $busca->execute();
+        return $busca->fetchAll(PDO::FETCH_ASSOC);
+    }
     public static function gravar(Disciplina $disciplina) {
         require_once '../controller/conexao.php';
         $conexao = conectar();

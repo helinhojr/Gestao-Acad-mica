@@ -18,15 +18,15 @@
         <div class="perfil1">
             <form class="form" name="turma" method="POST" enctype="multipart/form-data">
                 <label for="nomes">Nome</label>
-                <input type="text" required="" name="nomeTurma" id="name">
+                <input type="text" name="nomeTurma" id="name">
                 <label for="classe">Nível</label>
                 <select name="nivel">
                     <?php
                     $niv = $conexao->prepare("Select * from nivel");
                     $niv->execute();
                     while ($linha = $niv->fetch(PDO::FETCH_ASSOC)):
-                    ?>
-                    <option><?php echo $linha['nome']; ?></option>
+                        ?>
+                        <option value="<?php echo $linha['nome']; ?>"><?php echo $linha['nome']; ?></option>
                     <?php endwhile; ?>
                 </select>    
                 <label for="sala">Sala</label>
@@ -35,53 +35,49 @@
                     $salas = $conexao->prepare("Select * from sala");
                     $salas->execute();
                     while ($linha = $salas->fetch(PDO::FETCH_ASSOC)):
-                    ?>
-                    <option><?php echo $linha['nome']; ?></option>
+                        ?>
+                        <option><?php echo $linha['nome']; ?></option>
                     <?php endwhile; ?>
                 </select>    
                 <label for="diretor">Director de Turma</label>
                 <select name="diretor">
                     <?php
-                    $profs = $conexao->prepare("Select * from professor");
-                    $profs->execute();
-                    while ($linha = $profs->fetch(PDO::FETCH_ASSOC)):
-                    ?>
-                    <option><?php echo $linha['nome']; ?></option>
-                    <?php endwhile; ?>
+                    require_once '../modelo/Professor.php';
+                    foreach (Professor::buscar() as $linha):
+                        ?>
+                        <option value="<?php echo $linha['codigo']; ?>"><?php echo $linha['nome']; ?></option>
+                    <?php endforeach; ?>
                 </select>    
                 <button type="submit" name="btTurma"><i class="far fa-save"></i></button>
                 <h3>Professores - Turmas</h3>
                 <label>Turma</label>
-                <select>
+                <select name="ttu">
                     <?php
-                    $turm = $conexao->prepare("Select * from turma");
-                    $turm->execute();
-                    while ($linha = $turm->fetch(PDO::FETCH_ASSOC)):
-                    ?>
-                    <option><?php echo $linha['nome']; ?></option>
-                    <?php endwhile; ?>
+                    require_once '../modelo/Turma.php';
+                    foreach(Turma::buscar() as $linha):
+                        ?>
+                    <option value="<?php echo $linha['codigo']?>"><?php echo $linha['nome']; ?></option>
+                    <?php endforeach; ?>
                 </select>
                 <label>Professor</label>
-                <select>
+                <select name="dirPr">
                     <?php
-                    $profs = $conexao->prepare("Select * from professor");
-                    $profs->execute();
-                    while ($linha = $profs->fetch(PDO::FETCH_ASSOC)):
-                    ?>
-                    <option id="<?php echo $linha['codigo']; ?>"><?php echo $linha['nome']; ?></option>
-                    <?php endwhile; ?>
+                    require_once '../modelo/Professor.php';
+                    foreach (Professor::buscar() as $linha):
+                        ?>
+                        <option value="<?php echo $linha['codigo']; ?>"><?php echo $linha['nome']; ?></option>
+                    <?php endforeach; ?>
                 </select>
                 <label>Disciplina</label>
                 <select name="discProf">
                     <?php
-                    $profs = $conexao->prepare("Select nome,cod_disc from professor_disciplina join disciplina on cod_disc=codigo where cod_prof='AF56616'");
-                    $profs->execute();
-                    while ($linha = $profs->fetch(PDO::FETCH_ASSOC)):
-                    ?>
-                    <option id="<?php echo $linha['cod_disc']; ?>"><?php echo $linha['nome']; ?></option>
-                    <?php endwhile; ?>
+                    require_once '../modelo/Disciplina.php';
+                    foreach (Disciplina::buscar() as $linha):
+                        ?>
+                        <option value="<?php echo $linha['codigo']; ?>"><?php echo $linha['nome']; ?></option>
+                    <?php endforeach; ?>
                 </select>
-                <button type="submit"><i class="fas fa-plus"></i></button>
+                <button type="submit" name="btTDP"><i class="fas fa-plus"></i></button>
             </form>
             <div class="tabela">
                 <table class="table" >
@@ -93,25 +89,22 @@
                             <th>Director da Turma</th>
                             <th>Nível</th>
                             <th>Ano</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $turm1 = $conexao->prepare("select * from turma");
-                        $turm1->execute();
-                        while ($lee = $turm1->fetch(PDO::FETCH_ASSOC)):
-                        ?>
-                        <tr>
-                            <td><?php echo $lee['codigo']; ?></td>
-                            <td><?php echo $lee['nome']; ?></td>
-                            <td><?php echo $lee['sala']; ?></td>
-                            <td><?php echo $lee['director']; ?></td>
-                            <td><?php echo $lee['nivel']; ?></td>
-                            <td><?php echo $lee['ano']; ?></td>
-                            <td><button type="button" class="verde"><i class="fas fa-edit"></i></button><button type="button" class="vermelho"><i class="fas fa-trash"></i></button></td>
-                        </tr>
-                        <?php endwhile; ?>
+                        foreach (Turma::buscar() as $lee):
+                            ?>
+                            <tr>
+                                <td><?php echo $lee['codigo']; ?></td>
+                                <td><?php echo $lee['nome']; ?></td>
+                                <td><?php echo $lee['sala']; ?></td>
+                                <td><?php echo $lee['director']; ?></td>
+                                <td><?php echo $lee['nivel']; ?></td>
+                                <td><?php echo $lee['ano']; ?></td>
+                                <td><button type="button" class="verde"><i class="fas fa-edit"></i></button><button type="button" class="vermelho"><i class="fas fa-trash"></i></button></td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
 

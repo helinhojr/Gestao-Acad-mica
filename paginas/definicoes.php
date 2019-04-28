@@ -35,7 +35,7 @@
                         <option><?php echo $linha['ano']; ?></option>
                     <?php endwhile; ?>
                 </select>
-                <label class="lbl">Número do Semestre</label>
+                <label class="lbl">Número do Trimestre</label>
                 <select name="num">
                     <option>I</option>
                     <option>II</option>

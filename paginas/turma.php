@@ -77,6 +77,8 @@
                         <option value="<?php echo $linha['codigo']; ?>"><?php echo $linha['nome']; ?></option>
                     <?php endforeach; ?>
                 </select>
+                <label>Número de Avaliações</label>
+                <input type="number" maxlength="1" name="aval">
                 <button type="submit" name="btTDP"><i class="fas fa-plus"></i></button>
             </form>
             <div class="tabela">

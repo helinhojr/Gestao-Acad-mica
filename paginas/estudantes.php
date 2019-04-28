@@ -51,39 +51,41 @@
                 <input type="file" name="fotoEstu" id="foto">
                 <button type="submit" name="saveEst"><i class="far fa-save"></i></button>
             </form>
-            <div class="tabela">
+            <form method="POST" class="tabela" enctype="multipart/form-data">
                 <h3>Passo 2</h3>
                 <label>Estudante</label>
-                <select name="ests" disabled>
+                <select name="estuda">
                     <?php
-                    include_once '../modelo/Estudante.php';
-                    $professores = $conexao->prepare("SELECT * FROM estudante");
-                    $professores->execute();
-                    $profs = $professores->fetchAll(PDO::FETCH_ASSOC);
+                    require_once '../modelo/Estudante.php';
+                    $profs = Estudante::buscar();
                     ?>
                     <option value="<?php $profs[count($profs) - 1]['codigo'] ?>"><?php
-                    echo $profs[count($profs) - 1]['nome'];
-                    ?></option>
+                        echo $profs[count($profs) - 1]['nome'];
+                        ?></option>
                 </select>
                 <label>Turma</label>
                 <select name="turmaEs">
                     <?php
-                    $turmas = $conexao->prepare("SELECT * FROM turma");
-                    $turmas->execute();
-                    while ($row = $turmas->fetch(PDO::FETCH_ASSOC)):
+                    require_once '../modelo/Turma.php';
+                    foreach (Turma::buscar() as $row):
                         ?>
-                    <option value="<?php echo $row['codigo']; ?>"><?php echo $row['nome']; ?></option>
-                    <?php endwhile; ?>
+                        <option value="<?php echo $row['codigo']; ?>"><?php echo $row['nome']; ?></option>
+                    <?php endforeach; ?>
                 </select>
-                <button name="btTurmas" type="submit"><i class="far fa-save"></i></button>
+                <button type="submit" name="btTurmas"><i class="far fa-save"></i></button>
                 <h3>Passo 3</h3>
-                <label>Semestre</label>
+                <label>Trimestre</label>
                 <select name="sesmestre" disabled>
-                    <option></option>
+                    <?php
+                    require_once '../modelo/Semestre.php';
+                    foreach (Semestre::buscar() as $row):
+                        ?>
+                        <option value="<?php echo $row['codigo']; ?>"><?php echo $row['nome']; ?></option>
+                    <?php endforeach; ?>
                 </select>
                 <button type="submit"><i class="fas fa-chevron-right"></i></button>
 
-            </div>
+            </form>
         </div>
         <div class="roda">
 

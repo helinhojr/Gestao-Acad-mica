@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html>
+    <?php 
+    session_start();
+    require_once '../modelo/Estudante.php';
+    $estudante= Estudante::buscarEst($_SESSION['idUsuario']);
+    $turEs;
+    foreach ($estudante as $est){
+    $turEs= Estudante::buscarProf($est['turma']);
+    }
+    ?>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1">
@@ -19,13 +28,19 @@
                     <tr>
                         <th>Professor(a)</th>
                         <th>Disciplina</th>
+                        <th>Número de Avaliações</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <?php
+                        foreach ($turEs as $tures):
+                    ?>
                     <tr>
-                        <td></td>
-                        <td></td>
+                        <td><?php echo $tures['a']; ?></td>
+                        <td><?php echo $tures['c']; ?></td>
+                        <td><?php echo $tures['testes']; ?></td>
                     </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
 

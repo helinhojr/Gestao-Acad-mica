@@ -194,7 +194,7 @@ if (isset($_POST['btTurma'])) {
 if (isset($_POST['btTurmas'])) {
     require_once '../modelo/Estudante.php';
     $turma = $_POST['turmaEs'];
-    $ests = $_POST['ests'];
+    $ests = $_POST['estuda'];
     Estudante::enturmar($turma,$ests);
 }
 if (isset($_POST['btPer'])) {
@@ -224,5 +224,6 @@ if(isset($_POST['btTDP'])){
     $turma=$_POST['ttu'];
     $disc=$_POST['discProf'];
     $prof=$_POST['dirPr'];
-    Professor::enturmar($disc, $prof, $turma);
+    $numero=$_POST['aval'];
+    Professor::enturmar($disc, $prof, $turma,$numero);
 }

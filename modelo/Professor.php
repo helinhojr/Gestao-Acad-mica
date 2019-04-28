@@ -217,6 +217,10 @@ class Professor {
         $discs->bindValue(":pro", $prof);
         $discs->bindValue(":ds", $disc);
         $discs->execute();
+        $disT = $conexao->prepare("select disc from discturmpro where disc=:ds and turma=:tr");
+        $disT->bindValue(":tr", $turma);
+        $disT->bindValue(":ds", $disc);
+        $disT->execute();
         $turm = $conexao->prepare("select * from discturmpro where turma=:tr and professor=:pro and ano=:ano");
         $turm->bindValue(":pro", $prof);
         $turm->bindValue(":tr", $turma);
@@ -226,19 +230,22 @@ class Professor {
             return 0;
         } else if ($turm->rowCount() == 2) {
             return 1;
-        } else {
+        } else if($disT->rowCount()>0){
+            return 3;
+        }else{
             return 2;
         }
     }
 
-    public static function enturmar($disc, $prof, $turma) {
+    public static function enturmar($disc, $prof, $turma,$numero) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $turm = $conexao->prepare("insert into discturmpro values(:pro,:tr,:ds,:ano)");
+        $turm = $conexao->prepare("insert into discturmpro values(:pro,:tr,:ds,:ano,:num)");
         $turm->bindValue(":pro", $prof);
         $turm->bindValue(":tr", $turma);
         $turm->bindValue(":ds", $disc);
         $turm->bindValue(":ano", date("Y"));
+        $turm->bindValue(":num", $numero);
         $valor = Professor::verEnturm($disc, $prof, $turma);
         if ($valor == 0) {
             echo "<script>alert('Não foi possível efectuar a gravação, o professor já dá a mesma disciplina nesta turma!')</script>";
@@ -246,7 +253,10 @@ class Professor {
         } else if ($valor == 1) {
             echo "<script>alert('Não foi possível efectuar a gravação, o professor não pode dar mais de duas disciplinas na mesma turma!')</script>";
             header("../paginas/turma.php");
-        } else {
+        } else if($valor==3){
+            echo "<script>alert('Não foi possível efectuar a gravação, já existe um professor dando esta disciplina!')</script>";
+            header("../paginas/turma.php");
+        }else{ 
             if ($turm->execute()) {
                 echo "<script>alert('Salvo com Sucesso!')</script>";
                 header("../paginas/turma.php");

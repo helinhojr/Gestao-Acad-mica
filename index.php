@@ -137,6 +137,9 @@
             </button>
             <?php
             session_start();
+            $_SESSION['idUsuario']=0;
+            $_SESSION['idPr']=0;
+            $_SESSION['idSc']=0;
             if (isset($_POST['entraLogin'])) {
                 $user = $_POST['user'];
                 $pass = $_POST['pass'];

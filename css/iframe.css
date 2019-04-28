@@ -42,10 +42,14 @@
     height: 100%;
 }
 .escopo-img{
-    margin: 20% auto;
+    margin: 15% auto;
     border: 2px solid black;
-    width: 30%;
-    height: 30%;
+    width: 60%;
+    height: 60%;
+}
+.foto .fotodeperfil{
+    width: 100%;
+    height: 100%;
 }
 .escopo-bt{
     width: 100%;

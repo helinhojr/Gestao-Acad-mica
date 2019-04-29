@@ -22,12 +22,11 @@
                 <label for="classe">Nível</label>
                 <select name="nivel">
                     <?php
-                    $niv = $conexao->prepare("Select * from nivel");
-                    $niv->execute();
-                    while ($linha = $niv->fetch(PDO::FETCH_ASSOC)):
+                        require_once '../modelo/Nivel.php';
+                        foreach(Nivel::buscar() as $linha):
                         ?>
                         <option value="<?php echo $linha['nome']; ?>"><?php echo $linha['nome']; ?></option>
-                    <?php endwhile; ?>
+                    <?php endforeach; ?>
                 </select>    
                 <label for="sala">Sala</label>
                 <select name="sala">

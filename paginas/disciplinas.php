@@ -8,9 +8,12 @@
         <link rel="stylesheet" href="../css/all.css">
         <link rel="stylesheet" href="../css/iframe.css">
     </head>
+    <?php
+    require_once './mycontrolle.php';
+    ?>
     <body>
         <div class="tit">
-            <h2>Turmas</h2>
+            <h2>Disciplinas</h2>
         </div>
         <div class="perfil1">
             <form class="form" name="disciplinas" method="POST" enctype="multipart/form-data">
@@ -37,7 +40,8 @@
                                 <td><?php echo $linha['codigo'] ?></td>
                                 <td><?php echo $linha['nome'] ?></td>
                                 <td><?php echo $linha['data'] ?></td>
-                                <td><button type="button" class="verde"><i class="fas fa-edit"></i></button><button type="button" class="vermelho"><i class="fas fa-trash"></i></button></td>
+                                <td><a href="mycontrolle.php?bteditarD=<?php echo $linha['codigo']; ?>" class="verde"><i class="fas fa-edit"></i></a></td>
+                                <td><a href="mycontrolle.php?bteliminarD=<?php echo $linha['codigo']; ?>" class="vermelho"><i class="fas fa-trash"></i></a></td>
                             </tr>
                             <?php
                         endforeach;

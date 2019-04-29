@@ -48,14 +48,16 @@ class Secretario {
     function getNome() {
         return $this->nome;
     }
-    public static function buscarEst($cod){
+
+    public static function buscarEst($cod) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $busca=$conexao->prepare("select * from secretario where codigo=:cod");
+        $busca = $conexao->prepare("select * from secretario where codigo=:cod");
         $busca->bindValue(":cod", $cod);
         $busca->execute();
         return $busca->fetchAll(PDO::FETCH_ASSOC);
     }
+
     function getDataDeNasc() {
         return $this->dataDeNasc;
     }
@@ -119,13 +121,15 @@ class Secretario {
     function setEndereco($endereco) {
         $this->endereco = $endereco;
     }
-    public static function buscar(){
+
+    public static function buscar() {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $busca=$conexao->prepare("select * from secretario");
+        $busca = $conexao->prepare("select * from secretario where estado='activo'");
         $busca->execute();
         return $busca->fetchAll(PDO::FETCH_ASSOC);
     }
+
     public static function gravar(Secretario $sec) {
         require_once '../controller/conexao.php';
         require_once '../modelo/Usuario.php';
@@ -163,9 +167,27 @@ class Secretario {
                 echo "<script>alert('Não foi possível efectuar a gravação!')</script>";
                 header("../paginas/secretarios.php");
             }
-        }else{
-            echo "<script>alert('Não foi possível efectuar a gravação, Usuário já existente!')</script>"; 
-        }   
+        } else {
+            echo "<script>alert('Não foi possível efectuar a gravação, Usuário já existente!')</script>";
         }
     }
-    
+
+    public static function eliminar($cod) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca = $conexao->prepare("update secretario set estado=:in where codigo=:cod");
+        $busca->bindValue(":cod", $cod);
+        $busca->bindValue(":in", "inactivo");
+        $buscar = $conexao->prepare("update usuario set status=:in where codigoUs=:cod");
+        $buscar->bindValue(":cod", $cod);
+        $buscar->bindValue(":in", "inactivo");
+        if ($busca->execute() && $buscar->execute()) {
+            echo "<script>alert('Eliminado com Sucesso!')</script>";
+            echo "<script>window.location='../paginas/secretarios.php'</script>";
+        } else {
+            echo "<script>alert('Não foi possível eliminar!')</script>";
+            header("../paginas/secretarios.php");
+        }
+    }
+
+}

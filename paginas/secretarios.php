@@ -51,9 +51,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                       <?php
-                           require_once '../modelo/Secretario.php';
-                           foreach(Secretario::buscar() as $linha):
+                        <?php
+                        require_once '../modelo/Secretario.php';
+                        foreach (Secretario::buscar() as $linha):
                             ?>
                             <tr>
                                 <td><?php echo $linha['codigo'] ?></td>
@@ -63,11 +63,11 @@
                                 <td><?php echo $linha['bi'] ?></td>
                                 <td><?php echo $linha['user'] ?></td>
                                 <td><?php echo $linha['senha'] ?></td>
-                                <td><button class="verde"><i class="fas fa-edit"></i></button></td>
-                                <td><button class="vermelho"><i class="fas fa-trash"></i></button></td>
+                                <td><a href="mycontrolle.php?bteditarS=<?php echo $linha['codigo']; ?>" class="verde"><i class="fas fa-edit"></i></a></td>
+                                <td><a href="mycontrolle.php?bteliminarS=<?php echo $linha['codigo']; ?>" class="vermelho"><i class="fas fa-trash"></i></a></td>
                             </tr>
                             <?php
-                            endforeach;
+                        endforeach;
                         ?>
                     </tbody>
                 </table>

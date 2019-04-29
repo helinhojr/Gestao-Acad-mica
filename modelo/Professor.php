@@ -23,6 +23,24 @@ class Professor {
         return $busca->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function eliminar($cod) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca = $conexao->prepare("update professor set estado=:in where codigo=:cod");
+        $busca->bindValue(":cod", $cod);
+        $busca->bindValue(":in", "inactivo");
+        $buscar = $conexao->prepare("update usuario set status=:in where codigoUs=:cod");
+        $buscar->bindValue(":cod", $cod);
+        $buscar->bindValue(":in", "inactivo");
+        if ($busca->execute() && $buscar->execute()) {
+            echo "<script>alert('Eliminado com Sucesso!')</script>";
+            echo "<script>window.location='../paginas/professores.php'</script>";
+        } else {
+            echo "<script>alert('Não foi possível eliminar!')</script>";
+            header("../paginas/professores.php");
+        }
+    }
+
     public static function buscarDisc($cod) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
@@ -123,7 +141,7 @@ class Professor {
     public static function buscar() {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $busca = $conexao->prepare("select * from professor");
+        $busca = $conexao->prepare("select * from professor where estado='activo'");
         $busca->execute();
         return $busca->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -230,14 +248,14 @@ class Professor {
             return 0;
         } else if ($turm->rowCount() == 2) {
             return 1;
-        } else if($disT->rowCount()>0){
+        } else if ($disT->rowCount() > 0) {
             return 3;
-        }else{
+        } else {
             return 2;
         }
     }
 
-    public static function enturmar($disc, $prof, $turma,$numero) {
+    public static function enturmar($disc, $prof, $turma, $numero) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
         $turm = $conexao->prepare("insert into discturmpro values(:pro,:tr,:ds,:ano,:num)");
@@ -253,14 +271,14 @@ class Professor {
         } else if ($valor == 1) {
             echo "<script>alert('Não foi possível efectuar a gravação, o professor não pode dar mais de duas disciplinas na mesma turma!')</script>";
             header("../paginas/turma.php");
-        } else if($valor==3){
+        } else if ($valor == 3) {
             echo "<script>alert('Não foi possível efectuar a gravação, já existe um professor dando esta disciplina!')</script>";
             header("../paginas/turma.php");
-        }else{ 
+        } else {
             if ($turm->execute()) {
                 echo "<script>alert('Salvo com Sucesso!')</script>";
                 header("../paginas/turma.php");
-            }else{
+            } else {
                 echo "<script>alert('Não foi possível efectuar a gravação!')</script>";
                 header("../paginas/turma.php");
             }

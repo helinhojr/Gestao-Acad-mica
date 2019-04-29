@@ -27,10 +27,9 @@
     margin-top: 30%;
 }
 .table{
-    width: 100%;
     color:black;
     font-size: 1em;
-    font-weight: 300;
+    font-weight: 200;
 }
 .table td{
     padding: 0.2%;
@@ -100,32 +99,6 @@ button[type="submit"]{
     font-size: 1em;
     font-weight: 400; 
 }
-.verde{
-    margin-top: 4%;
-    background: #0ed145;
-    border: none;
-    border-radius: 60px;
-    cursor: pointer;
-    color: black;
-    padding: 2% 3%;
-    text-align: center;
-    align-self: flex-end;
-    font-size: 1em;
-    font-weight: 400;
-}
-.vermelho{
-    margin-top: 4%;
-    background: red;
-    border: none;
-    border-radius: 60px;
-    cursor: pointer;
-    color: black;
-    padding: 2% 3%;
-    text-align: center;
-    align-self: flex-end;
-    font-size: 1em;
-    font-weight: 400;
-}
 input[type="button"]{
     margin-top: 4%;
     background: #1E90FF;
@@ -159,4 +132,30 @@ h3{
 }
 .formulario{
     padding: 2% 3%;
+}
+.verde{
+    margin-top: 4%;
+    background: #0ed145;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    color: black;
+    padding: 2% 3%;
+    text-align: center;
+    align-self: flex-end;
+    font-size: 1em;
+    font-weight: 400;
+}
+.vermelho{
+    margin-top: 4%;
+    background: red;
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    color: black;
+    padding: 2% 3%;
+    text-align: center;
+    align-self: flex-end;
+    font-size: 1em;
+    font-weight: 400;
 }

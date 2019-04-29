@@ -57,7 +57,7 @@ class Disciplina {
         $niveis->execute();
         $resultado = 0;
         while ($nomes = $niveis->fetch(PDO::FETCH_ASSOC)) {
-            if (strcmp($nome, $nomes['nome'])==0)
+            if (strcmp($nome, $nomes['nome']) == 0)
                 $resultado++;
         }
         if ($resultado == 0) {
@@ -66,13 +66,15 @@ class Disciplina {
             return 0;
         }
     }
-    public static function buscar(){
+
+    public static function buscar() {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $busca=$conexao->prepare("select * from disciplina");
+        $busca = $conexao->prepare("select * from disciplina where estado='activo'");
         $busca->execute();
         return $busca->fetchAll(PDO::FETCH_ASSOC);
     }
+
     public static function gravar(Disciplina $disciplina) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
@@ -92,6 +94,21 @@ class Disciplina {
                 echo "<script>alert('Não foi possível efectuar a gravação!')</script>";
                 header("../paginas/disciplinas.php");
             }
+        }
+    }
+
+    public static function eliminar($cod) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca = $conexao->prepare("update disciplina set estado=:in where codigo=:cod");
+        $busca->bindValue(":cod", $cod);
+        $busca->bindValue(":in", "inactivo");
+        if ($busca->execute()) {
+            echo "<script>alert('Eliminado com Sucesso!')</script>";
+            echo "<script>window.location='../paginas/disciplinas.php'</script>";
+        } else {
+            echo "<script>alert('Não foi possível eliminar!')</script>";
+            echo "<script>window.location='../paginas/disciplinas.php'</script>";
         }
     }
 

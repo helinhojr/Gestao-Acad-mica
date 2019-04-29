@@ -227,3 +227,23 @@ if(isset($_POST['btTDP'])){
     $numero=$_POST['aval'];
     Professor::enturmar($disc, $prof, $turma,$numero);
 }
+if(isset($_GET['bteliminarP'])){
+    require_once '../modelo/Professor.php';
+    $codigo=$_GET['bteliminarP'];
+    Professor::eliminar($codigo);
+}
+if(isset($_GET['bteliminarE'])){
+    require_once '../modelo/Professor.php';
+    $codigo=$_GET['bteliminarE'];
+    Professor::eliminar($codigo);
+}
+if(isset($_GET['bteliminarS'])){
+    require_once '../modelo/Secretario.php';
+    $codigo=$_GET['bteliminarS'];
+    Secretario::eliminar($codigo);
+}
+if(isset($_GET['bteliminarD'])){
+    require_once '../modelo/Disciplina.php';
+    $codigo=$_GET['bteliminarD'];
+    Disciplina::eliminar($codigo);
+}

@@ -4,10 +4,10 @@
         <meta charset="UTF-8">
         <title>Gestão Académica - Professores</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="../css/forms.css">
         <link rel="stylesheet" href="../css/all.css">
         <link rel="icon" href="../img/notebook.png" >
         <link rel="stylesheet" href="../css/iframe.css">
+        <link rel="stylesheet" href="../css/forms.css">
     </head>
     <?php
     require_once './mycontrolle.php';
@@ -42,13 +42,13 @@
                     include_once '../modelo/Professor.php';
                     $professores = $conexao->prepare("SELECT * FROM professor");
                     $professores->execute();
-                    while($linha=$professores->fetch(PDO::FETCH_ASSOC)):
-                    ?>
+                    while ($linha = $professores->fetch(PDO::FETCH_ASSOC)):
+                        ?>
 
-                    <option value="<?php echo $linha['codigo']; ?>">
-                        <?php
-                        echo $linha['nome'] ;
-                        ?></option>
+                        <option value="<?php echo $linha['codigo']; ?>">
+                            <?php
+                            echo $linha['nome'];
+                            ?></option>
                     <?php endwhile; ?>
                 </select>
                 <label>Disciplinas</label>
@@ -58,7 +58,7 @@
                     $disciplinas->execute();
                     while ($row = $disciplinas->fetch(PDO::FETCH_ASSOC)):
                         ?>
-                    <option value="<?php echo $row['codigo']; ?>"><?php echo $row['nome']; ?></option>
+                        <option value="<?php echo $row['codigo']; ?>"><?php echo $row['nome']; ?></option>
                     <?php endwhile; ?>
                 </select>
                 <button type="submit" name="addDisc"><i class="fas fa-plus"></i></button>
@@ -67,34 +67,29 @@
                 <table class="table" >
                     <thead>
                         <tr>
-                            <th>Código</th>
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Data de Nascimento</th>
-                            <th>Número do BI</th>
                             <th>User</th>
                             <th>Senha</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $profers = $conexao->prepare("SELECT * FROM professor");
-                        $profers->execute();
-                        while ($linha = $profers->fetch(PDO::FETCH_ASSOC)):
+                        require_once '../modelo/Professor.php';
+                        foreach (Professor::buscar() as $linha):
                             ?>
                             <tr>
-                                <td><?php echo $linha['codigo']; ?></td>
                                 <td><?php echo $linha['nome']; ?></td>
                                 <td><?php echo $linha['email']; ?></td>
                                 <td><?php echo $linha['nascimento']; ?></td>
-                                <td><?php echo $linha['bi']; ?></td>
                                 <td><?php echo $linha['user']; ?></td>
                                 <td><?php echo $linha['senha']; ?></td>
-                                <td><button class="verde"><i class="fas fa-edit"></i></button></td>
-                                <td><button class="vermelho"><i class="fas fa-trash"></i></button></td>
+                                <td><a href="mycontrolle.php?bteditarP=<?php echo $linha['codigo']; ?>" class="verde"><i class="fas fa-edit"></i></a></td>
+                                <td><a href="mycontrolle.php?bteliminarP=<?php echo $linha['codigo']; ?>" class="vermelho"><i class="fas fa-trash"></i></a></td>
                             </tr>
                             <?php
-                        endwhile;
+                        endforeach;
                         ?>
                     </tbody>
                 </table>

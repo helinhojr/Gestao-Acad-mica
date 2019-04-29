@@ -160,7 +160,23 @@ class Estudante {
     function setTurma($turma) {
         $this->turma = $turma;
     }
-
+    public static function eliminar($cod) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca = $conexao->prepare("update estudante set estado=:in where codigo=:cod");
+        $busca->bindValue(":cod", $cod);
+        $busca->bindValue(":in", "inactivo");
+        $buscar = $conexao->prepare("update usuario set status=:in where codigoUs=:cod");
+        $buscar->bindValue(":cod", $cod);
+        $buscar->bindValue(":in", "inactivo");
+        if ($busca->execute() && $buscar->execute()) {
+            echo "<script>alert('Eliminado com Sucesso!')</script>";
+            echo "<script>window.location='../paginas/estudantes.php'</script>";
+        } else {
+            echo "<script>alert('Não foi possível eliminar!')</script>";
+            header("../paginas/estudantes.php");
+        }
+    }
     public static function verebuscar($est,$pro,$sec){
         require_once 'Professor.php';
         require_once 'Secretario.php';
@@ -176,7 +192,7 @@ class Estudante {
     public static function buscar() {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $busca = $conexao->prepare("select * from estudante");
+        $busca = $conexao->prepare("select * from estudante where estado='activo'");
         $busca->execute();
         return $busca->fetchAll(PDO::FETCH_ASSOC);
     }

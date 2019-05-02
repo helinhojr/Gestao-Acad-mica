@@ -99,7 +99,7 @@ class Turma {
     public static function buscarPrTE($prof) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $busca = $conexao->prepare("select turma.nome as a,disciplina.nome as c,discturmpro.turma,disc,nivel,estudante.nome as d from discturmpro join disciplina on disc=disciplina.codigo join turma on turma=turma.codigo join turma_est on turma.codigo=turma_est.turma join estudante on turma_est.estudante=estudante.codigo where professor=:pro");
+        $busca = $conexao->prepare("select turma.nome as a,disciplina.nome as c,discturmpro.turma,disc,nivel,estudante.nome as d,estudante.codigo as e from discturmpro join disciplina on disc=disciplina.codigo join turma on turma=turma.codigo join turma_est on turma.codigo=turma_est.turma join estudante on turma_est.estudante=estudante.codigo where professor=:pro");
         $busca->bindValue(":pro", $prof);
         $busca->execute();
         return $busca->fetchAll(PDO::FETCH_ASSOC);

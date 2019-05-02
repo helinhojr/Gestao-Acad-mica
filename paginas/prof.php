@@ -3,6 +3,13 @@
     <?php
     require_once '../modelo/Professor.php';
     session_start();
+    if(isset($_SESSION['logado'])){
+        if($_SESSION['logado'] ==false){
+            echo "<script>window.location='../index.php'</script>";
+        }
+    }else{
+        echo "<script>window.location='../index.php'</script>";
+    }
     $estuda = $_SESSION['idPr'];
     foreach (Professor::buscarEst($estuda) as $est):
         ?>

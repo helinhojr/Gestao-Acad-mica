@@ -242,9 +242,9 @@ if (isset($_GET['bteliminarE'])) {
 }
 if (isset($_GET['encerrar'])) {
     $_SESSION['logado'];
-    $_SESSION['idUsuario']=null;
-    $_SESSION['idPr']=null;
-    $_SESSION['idSc']=null;
+    $_SESSION['idUsuario'] = null;
+    $_SESSION['idPr'] = null;
+    $_SESSION['idSc'] = null;
     echo "<script>window.location='../index.php'</script>";
 }
 if (isset($_GET['bteliminarS'])) {
@@ -266,5 +266,9 @@ if (isset($_POST['btFinalizar'])) {
     require_once '../modelo/Nota.php';
     require_once '../modelo/Semestre.php';
     $semestre = Semestre::buscar()[0]['codigo'];
-    Nota::adicionarNota($_SESSION['estudante'], $_SESSION['turma'], $semestre);
+    if (isset($_SESSION['estudante']) && isset($_SESSION['turma'])) {
+        $estudante = $_SESSION['estudante'];
+        $turma = $_SESSION['turma'];
+        Nota::adicionarNota($estudante, $turma, $semestre);
+    }
 }

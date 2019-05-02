@@ -32,14 +32,16 @@
                 </thead>
                 <tbody>
                     <?php foreach ($turmas as $tr): ?>
-                    <tr>
-                        <td><?php echo $tr['d'] ?></td>
-                        <td><?php echo $tr['a'] ?></td>
-                        <td><?php echo $tr['c'] ?></td>
-                        <td><?php echo $tr['a'] ?></td>
-                        <td><?php echo $tr['a'] ?></td>
-                        <td><?php echo $tr['nivel'] ?></td>
-                    </tr>
+                        <tr>
+                            <td><?php echo $tr['d'] ?></td>
+                            <td><?php echo $tr['a'] ?></td>
+                            <td><?php echo $tr['c'] ?></td>
+                            <td><?php echo $tr['a'] ?></td>
+                            <td><?php echo $tr['a'] ?></td>
+                            <td><?php echo $tr['nivel'] ?></td>
+                            <td><a href="mycontrolle.php?bteditarN=<?php echo $linha['e']; ?>" class="verde"><i class="fas fa-edit"></i></a></td>
+                            <td><a href="mycontrolle.php?bteliminarN=<?php echo $linha['e']; ?>" class="vermelho"><i class="fas fa-trash"></i></a></td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>

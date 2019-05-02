@@ -23,7 +23,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th colspan="2">Dados do Aluno</th>
+                            <th colspan="2">Dados do Utilizador</th>
                         </tr>
                     </thead>
                     <tbody>

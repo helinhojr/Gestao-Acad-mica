@@ -6,7 +6,8 @@
     $estudante= Estudante::buscarEst($_SESSION['idUsuario']);
     $turEs;
     foreach ($estudante as $est){
-    $turEs= Estudante::buscarProf($est['turma']);
+    echo "<script>alert(".$est['nome'].")</script>";    
+    $turEs= Estudante::buscarProf($est['codigo']);
     }
     ?>
     <head>
@@ -37,8 +38,8 @@
                     ?>
                     <tr>
                         <td><?php echo $tures['a']; ?></td>
+                        <td><?php echo $tures['b']; ?></td>
                         <td><?php echo $tures['c']; ?></td>
-                        <td><?php echo $tures['testes']; ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

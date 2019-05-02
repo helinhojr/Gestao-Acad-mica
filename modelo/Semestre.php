@@ -85,7 +85,7 @@ class Semestre {
     public static function buscar(){
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $busca=$conexao->prepare("select * from semestre");
+        $busca=$conexao->prepare("select * from semestre where estado='activo'");
         $busca->execute();
         return $busca->fetchAll(PDO::FETCH_ASSOC);
     }

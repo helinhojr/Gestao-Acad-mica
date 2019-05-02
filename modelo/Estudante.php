@@ -160,6 +160,7 @@ class Estudante {
     function setTurma($turma) {
         $this->turma = $turma;
     }
+
     public static function eliminar($cod) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
@@ -177,14 +178,15 @@ class Estudante {
             header("../paginas/estudantes.php");
         }
     }
-    public static function verebuscar($est,$pro,$sec){
+
+    public static function verebuscar($est, $pro, $sec) {
         require_once 'Professor.php';
         require_once 'Secretario.php';
-        if($sec!=0){
+        if ($sec != 0) {
             return Secretario::buscarEst($sec);
-        }else if($est!=0){
+        } else if ($est != 0) {
             return Estudante::buscarEst($est);
-        }else{
+        } else {
             return Professor::buscarEst($pro);
         }
     }
@@ -211,6 +213,7 @@ class Estudante {
         require_once '../modelo/Usuario.php';
         $conexao = conectar();
         $codigo = strtoupper(substr((md5(date("YmdHis"))), 1, 7));
+        $_SESSION['estAct']=$codigo;
         $gravar = $conexao->prepare("INSERT INTO estudante(codigo,nome,estado,nascimento,user,bi,endereco,senha,genero,email,pai,mae,contacto,contenc,regime,foto) VALUES(:codigo,:nome,:estado,:data,:user,:bi,:endereco,:senha,:genero,:email,:np,:nm,:cont,:contEn,:regime,:foto)");
         $gravar->bindValue(":codigo", $codigo);
         $gravar->bindValue(":nome", $est->getNome());
@@ -247,28 +250,45 @@ class Estudante {
         }
     }
 
-    public static $ests = "ss";
-
-    public static function enturmar($turma, $ests) {
+    public static function verificar($est, $ano) {
         require_once '../controller/conexao.php';
-//        $conexao= conectar();
-//        $estudantes = $conexao->prepare("SELECT * FROM estudante");
-//        $estudantes->execute();
-//        $ests = $estudantes->fetchAll(PDO::FETCH_ASSOC);
         $conexao = conectar();
-        $est = $conexao->prepare("update estudante set turma=:turma where codigo=:cond");
-        $est->bindValue(":turma", $turma);
-        $est->bindValue(":cond", $ests);
-        if ($est->execute()) {
-            echo "<script>alert('Salvo com Sucesso!!!')</script>";
+        $estuda = $conexao->prepare("select * from turma_est where estudante=:cond and ano=:ano");
+        $estuda->bindValue(":cond", $est);
+        $estuda->bindValue(":ano", $ano);
+        $estuda->execute();
+        if ($estuda->rowCount() > 0) {
+            return 0;
+        } else {
+            return 1;
         }
     }
 
-    public static function buscarProf($turma) {
+    public static function enturmar($turma, $ests) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $busca = $conexao->prepare("select professor.nome as a,disciplina.nome as c,turma.nome as b,testes from discturmpro join disciplina on disc=disciplina.codigo join professor on professor=professor.codigo join turma on turma=turma.codigo where turma=:tr");
-        $busca->bindValue(":tr", $turma);
+        $ano = date("Y");
+        $est = $conexao->prepare("insert into turma_est values(:turma,:cond,:ano)");
+        $est->bindValue(":turma", $turma);
+        $est->bindValue(":cond", $ests);
+        $est->bindValue(":ano", $ano);
+        $valor = Estudante::verificar($ests, $ano);
+        if ($valor == 1) {
+            if ($est->execute()) {
+                echo "<script>alert('Salvo com Sucesso!!!')</script>";
+            }
+        } else {
+            echo "<script>alert('Não foi possível efectuar a gravação, este estudante já frequenta uma turma!!!')</script>";
+        }
+    }
+
+    public static function buscarProf($codigo) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $data=date("Y");
+        $busca = $conexao->prepare("select professor.nome as a,disciplina.nome as b,disi.testes as c from turma_est join turma on turma_est.turma=codigo join discturmpro on turma_est.turma=discturmpro.turma join professor on discturmpro.professor=professor.codigo join discturmpro as disi on professor.codigo=disi.professor join disciplina on disi.disc=disciplina.codigo where estudante=:est and turma_est.ano=:ano");
+        $busca->bindValue(":est", $codigo);
+        $busca->bindValue(":ano",$data );
         $busca->execute();
         return $busca->fetchAll(PDO::FETCH_ASSOC);
     }

@@ -19,18 +19,22 @@
             <h2>Disciplinas leccionadas</h2>
         </div>
         <div class="tabb">
-            <table class="table" border="0" width="6" cellpadding="4">
+            <table class="table1" border="0" width="6" cellpadding="4">
                 <thead>
                     <tr>
                         <th>Disciplina</th>
                         <th>Turma</th>
+                        <th>Classe</th>
+                        <th>Número de estudantes</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($turmas as $turma): ?>
                     <tr>
-                        <td><?php echo $turma['c'] ?></td>
-                        <td><?php echo $turma['a'] ?></td>
+                        <td><?php echo $turma['c']; ?></td>
+                        <td><?php echo $turma['a']; ?></td>
+                        <td><?php echo $turma['nivel']; ?></td>
+                        <td><?php echo Turma::buscarNumero($turma['tr']);?></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

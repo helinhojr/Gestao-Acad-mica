@@ -231,9 +231,10 @@ class Professor {
     public static function verEnturm($disc, $prof, $turma) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $discs = $conexao->prepare("select * from discturmpro where disc=:ds and professor=:pro");
+        $discs = $conexao->prepare("select * from discturmpro where disc=:ds and professor=:pro and turma=:tr");
         $discs->bindValue(":pro", $prof);
         $discs->bindValue(":ds", $disc);
+        $discs->bindValue(":tr", $turma);
         $discs->execute();
         $disT = $conexao->prepare("select disc from discturmpro where disc=:ds and turma=:tr");
         $disT->bindValue(":tr", $turma);

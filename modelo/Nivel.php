@@ -32,7 +32,20 @@ class Nivel {
     function setData($data) {
         $this->data = $data;
     }
-
+    public static function eliminar($cod) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca = $conexao->prepare("update nivel set estado=:in where codigo=:cod");
+        $busca->bindValue(":cod", $cod);
+        $busca->bindValue(":in", "inactivo");
+        if ($busca->execute()) {
+            echo "<script>alert('Eliminado com Sucesso!')</script>";
+            echo "<script>window.location='../paginas/niveis.php'</script>";
+        } else {
+            echo "<script>alert('Não foi possível eliminar!')</script>";
+            header("../paginas/niveis.php");
+        }
+    }
     function getNome() {
         return $this->nome;
     }

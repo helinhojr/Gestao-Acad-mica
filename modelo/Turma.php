@@ -91,10 +91,28 @@ class Turma {
     public static function buscarPrT($prof) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $busca = $conexao->prepare("select turma.nome as a,disciplina.nome as c,turma,disc from discturmpro join disciplina on disc=disciplina.codigo join turma on turma=turma.codigo where professor=:pro");
+        $busca = $conexao->prepare("select turma.nome as a,disciplina.nome as c,discturmpro.turma as tr,disc,nivel from discturmpro join disciplina on disc=disciplina.codigo join turma on turma=turma.codigo  where professor=:pro");
         $busca->bindValue(":pro", $prof);
         $busca->execute();
         return $busca->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function buscarPrTE($prof) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca = $conexao->prepare("select turma.nome as a,disciplina.nome as c,discturmpro.turma,disc,nivel,estudante.nome as d from discturmpro join disciplina on disc=disciplina.codigo join turma on turma=turma.codigo join turma_est on turma.codigo=turma_est.turma join estudante on turma_est.estudante=estudante.codigo where professor=:pro");
+        $busca->bindValue(":pro", $prof);
+        $busca->execute();
+        return $busca->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function buscarNumero($prof) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $ano=date("Y");
+        $busca = $conexao->prepare("select * turma_est where turma=:tr and ano=:an");
+        $busca->bindValue(":tr", $prof);
+        $busca->bindValue(":an", $ano);
+        $busca->execute();
+        return count($busca->fetchAll(PDO::FETCH_ASSOC));
     }
 
     public static function gravar(Turma $turma) {

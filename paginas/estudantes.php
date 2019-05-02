@@ -57,11 +57,13 @@
                 <select name="estuda">
                     <?php
                     require_once '../modelo/Estudante.php';
-                    $profs = Estudante::buscar();
+                    if (isset($_SESSION['estAct'])):
+                        $profs = Estudante::buscarEst($_SESSION['estAct']);
                     ?>
-                    <option value="<?php $profs[count($profs) - 1]['codigo'] ?>"><?php
-                        echo $profs[count($profs) - 1]['nome'];
+                    <option value="<?php echo $profs[0]['codigo']; ?>"> <?php
+                        echo $profs[0]['nome'];
                         ?></option>
+                    <?php endif; ?>
                 </select>
                 <label>Turma</label>
                 <select name="turmaEs">
@@ -75,7 +77,7 @@
                 <button type="submit" name="btTurmas"><i class="far fa-save"></i></button>
                 <h3>Passo 3</h3>
                 <label>Trimestre</label>
-                <select name="sesmestre" disabled>
+                <select  name="sem" disabled="">
                     <?php
                     require_once '../modelo/Semestre.php';
                     foreach (Semestre::buscar() as $row):
@@ -83,12 +85,9 @@
                         <option value="<?php echo $row['codigo']; ?>"><?php echo $row['nome']; ?></option>
                     <?php endforeach; ?>
                 </select>
-                <button type="submit"><i class="fas fa-chevron-right"></i></button>
+                <button type="submit" name="btFinalizar"><i class="fas fa-chevron-right"></i></button>
 
             </form>
-        </div>
-        <div class="roda">
-
         </div>
     </body>
 </html>

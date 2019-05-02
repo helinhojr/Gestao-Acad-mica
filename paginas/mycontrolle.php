@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 include '../controller/conexao.php';
 $conexao = conectar();
 if (isset($_POST['entraLogin'])) {
@@ -17,7 +18,7 @@ if (isset($_POST['entraLogin'])) {
             $estudante = $conexao->prepare("select * from estudante where codigo='$cod'");
             $estudante->execute();
             while ($lnha = $estudante->fetch(PDO::FETCH_ASSOC)):
-                $novocodigo=$lnha['codigo'];
+                $novocodigo = $lnha['codigo'];
             endwhile;
             echo "<script>window.location='est.php'</script>";
         }else if (strcmp($user['painel'], "admin") == 0) {
@@ -40,8 +41,8 @@ if (isset($_POST['btadicionarN'])) {
 }
 if (isset($_POST['btaddn'])) {
     require_once '../modelo/Nivel.php';
-    $disc=$_POST['discNiv'];
-    $nivel=$_POST['nivel'];
+    $disc = $_POST['discNiv'];
+    $nivel = $_POST['nivel'];
     Nivel::nivDisc($disc, $nivel);
 }
 if (isset($_POST['btProf'])) {
@@ -125,8 +126,8 @@ if (isset($_POST['btSala'])) {
 if (isset($_POST['addDisc'])) {
     require_once '../modelo/Professor.php';
     $disc = $_POST['disciplinaS'];
-    $profex=$_POST['rep'];
-    Professor::profDisc($disc,$profex);
+    $profex = $_POST['rep'];
+    Professor::profDisc($disc, $profex);
 }
 if (isset($_POST['saveEst'])) {
     require_once '../modelo/Estudante.php';
@@ -195,7 +196,9 @@ if (isset($_POST['btTurmas'])) {
     require_once '../modelo/Estudante.php';
     $turma = $_POST['turmaEs'];
     $ests = $_POST['estuda'];
-    Estudante::enturmar($turma,$ests);
+    $_SESSION['turma'] = $turma;
+    $_SESSION['estudante'] = $ests;
+    Estudante::enturmar($turma, $ests);
 }
 if (isset($_POST['btPer'])) {
     require_once '../modelo/PeriodoLectivo.php';
@@ -219,31 +222,49 @@ if (isset($_POST['bts'])) {
     $semestre->setPeriodo($pl);
     Semestre::gravar($semestre);
 }
-if(isset($_POST['btTDP'])){
+if (isset($_POST['btTDP'])) {
     require_once '../modelo/Professor.php';
-    $turma=$_POST['ttu'];
-    $disc=$_POST['discProf'];
-    $prof=$_POST['dirPr'];
-    $numero=$_POST['aval'];
-    Professor::enturmar($disc, $prof, $turma,$numero);
+    $turma = $_POST['ttu'];
+    $disc = $_POST['discProf'];
+    $prof = $_POST['dirPr'];
+    $numero = $_POST['aval'];
+    Professor::enturmar($disc, $prof, $turma, $numero);
 }
-if(isset($_GET['bteliminarP'])){
+if (isset($_GET['bteliminarP'])) {
     require_once '../modelo/Professor.php';
-    $codigo=$_GET['bteliminarP'];
+    $codigo = $_GET['bteliminarP'];
     Professor::eliminar($codigo);
 }
-if(isset($_GET['bteliminarE'])){
+if (isset($_GET['bteliminarE'])) {
     require_once '../modelo/Professor.php';
-    $codigo=$_GET['bteliminarE'];
+    $codigo = $_GET['bteliminarE'];
     Professor::eliminar($codigo);
 }
-if(isset($_GET['bteliminarS'])){
+if (isset($_GET['encerrar'])) {
+    $_SESSION['logado'];
+    $_SESSION['idUsuario']=null;
+    $_SESSION['idPr']=null;
+    $_SESSION['idSc']=null;
+    echo "<script>window.location='../index.php'</script>";
+}
+if (isset($_GET['bteliminarS'])) {
     require_once '../modelo/Secretario.php';
-    $codigo=$_GET['bteliminarS'];
+    $codigo = $_GET['bteliminarS'];
     Secretario::eliminar($codigo);
 }
-if(isset($_GET['bteliminarD'])){
+if (isset($_GET['bteliminarN'])) {
+    require_once '../modelo/Nivel.php';
+    $codigo = $_GET['bteliminarN'];
+    Nivel::eliminar($codigo);
+}
+if (isset($_GET['bteliminarD'])) {
     require_once '../modelo/Disciplina.php';
-    $codigo=$_GET['bteliminarD'];
+    $codigo = $_GET['bteliminarD'];
     Disciplina::eliminar($codigo);
+}
+if (isset($_POST['btFinalizar'])) {
+    require_once '../modelo/Nota.php';
+    require_once '../modelo/Semestre.php';
+    $semestre = Semestre::buscar()[0]['codigo'];
+    Nota::adicionarNota($_SESSION['estudante'], $_SESSION['turma'], $semestre);
 }

@@ -171,6 +171,10 @@
                                         $_SESSION['idSc']=$us['codigoUs'];
                                         echo "<script>window.location='paginas/sec.php'</script>";
                                         break;
+                                    case "admin":$_SESSION['logado']=true;
+                                        $_SESSION['idA']=$us['codigoUs'];
+                                        echo "<script>window.location='paginas/admin.php'</script>";
+                                        break;
                                 }
                             }
                         }

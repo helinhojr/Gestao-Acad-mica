@@ -3,7 +3,7 @@
     <?php
     session_start();
     require_once '../modelo/Turma.php';
-    $turmas = Turma::buscarPrT($_SESSION['idPr']);
+    $turmas = Turma::buscarPrTE($_SESSION['idPr']);
     ?>
     <head>
         <meta charset="UTF-8">
@@ -19,35 +19,31 @@
             <h2>Dísponibilizando as notas</h2>
         </div>
         <div class="tab">
-            <table class="table" border="0" width="6" cellpadding="4">
+            <table class="table1" border="0" width="6" cellpadding="4">
                 <thead>
                     <tr>
+                        <th>Estudante</th>
                         <th>Turma</th>
                         <th>Disciplina</th>
-                        <th>Estudante</th>
-                        <th>Notas</th>
+                        <th>Media</th>
                         <th>Estado</th>
+                        <th>Classe</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach ($turmas as $tr): ?>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td><?php echo $tr['d'] ?></td>
+                        <td><?php echo $tr['a'] ?></td>
+                        <td><?php echo $tr['c'] ?></td>
+                        <td><?php echo $tr['a'] ?></td>
+                        <td><?php echo $tr['a'] ?></td>
+                        <td><?php echo $tr['nivel'] ?></td>
                     </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
             <form class="formulario" method="post">
-                <label>Turma</label>
-                <select class="pesq">
-                    <?php foreach ($turmas as $turma): ?>
-                        <option value="<?php echo $turma['turma'] ?>"><?php echo $turma['a'] ?></option>
-                    <?php endforeach; ?>
-                </select>
-                <button type="submit" ><i class="fas fa-sync-alt"></i></button>
-
                 <label>Nome do Estudante</label>
                 <input class="pesq" type="text" name="nome" id="nome">
                 <label>Nota</label>

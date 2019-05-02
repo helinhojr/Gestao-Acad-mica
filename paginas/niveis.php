@@ -59,8 +59,8 @@
                                 <td><?php echo $linha['nome'] ?></td>
                                 <td><?php echo $linha['data'] ?></td>
                                 <td></td>
-                                <td><a href="mycontrolle.php?bteditarP=<?php echo $linha['codigo']; ?>" class="verde"><i class="fas fa-edit"></i></a></td>
-                                <td><a href="mycontrolle.php?bteliminarP=<?php echo $linha['codigo']; ?>" class="vermelho"><i class="fas fa-trash"></i></a></td>
+                                <td><a href="mycontrolle.php?bteditarN=<?php echo $linha['codigo']; ?>" class="verde"><i class="fas fa-edit"></i></a></td>
+                                <td><a href="mycontrolle.php?bteliminarN=<?php echo $linha['codigo']; ?>" class="vermelho"><i class="fas fa-trash"></i></a></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

@@ -14,6 +14,11 @@
     display: grid;
     grid-template-rows:10% 85% 5%;
 }
+.corpinho{
+    height: 100vh;
+    display: grid;
+    grid-template-column:auto auto;
+}
 .corpo1{
     height: 100vh;
     display: grid;

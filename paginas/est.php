@@ -19,7 +19,7 @@
             <div class="cima">
                 <img class="imagem" src="../img/notebook.png">
                 <h1><span>S</span>istema de <span>G</span>estão <span>A</span>cadémica</h1>
-                <a href="#"><img src="<?php echo $est['foto']; ?>"></a>
+                <a href="mycontrolle.php?encerrar=a"><img src="<?php echo $est['foto']; ?>"></a>
                 <h2><?php echo $est['nome']; ?></h2>
                 <div class="btbotao">
                     <span></span>

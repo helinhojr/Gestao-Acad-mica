@@ -84,7 +84,7 @@ class Turma {
     public static function buscar() {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $busca = $conexao->prepare("select * from turma");
+        $busca = $conexao->prepare("select * from turma where estado='activo'");
         $busca->execute();
         return $busca->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -95,6 +95,20 @@ class Turma {
         $busca->bindValue(":pro", $prof);
         $busca->execute();
         return $busca->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function eliminar($cod) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $busca = $conexao->prepare("update turma set estado=:in where codigo=:cod");
+        $busca->bindValue(":cod", $cod);
+        $busca->bindValue(":in", "inactivo");
+        if ($busca->execute()) {
+            echo "<script>alert('Eliminado com Sucesso!')</script>";
+            echo "<script>window.location='../paginas/turma.php'</script>";
+        } else {
+            echo "<script>alert('Não foi possível eliminar!')</script>";
+            echo "<script>window.location='../paginas/turma.php'</script>";
+        }
     }
     public static function buscarPrTE($prof) {
         require_once '../controller/conexao.php';
@@ -120,13 +134,14 @@ class Turma {
         $conexao = conectar();
         $data = date("Y");
         $codigo = strtoupper(substr((md5(date("YmdHis"))), 1, 7));
-        $gravar = $conexao->prepare("INSERT INTO turma(codigo,nome,ano,director,nivel,sala) VALUES(:codigo,:nome,:ano,:director,:nivel,:sala)");
+        $gravar = $conexao->prepare("INSERT INTO turma(codigo,nome,ano,director,nivel,sala,estado) VALUES(:codigo,:nome,:ano,:director,:nivel,:sala,:est)");
         $gravar->bindValue(":nome", $turma->getNome());
         $gravar->bindValue(":ano", $data);
         $gravar->bindValue(":director", $turma->getDirector());
         $gravar->bindValue(":nivel", $turma->getNivel());
         $gravar->bindValue(":sala", $turma->getSala());
         $gravar->bindValue(":codigo", $codigo);
+        $gravar->bindValue(":est", 'activo');
         $valor = Turma::verificar($turma->getNome(), $data, $turma->getDirector());
         if ($valor == 0) {
             echo "<script>alert('Impossível fazer a gravação, turma já cadastrada!')</script>";

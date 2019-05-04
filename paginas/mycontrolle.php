@@ -262,6 +262,16 @@ if (isset($_GET['bteliminarD'])) {
     $codigo = $_GET['bteliminarD'];
     Disciplina::eliminar($codigo);
 }
+if (isset($_GET['bteliminarT'])) {
+    require_once '../modelo/Turma.php';
+    $codigo = $_GET['bteliminarT'];
+    Turma::eliminar($codigo);
+}
+if (isset($_GET['bteliminarEs'])) {
+    require_once '../modelo/Estudante.php';
+    $codigo = $_GET['bteliminarEs'];
+    Estudante::eliminar($codigo);
+}
 if (isset($_POST['btFinalizar'])) {
     require_once '../modelo/Nota.php';
     require_once '../modelo/Semestre.php';

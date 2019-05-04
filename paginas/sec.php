@@ -33,6 +33,7 @@
                 <ul>
                     <li><i class="fas fa-home"></i><a href="#">Início</a></li>
                     <li><i class="fas fa-user-edit"></i><a href="#">Matrículas</a></li>
+                    <li><i class="fas fa-user-edit"></i><a href="#">Estudantes</a></li>
                 </ul>
             </div>
             <div class="direita">
@@ -72,6 +73,12 @@
             });
             lga[1].addEventListener("click", function () {
                 frame.src = "estudantes.php";
+            });
+            icones[2].addEventListener("click", function () {
+                frame.src = "estudanteLis.php";
+            });
+            lga[2].addEventListener("click", function () {
+                frame.src = "estudanteLis.php";
             });
         </script>
     </body>

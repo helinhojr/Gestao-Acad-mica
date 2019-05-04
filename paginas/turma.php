@@ -84,7 +84,6 @@
                 <table class="table" >
                     <thead>
                         <tr>
-                            <th>Código</th>
                             <th>Nome</th>
                             <th>Sala</th>
                             <th>Director da Turma</th>
@@ -97,13 +96,13 @@
                         foreach (Turma::buscar() as $lee):
                             ?>
                             <tr>
-                                <td><?php echo $lee['codigo']; ?></td>
                                 <td><?php echo $lee['nome']; ?></td>
                                 <td><?php echo $lee['sala']; ?></td>
                                 <td><?php echo $lee['director']; ?></td>
                                 <td><?php echo $lee['nivel']; ?></td>
                                 <td><?php echo $lee['ano']; ?></td>
-                                <td><button type="button" class="verde"><i class="fas fa-edit"></i></button><button type="button" class="vermelho"><i class="fas fa-trash"></i></button></td>
+                                <td><a href="" class="verde"><i class="fas fa-edit"></i></a></td>
+                                <td><a href="mycontrolle.php?bteliminarT=<?php echo $lee['codigo']; ?>" class="vermelho"><i class="fas fa-trash"></i></a></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

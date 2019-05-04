@@ -161,6 +161,15 @@ class Estudante {
         $this->turma = $turma;
     }
 
+    public static function buscarDados($ano) {
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $estus=$conexao->prepare("select estudante.codigo as cod,estudante.nome as e,turma.nome as tr,nivel,turma_est.ano as a,contenc,pai,mae,user,senha,nascimento,contacto from turma_est join estudante on turma_est.estudante=estudante.codigo join turma on turma_est.turma=turma.codigo where turma_est.ano=:ano");
+        $estus->bindValue(":ano", $ano);
+        $estus->execute();
+        return $estus->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function eliminar($cod) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
@@ -172,10 +181,10 @@ class Estudante {
         $buscar->bindValue(":in", "inactivo");
         if ($busca->execute() && $buscar->execute()) {
             echo "<script>alert('Eliminado com Sucesso!')</script>";
-            echo "<script>window.location='../paginas/estudantes.php'</script>";
+            echo "<script>window.location='../paginas/estudanteLis.php'</script>";
         } else {
             echo "<script>alert('Não foi possível eliminar!')</script>";
-            header("../paginas/estudantes.php");
+            header("../paginas/estudanteLis.php");
         }
     }
 
@@ -213,7 +222,7 @@ class Estudante {
         require_once '../modelo/Usuario.php';
         $conexao = conectar();
         $codigo = strtoupper(substr((md5(date("YmdHis"))), 1, 7));
-        $_SESSION['estAct']=$codigo;
+        $_SESSION['estAct'] = $codigo;
         $gravar = $conexao->prepare("INSERT INTO estudante(codigo,nome,estado,nascimento,user,bi,endereco,senha,genero,email,pai,mae,contacto,contenc,regime,foto) VALUES(:codigo,:nome,:estado,:data,:user,:bi,:endereco,:senha,:genero,:email,:np,:nm,:cont,:contEn,:regime,:foto)");
         $gravar->bindValue(":codigo", $codigo);
         $gravar->bindValue(":nome", $est->getNome());
@@ -285,10 +294,10 @@ class Estudante {
     public static function buscarProf($codigo) {
         require_once '../controller/conexao.php';
         $conexao = conectar();
-        $data=date("Y");
+        $data = date("Y");
         $busca = $conexao->prepare("select professor.nome as a,disciplina.nome as b,disi.testes as c from turma_est join turma on turma_est.turma=codigo join discturmpro on turma_est.turma=discturmpro.turma join professor on discturmpro.professor=professor.codigo join discturmpro as disi on professor.codigo=disi.professor join disciplina on disi.disc=disciplina.codigo where estudante=:est and turma_est.ano=:ano");
         $busca->bindValue(":est", $codigo);
-        $busca->bindValue(":ano",$data );
+        $busca->bindValue(":ano", $data);
         $busca->execute();
         return $busca->fetchAll(PDO::FETCH_ASSOC);
     }

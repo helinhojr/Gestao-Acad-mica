@@ -301,5 +301,20 @@ class Estudante {
         $busca->execute();
         return $busca->fetchAll(PDO::FETCH_ASSOC);
     }
-
+    public static function buscarNotas($estudante,$ano){
+        require_once '../controller/conexao.php';
+        $conexao = conectar();
+        $notas=$conexao->prepare("select codigo from notas where est=:est and ano=:an");
+        $notas->bindValue(":est", $estudante);
+        $notas->bindValue(":an", $ano);
+        $notas->execute();
+        $valores=$conexao->prepare("select * from nota where notas=:not");
+        $valores->bindValue(":not", $notas->fetch(PDO::FETCH_ASSOC)['codigo']);
+        $valores->execute();
+        return $valores->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function redirecionar($cod){
+        $_SESSION['codEs'] = $cod;
+        echo "<script>window.location='./prof_al.php'</script:>";
+    }
 }

@@ -240,12 +240,19 @@ if (isset($_GET['bteliminarE'])) {
     $codigo = $_GET['bteliminarE'];
     Professor::eliminar($codigo);
 }
+
 if (isset($_GET['encerrar'])) {
     $_SESSION['logado'];
     $_SESSION['idUsuario'] = null;
     $_SESSION['idPr'] = null;
     $_SESSION['idSc'] = null;
     echo "<script>window.location='../index.php'</script>";
+}
+if (isset($_GET['bteditarAl'])) {
+    echo "<script>alert('Aqiui')</script:>";
+    require_once '../modelo/Estudante.php';
+    $codigo = $_GET['bteditarAl'];
+    Estudante::redirecionar($codigo);
 }
 if (isset($_GET['bteliminarS'])) {
     require_once '../modelo/Secretario.php';

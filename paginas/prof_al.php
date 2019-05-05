@@ -3,7 +3,7 @@
     <?php
     session_start();
     require_once '../modelo/Turma.php';
-    $turmas = Turma::buscarPrTE($_SESSION['idPr']);
+    $turmas = Turma::buscarPrTE('9E90CE4');
     ?>
     <head>
         <meta charset="UTF-8">
@@ -16,7 +16,7 @@
     </head>
     <body>
         <div class="tit">
-            <h2>Dísponibilizando as notas</h2>
+            <h2>Disponibilizando as notas</h2>
         </div>
         <div class="tab">
             <table class="table1" border="0" width="6" cellpadding="4">
@@ -39,17 +39,31 @@
                             <td><?php echo $tr['a'] ?></td>
                             <td><?php echo $tr['a'] ?></td>
                             <td><?php echo $tr['nivel'] ?></td>
-                            <td><a href="mycontrolle.php?bteditarN=<?php echo $linha['e']; ?>" class="verde"><i class="fas fa-edit"></i></a></td>
-                            <td><a href="mycontrolle.php?bteliminarN=<?php echo $linha['e']; ?>" class="vermelho"><i class="fas fa-trash"></i></a></td>
+                            <td><a href="mycontrolle.php?bteditarAl=<?php echo $tr['e']; ?>" class="verde"><i class="fas fa-edit"></i></a></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
             <form class="formulario" method="post">
                 <label>Nome do Estudante</label>
-                <input class="pesq" type="text" name="nome" id="nome">
+                <input class="pesq" type="text" disabled="" name="nome" id="nome">
                 <label>Nota</label>
                 <select class="pesq">
+                    <?php
+                    require_once '../modelo/Estudante.php';
+                    $estuda;
+                    if (isset($_SESSION['codEs'])) {
+                        $estuda = Estudante::buscarNotas($_SESSION['codEs'], date("Y"));
+                        ?>
+                        <?php
+                        foreach ($estuda as $nota):
+                            ?>
+                            <option value="<?php echo $nota['codigo'] ?>"><?php $nota['numero'] ?></option>
+                            <?php
+                        endforeach;
+                    }
+                    unset($_SESSION['codEs']);
+                    ?>
                 </select>
                 <label>Valor</label>
                 <input class="pesq" type="number" max="2" name="nome" id="nome">

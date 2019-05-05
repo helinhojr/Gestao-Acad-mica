@@ -29,7 +29,7 @@
                         <th>Mãe</th>
                         <th>Contacto Do Encarregado</th>
                         <th>Turma</th>
-                        <th>Nível</th>
+                        <th>Classe</th>
                         <th>Ano</th>
                     </tr>
                 </thead>
